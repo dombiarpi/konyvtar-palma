@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="UtalasViewDlg" widgetVar="UtalasViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewUtalasTitle}">
+            <h:form id="UtalasViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{utalasController.selected != null}">
+                        <h:outputText value="#{bundle.ViewUtalasLabel_id}"/>
+                        <h:outputText value="#{utalasController.selected.id}" title="#{bundle.ViewUtalasTitle_id}"/>
+                        <h:outputText value="#{bundle.ViewUtalasLabel_konyv}"/>
+                        <h:outputText value="#{utalasController.selected.konyv}" title="#{bundle.ViewUtalasTitle_konyv}"/>
+                        <h:outputText value="#{bundle.ViewUtalasLabel_fogalom}"/>
+                        <h:outputText value="#{utalasController.selected.fogalom}" title="#{bundle.ViewUtalasTitle_fogalom}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="UtalasViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

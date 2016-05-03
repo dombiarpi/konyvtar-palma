@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="KonyvEditDlg" widgetVar="KonyvEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditKonyvTitle}">
+            <h:form id="KonyvEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{konyvController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditKonyvLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{konyvController.selected.id}" title="#{bundle.EditKonyvTitle_id}" required="true" requiredMessage="#{bundle.EditKonyvRequiredMessage_id}"/>
+                        <p:outputLabel value="#{bundle.EditKonyvLabel_katal}" for="katal" />
+                        <p:inputText id="katal" value="#{konyvController.selected.katal}" title="#{bundle.EditKonyvTitle_katal}" required="true" requiredMessage="#{bundle.EditKonyvRequiredMessage_katal}"/>
+                        <p:outputLabel value="#{bundle.EditKonyvLabel_cim}" for="cim" />
+                        <p:inputText id="cim" value="#{konyvController.selected.cim}" title="#{bundle.EditKonyvTitle_cim}" required="true" requiredMessage="#{bundle.EditKonyvRequiredMessage_cim}"/>
+                        <p:outputLabel value="#{bundle.EditKonyvLabel_alcim}" for="alcim" />
+                        <p:inputText id="alcim" value="#{konyvController.selected.alcim}" title="#{bundle.EditKonyvTitle_alcim}" />
+                        <p:outputLabel value="#{bundle.EditKonyvLabel_kiadszam}" for="kiadszam" />
+                        <p:inputText id="kiadszam" value="#{konyvController.selected.kiadszam}" title="#{bundle.EditKonyvTitle_kiadszam}" />
+                        <p:outputLabel value="#{bundle.EditKonyvLabel_kiadev}" for="kiadev" />
+                        <p:calendar id="kiadev" pattern="MM/dd/yyyy" value="#{konyvController.selected.kiadev}" title="#{bundle.EditKonyvTitle_kiadev}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.EditKonyvLabel_mufaj}" for="mufaj" />
+                        <p:inputText id="mufaj" value="#{konyvController.selected.mufaj}" title="#{bundle.EditKonyvTitle_mufaj}" required="true" requiredMessage="#{bundle.EditKonyvRequiredMessage_mufaj}"/>
+                        <p:outputLabel value="#{bundle.EditKonyvLabel_beszerzesiAr}" for="beszerzesiAr" />
+                        <p:inputText id="beszerzesiAr" value="#{konyvController.selected.beszerzesiAr}" title="#{bundle.EditKonyvTitle_beszerzesiAr}" required="true" requiredMessage="#{bundle.EditKonyvRequiredMessage_beszerzesiAr}"/>
+                        <p:outputLabel value="#{bundle.EditKonyvLabel_egysAr}" for="egysAr" />
+                        <p:inputText id="egysAr" value="#{konyvController.selected.egysAr}" title="#{bundle.EditKonyvTitle_egysAr}" required="true" requiredMessage="#{bundle.EditKonyvRequiredMessage_egysAr}"/>
+                        <p:outputLabel value="#{bundle.EditKonyvLabel_szorzo}" for="szorzo" />
+                        <p:inputText id="szorzo" value="#{konyvController.selected.szorzo}" title="#{bundle.EditKonyvTitle_szorzo}" required="true" requiredMessage="#{bundle.EditKonyvRequiredMessage_szorzo}"/>
+                        <p:outputLabel value="#{bundle.EditKonyvLabel_megjegyzes}" for="megjegyzes" />
+                        <p:inputText id="megjegyzes" value="#{konyvController.selected.megjegyzes}" title="#{bundle.EditKonyvTitle_megjegyzes}" />
+                        <p:outputLabel value="#{bundle.EditKonyvLabel_media}" for="media" />
+                        <p:inputText id="media" value="#{konyvController.selected.media}" title="#{bundle.EditKonyvTitle_media}" required="true" requiredMessage="#{bundle.EditKonyvRequiredMessage_media}"/>
+                        <p:outputLabel value="#{bundle.EditKonyvLabel_nyelv}" for="nyelv" />
+                        <p:inputText id="nyelv" value="#{konyvController.selected.nyelv}" title="#{bundle.EditKonyvTitle_nyelv}" required="true" requiredMessage="#{bundle.EditKonyvRequiredMessage_nyelv}"/>
+                        <p:outputLabel value="#{bundle.EditKonyvLabel_sorozat}" for="sorozat" />
+                        <p:selectOneMenu id="sorozat" value="#{konyvController.selected.sorozat}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{sorozatController.itemsAvailableSelectOne}"
+                                           var="sorozatItem"
+                                           itemValue="#{sorozatItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditKonyvLabel_kiado}" for="kiado" />
+                        <p:selectOneMenu id="kiado" value="#{konyvController.selected.kiado}" required="true" requiredMessage="#{bundle.EditKonyvRequiredMessage_kiado}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{kiadoController.itemsAvailableSelectOne}"
+                                           var="kiadoItem"
+                                           itemValue="#{kiadoItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{konyvController.update}" value="#{bundle.Save}" update="display,:KonyvListForm:datalist,:growl" oncomplete="handleSubmit(args, 'KonyvEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="KonyvEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

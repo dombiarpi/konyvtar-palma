@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="PeldanyCreateDlg" widgetVar="PeldanyCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreatePeldanyTitle}">
+            <h:form id="PeldanyCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{peldanyController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreatePeldanyLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{peldanyController.selected.id}" title="#{bundle.CreatePeldanyTitle_id}" required="true" requiredMessage="#{bundle.CreatePeldanyRequiredMessage_id}"/>
+                        <p:outputLabel value="#{bundle.CreatePeldanyLabel_konyv}" for="konyv" />
+                        <p:inputText id="konyv" value="#{peldanyController.selected.konyv}" title="#{bundle.CreatePeldanyTitle_konyv}" required="true" requiredMessage="#{bundle.CreatePeldanyRequiredMessage_konyv}"/>
+                        <p:outputLabel value="#{bundle.CreatePeldanyLabel_konyvPeldany}" for="konyvPeldany" />
+                        <p:inputText id="konyvPeldany" value="#{peldanyController.selected.konyvPeldany}" title="#{bundle.CreatePeldanyTitle_konyvPeldany}" required="true" requiredMessage="#{bundle.CreatePeldanyRequiredMessage_konyvPeldany}"/>
+                        <p:outputLabel value="#{bundle.CreatePeldanyLabel_kikolcs}" for="kikolcs" />
+                        <p:inputText id="kikolcs" value="#{peldanyController.selected.kikolcs}" title="#{bundle.CreatePeldanyTitle_kikolcs}" required="true" requiredMessage="#{bundle.CreatePeldanyRequiredMessage_kikolcs}"/>
+                        <p:outputLabel value="#{bundle.CreatePeldanyLabel_aktKolcs}" for="aktKolcs" />
+                        <p:inputText id="aktKolcs" value="#{peldanyController.selected.aktKolcs}" title="#{bundle.CreatePeldanyTitle_aktKolcs}" required="true" requiredMessage="#{bundle.CreatePeldanyRequiredMessage_aktKolcs}"/>
+                        <p:outputLabel value="#{bundle.CreatePeldanyLabel_polc}" for="polc" />
+                        <p:inputText id="polc" value="#{peldanyController.selected.polc}" title="#{bundle.CreatePeldanyTitle_polc}" required="true" requiredMessage="#{bundle.CreatePeldanyRequiredMessage_polc}"/>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{peldanyController.create}" value="#{bundle.Save}" update="display,:PeldanyListForm:datalist,:growl" oncomplete="handleSubmit(args,'PeldanyCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="PeldanyCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

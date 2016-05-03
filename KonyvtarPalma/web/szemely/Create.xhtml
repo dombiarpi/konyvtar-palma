@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="SzemelyCreateDlg" widgetVar="SzemelyCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateSzemelyTitle}">
+            <h:form id="SzemelyCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{szemelyController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateSzemelyLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{szemelyController.selected.id}" title="#{bundle.CreateSzemelyTitle_id}" required="true" requiredMessage="#{bundle.CreateSzemelyRequiredMessage_id}"/>
+                        <p:outputLabel value="#{bundle.CreateSzemelyLabel_nev}" for="nev" />
+                        <p:inputText id="nev" value="#{szemelyController.selected.nev}" title="#{bundle.CreateSzemelyTitle_nev}" required="true" requiredMessage="#{bundle.CreateSzemelyRequiredMessage_nev}"/>
+                        <p:outputLabel value="#{bundle.CreateSzemelyLabel_leanykoriNev}" for="leanykoriNev" />
+                        <p:inputText id="leanykoriNev" value="#{szemelyController.selected.leanykoriNev}" title="#{bundle.CreateSzemelyTitle_leanykoriNev}" />
+                        <p:outputLabel value="#{bundle.CreateSzemelyLabel_beiratkozas}" for="beiratkozas" />
+                        <p:calendar id="beiratkozas" pattern="MM/dd/yyyy" value="#{szemelyController.selected.beiratkozas}" title="#{bundle.EditSzemelyTitle_beiratkozas}" required="true" requiredMessage="#{bundle.EditSzemelyRequiredMessage_beiratkozas}" showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateSzemelyLabel_elofizTipus}" for="elofizTipus" />
+                        <p:inputText id="elofizTipus" value="#{szemelyController.selected.elofizTipus}" title="#{bundle.CreateSzemelyTitle_elofizTipus}" required="true" requiredMessage="#{bundle.CreateSzemelyRequiredMessage_elofizTipus}"/>
+                        <p:outputLabel value="#{bundle.CreateSzemelyLabel_tagdij}" for="tagdij" />
+                        <p:inputText id="tagdij" value="#{szemelyController.selected.tagdij}" title="#{bundle.CreateSzemelyTitle_tagdij}" required="true" requiredMessage="#{bundle.CreateSzemelyRequiredMessage_tagdij}"/>
+                        <p:outputLabel value="#{bundle.CreateSzemelyLabel_email}" for="email" />
+                        <p:inputText id="email" value="#{szemelyController.selected.email}" title="#{bundle.CreateSzemelyTitle_email}" />
+                        <p:outputLabel value="#{bundle.CreateSzemelyLabel_mobil}" for="mobil" />
+                        <p:inputText id="mobil" value="#{szemelyController.selected.mobil}" title="#{bundle.CreateSzemelyTitle_mobil}" />
+                        <p:outputLabel value="#{bundle.CreateSzemelyLabel_cim}" for="cim" />
+                        <p:inputText id="cim" value="#{szemelyController.selected.cim}" title="#{bundle.CreateSzemelyTitle_cim}" />
+                        <p:outputLabel value="#{bundle.CreateSzemelyLabel_megjegyzes}" for="megjegyzes" />
+                        <p:inputText id="megjegyzes" value="#{szemelyController.selected.megjegyzes}" title="#{bundle.CreateSzemelyTitle_megjegyzes}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{szemelyController.create}" value="#{bundle.Save}" update="display,:SzemelyListForm:datalist,:growl" oncomplete="handleSubmit(args,'SzemelyCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="SzemelyCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/template.xhtml">
+
+
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListKolcsonzesTitle}"></h:outputText>
+        </ui:define>
+
+        <ui:define name="body">
+            <h:form id="KolcsonzesListForm">
+                <p:panel header="#{bundle.ListKolcsonzesTitle}">
+                    <p:dataTable id="datalist" value="#{kolcsonzesController.items}" var="item"
+                                 selectionMode="single" selection="#{kolcsonzesController.selected}"
+                                 paginator="true"
+                                 rowKey="#{item.id}"
+                                 rows="10"
+                                 rowsPerPageTemplate="10,20,30,40,50"
+                                 >
+
+                        <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
+                        <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
+
+                        <!--<p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListKolcsonzesTitle_id}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.id}"/>
+                        </p:column>
+                        -->
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListKolcsonzesTitle_datum}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.datum}">
+                                <f:convertDateTime pattern="yyyy-MM-dd" />
+                            </h:outputText>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListKolcsonzesTitle_szemely}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.szemely.nev}"/>
+                        </p:column>   
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListKolcsonzesTitle_peldany}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.peldany}"/>
+                        </p:column>                        
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListKolcsonzesTitle_visszahozDatum}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.visszahozDatum}">
+                                <f:convertDateTime pattern="yyyy-MM-dd" />
+                            </h:outputText>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListKolcsonzesTitle_felszolit}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.felszolit}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListKolcsonzesTitle_maxKolcs}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.maxKolcs}"/>
+                        </p:column>
+                        <f:facet name="footer">
+                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{kolcsonzesController.prepareCreate}" update=":KolcsonzesCreateForm" oncomplete="PF('KolcsonzesCreateDialog').show()"/>
+                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":KolcsonzesViewForm" oncomplete="PF('KolcsonzesViewDialog').show()" disabled="#{empty kolcsonzesController.selected}"/>
+                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":KolcsonzesEditForm" oncomplete="PF('KolcsonzesEditDialog').show()" disabled="#{empty kolcsonzesController.selected}"/>
+                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{kolcsonzesController.destroy}" update=":growl,datalist" disabled="#{empty kolcsonzesController.selected}"/>
+                        </f:facet>
+                    </p:dataTable>
+                </p:panel>
+            </h:form>
+
+            <ui:include src="Create.xhtml"/>
+            <ui:include src="Edit.xhtml"/>
+            <ui:include src="View.xhtml"/>
+        </ui:define>
+    </ui:composition>
+
+</html>

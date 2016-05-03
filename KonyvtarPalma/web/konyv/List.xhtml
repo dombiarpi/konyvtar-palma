@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/template.xhtml">
+
+
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListKonyvTitle}"></h:outputText>
+        </ui:define>
+
+        <ui:define name="body">
+            <h:form id="KonyvListForm">
+                <p:panel header="#{bundle.ListKonyvTitle}">
+                    <p:dataTable id="datalist" value="#{konyvController.items}" var="item"
+                                 selectionMode="single" selection="#{konyvController.selected}"
+                                 paginator="true"
+                                 rowKey="#{item.id}"
+                                 rows="10"
+                                 rowsPerPageTemplate="10,20,30,40,50"
+                                 >
+
+                        <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
+                        <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListKonyvTitle_id}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.id}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListKonyvTitle_katal}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.katal}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListKonyvTitle_cim}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.cim}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListKonyvTitle_alcim}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.alcim}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListKonyvTitle_kiadszam}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.kiadszam}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListKonyvTitle_kiadev}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.kiadev}">
+                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                            </h:outputText>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListKonyvTitle_mufaj}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.mufaj}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListKonyvTitle_beszerzesiAr}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.beszerzesiAr}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListKonyvTitle_egysAr}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.egysAr}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListKonyvTitle_szorzo}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.szorzo}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListKonyvTitle_megjegyzes}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.megjegyzes}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListKonyvTitle_media}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.media}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListKonyvTitle_nyelv}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.nyelv}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListKonyvTitle_sorozat}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.sorozat}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListKonyvTitle_kiado}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.kiado}"/>
+                        </p:column>
+                        <f:facet name="footer">
+                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{konyvController.prepareCreate}" update=":KonyvCreateForm" oncomplete="PF('KonyvCreateDialog').show()"/>
+                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":KonyvViewForm" oncomplete="PF('KonyvViewDialog').show()" disabled="#{empty konyvController.selected}"/>
+                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":KonyvEditForm" oncomplete="PF('KonyvEditDialog').show()" disabled="#{empty konyvController.selected}"/>
+                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{konyvController.destroy}" update=":growl,datalist" disabled="#{empty konyvController.selected}"/>
+                        </f:facet>
+                    </p:dataTable>
+                </p:panel>
+            </h:form>
+
+            <ui:include src="Create.xhtml"/>
+            <ui:include src="Edit.xhtml"/>
+            <ui:include src="View.xhtml"/>
+        </ui:define>
+    </ui:composition>
+
+</html>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ElojegyzesViewDlg" widgetVar="ElojegyzesViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewElojegyzesTitle}">
+            <h:form id="ElojegyzesViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{elojegyzesController.selected != null}">
+                        <h:outputText value="#{bundle.ViewElojegyzesLabel_id}"/>
+                        <h:outputText value="#{elojegyzesController.selected.id}" title="#{bundle.ViewElojegyzesTitle_id}"/>
+                        <h:outputText value="#{bundle.ViewElojegyzesLabel_datum}"/>
+                        <h:outputText value="#{elojegyzesController.selected.datum}" title="#{bundle.ViewElojegyzesTitle_datum}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewElojegyzesLabel_szemely}"/>
+                        <h:outputText value="#{elojegyzesController.selected.szemely}" title="#{bundle.ViewElojegyzesTitle_szemely}"/>
+                        <h:outputText value="#{bundle.ViewElojegyzesLabel_konyv}"/>
+                        <h:outputText value="#{elojegyzesController.selected.konyv}" title="#{bundle.ViewElojegyzesTitle_konyv}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="ElojegyzesViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

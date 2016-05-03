@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="NincsCreateDlg" widgetVar="NincsCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateNincsTitle}">
+            <h:form id="NincsCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{nincsController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateNincsLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{nincsController.selected.id}" title="#{bundle.CreateNincsTitle_id}" required="true" requiredMessage="#{bundle.CreateNincsRequiredMessage_id}"/>
+                        <p:outputLabel value="#{bundle.CreateNincsLabel_peldany}" for="peldany" />
+                        <p:inputText id="peldany" value="#{nincsController.selected.peldany}" title="#{bundle.CreateNincsTitle_peldany}" required="true" requiredMessage="#{bundle.CreateNincsRequiredMessage_peldany}"/>
+                        <p:outputLabel value="#{bundle.CreateNincsLabel_kelt}" for="kelt" />
+                        <p:calendar id="kelt" pattern="MM/dd/yyyy" value="#{nincsController.selected.kelt}" title="#{bundle.EditNincsTitle_kelt}" required="true" requiredMessage="#{bundle.EditNincsRequiredMessage_kelt}" showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateNincsLabel_selejtLopott}" for="selejtLopott" />
+                        <p:inputText id="selejtLopott" value="#{nincsController.selected.selejtLopott}" title="#{bundle.CreateNincsTitle_selejtLopott}" required="true" requiredMessage="#{bundle.CreateNincsRequiredMessage_selejtLopott}"/>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{nincsController.create}" value="#{bundle.Save}" update="display,:NincsListForm:datalist,:growl" oncomplete="handleSubmit(args,'NincsCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="NincsCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

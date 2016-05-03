@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="KolcsonzesEditDlg" widgetVar="KolcsonzesEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditKolcsonzesTitle}">
+            <h:form id="KolcsonzesEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{kolcsonzesController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditKolcsonzesLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{kolcsonzesController.selected.id}" title="#{bundle.EditKolcsonzesTitle_id}" required="true" requiredMessage="#{bundle.EditKolcsonzesRequiredMessage_id}"/>
+                        <p:outputLabel value="#{bundle.EditKolcsonzesLabel_datum}" for="datum" />
+                        <p:calendar id="datum" pattern="MM/dd/yyyy" value="#{kolcsonzesController.selected.datum}" title="#{bundle.EditKolcsonzesTitle_datum}" required="true" requiredMessage="#{bundle.EditKolcsonzesRequiredMessage_datum}" showOn="button"/>
+                        <p:outputLabel value="#{bundle.EditKolcsonzesLabel_visszahozDatum}" for="visszahozDatum" />
+                        <p:calendar id="visszahozDatum" pattern="MM/dd/yyyy" value="#{kolcsonzesController.selected.visszahozDatum}" title="#{bundle.EditKolcsonzesTitle_visszahozDatum}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.EditKolcsonzesLabel_felszolit}" for="felszolit" />
+                        <p:inputText id="felszolit" value="#{kolcsonzesController.selected.felszolit}" title="#{bundle.EditKolcsonzesTitle_felszolit}" />
+                        <p:outputLabel value="#{bundle.EditKolcsonzesLabel_maxKolcs}" for="maxKolcs" />
+                        <p:inputText id="maxKolcs" value="#{kolcsonzesController.selected.maxKolcs}" title="#{bundle.EditKolcsonzesTitle_maxKolcs}" required="true" requiredMessage="#{bundle.EditKolcsonzesRequiredMessage_maxKolcs}"/>
+                        <p:outputLabel value="#{bundle.EditKolcsonzesLabel_szemely}" for="szemely" />
+                        <p:selectOneMenu id="szemely" value="#{kolcsonzesController.selected.szemely}" required="true" requiredMessage="#{bundle.EditKolcsonzesRequiredMessage_szemely}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{szemelyController.itemsAvailableSelectOne}"
+                                           var="szemelyItem"
+                                           itemValue="#{szemelyItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditKolcsonzesLabel_peldany}" for="peldany" />
+                        <p:selectOneMenu id="peldany" value="#{kolcsonzesController.selected.peldany}" required="true" requiredMessage="#{bundle.EditKolcsonzesRequiredMessage_peldany}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{peldanyController.itemsAvailableSelectOne}"
+                                           var="peldanyItem"
+                                           itemValue="#{peldanyItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{kolcsonzesController.update}" value="#{bundle.Save}" update="display,:KolcsonzesListForm:datalist,:growl" oncomplete="handleSubmit(args, 'KolcsonzesEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="KolcsonzesEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>
