@@ -12,8 +12,6 @@
             <h:form id="FogalomEditForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{fogalomController.selected != null}">
-                        <p:outputLabel value="#{bundle.EditFogalomLabel_id}" for="id" />
-                        <p:inputText id="id" value="#{fogalomController.selected.id}" title="#{bundle.EditFogalomTitle_id}" required="true" requiredMessage="#{bundle.EditFogalomRequiredMessage_id}"/>
                         <p:outputLabel value="#{bundle.EditFogalomLabel_nev}" for="nev" />
                         <p:inputText id="nev" value="#{fogalomController.selected.nev}" title="#{bundle.EditFogalomTitle_nev}" required="true" requiredMessage="#{bundle.EditFogalomRequiredMessage_nev}"/>
                     </p:panelGrid>

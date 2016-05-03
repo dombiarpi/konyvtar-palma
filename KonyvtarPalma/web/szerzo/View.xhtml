@@ -12,8 +12,6 @@
             <h:form id="SzerzoViewForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{szerzoController.selected != null}">
-                        <h:outputText value="#{bundle.ViewSzerzoLabel_id}"/>
-                        <h:outputText value="#{szerzoController.selected.id}" title="#{bundle.ViewSzerzoTitle_id}"/>
                         <h:outputText value="#{bundle.ViewSzerzoLabel_nev}"/>
                         <h:outputText value="#{szerzoController.selected.nev}" title="#{bundle.ViewSzerzoTitle_nev}"/>
                     </p:panelGrid>

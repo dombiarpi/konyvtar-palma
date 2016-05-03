@@ -12,8 +12,6 @@
             <h:form id="KimitirtEditForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{kimitirtController.selected != null}">
-                        <p:outputLabel value="#{bundle.EditKimitirtLabel_id}" for="id" />
-                        <p:inputText id="id" value="#{kimitirtController.selected.id}" title="#{bundle.EditKimitirtTitle_id}" required="true" requiredMessage="#{bundle.EditKimitirtRequiredMessage_id}"/>
                         <p:outputLabel value="#{bundle.EditKimitirtLabel_szerzo}" for="szerzo" />
                         <p:selectOneMenu id="szerzo" value="#{kimitirtController.selected.szerzo}" required="true" requiredMessage="#{bundle.EditKimitirtRequiredMessage_szerzo}">
                             <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>

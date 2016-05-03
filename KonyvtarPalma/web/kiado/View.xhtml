@@ -12,8 +12,6 @@
             <h:form id="KiadoViewForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{kiadoController.selected != null}">
-                        <h:outputText value="#{bundle.ViewKiadoLabel_id}"/>
-                        <h:outputText value="#{kiadoController.selected.id}" title="#{bundle.ViewKiadoTitle_id}"/>
                         <h:outputText value="#{bundle.ViewKiadoLabel_nev}"/>
                         <h:outputText value="#{kiadoController.selected.nev}" title="#{bundle.ViewKiadoTitle_nev}"/>
                     </p:panelGrid>

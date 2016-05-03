@@ -12,8 +12,6 @@
             <h:form id="KiadoEditForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{kiadoController.selected != null}">
-                        <p:outputLabel value="#{bundle.EditKiadoLabel_id}" for="id" />
-                        <p:inputText id="id" value="#{kiadoController.selected.id}" title="#{bundle.EditKiadoTitle_id}" required="true" requiredMessage="#{bundle.EditKiadoRequiredMessage_id}"/>
                         <p:outputLabel value="#{bundle.EditKiadoLabel_nev}" for="nev" />
                         <p:inputText id="nev" value="#{kiadoController.selected.nev}" title="#{bundle.EditKiadoTitle_nev}" required="true" requiredMessage="#{bundle.EditKiadoRequiredMessage_nev}"/>
                     </p:panelGrid>

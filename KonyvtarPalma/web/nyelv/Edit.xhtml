@@ -12,8 +12,6 @@
             <h:form id="NyelvEditForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{nyelvController.selected != null}">
-                        <p:outputLabel value="#{bundle.EditNyelvLabel_id}" for="id" />
-                        <p:inputText id="id" value="#{nyelvController.selected.id}" title="#{bundle.EditNyelvTitle_id}" required="true" requiredMessage="#{bundle.EditNyelvRequiredMessage_id}"/>
                         <p:outputLabel value="#{bundle.EditNyelvLabel_nev}" for="nev" />
                         <p:inputText id="nev" value="#{nyelvController.selected.nev}" title="#{bundle.EditNyelvTitle_nev}" required="true" requiredMessage="#{bundle.EditNyelvRequiredMessage_nev}"/>
                     </p:panelGrid>

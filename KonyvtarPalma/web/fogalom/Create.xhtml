@@ -12,8 +12,6 @@
             <h:form id="FogalomCreateForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{fogalomController.selected != null}">
-                        <p:outputLabel value="#{bundle.CreateFogalomLabel_id}" for="id" />
-                        <p:inputText id="id" value="#{fogalomController.selected.id}" title="#{bundle.CreateFogalomTitle_id}" required="true" requiredMessage="#{bundle.CreateFogalomRequiredMessage_id}"/>
                         <p:outputLabel value="#{bundle.CreateFogalomLabel_nev}" for="nev" />
                         <p:inputText id="nev" value="#{fogalomController.selected.nev}" title="#{bundle.CreateFogalomTitle_nev}" required="true" requiredMessage="#{bundle.CreateFogalomRequiredMessage_nev}"/>
                     </p:panelGrid>

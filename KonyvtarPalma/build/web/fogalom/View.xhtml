@@ -12,8 +12,6 @@
             <h:form id="FogalomViewForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{fogalomController.selected != null}">
-                        <h:outputText value="#{bundle.ViewFogalomLabel_id}"/>
-                        <h:outputText value="#{fogalomController.selected.id}" title="#{bundle.ViewFogalomTitle_id}"/>
                         <h:outputText value="#{bundle.ViewFogalomLabel_nev}"/>
                         <h:outputText value="#{fogalomController.selected.nev}" title="#{bundle.ViewFogalomTitle_nev}"/>
                     </p:panelGrid>

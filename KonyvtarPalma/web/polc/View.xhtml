@@ -12,8 +12,6 @@
             <h:form id="PolcViewForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{polcController.selected != null}">
-                        <h:outputText value="#{bundle.ViewPolcLabel_id}"/>
-                        <h:outputText value="#{polcController.selected.id}" title="#{bundle.ViewPolcTitle_id}"/>
                         <h:outputText value="#{bundle.ViewPolcLabel_szekreny}"/>
                         <h:outputText value="#{polcController.selected.szekreny}" title="#{bundle.ViewPolcTitle_szekreny}"/>
                         <h:outputText value="#{bundle.ViewPolcLabel_polc}"/>

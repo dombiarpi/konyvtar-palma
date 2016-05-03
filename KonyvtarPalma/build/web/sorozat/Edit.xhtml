@@ -12,8 +12,6 @@
             <h:form id="SorozatEditForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{sorozatController.selected != null}">
-                        <p:outputLabel value="#{bundle.EditSorozatLabel_id}" for="id" />
-                        <p:inputText id="id" value="#{sorozatController.selected.id}" title="#{bundle.EditSorozatTitle_id}" required="true" requiredMessage="#{bundle.EditSorozatRequiredMessage_id}"/>
                         <p:outputLabel value="#{bundle.EditSorozatLabel_nev}" for="nev" />
                         <p:inputText id="nev" value="#{sorozatController.selected.nev}" title="#{bundle.EditSorozatTitle_nev}" required="true" requiredMessage="#{bundle.EditSorozatRequiredMessage_nev}"/>
                     </p:panelGrid>

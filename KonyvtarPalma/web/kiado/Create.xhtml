@@ -12,8 +12,6 @@
             <h:form id="KiadoCreateForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{kiadoController.selected != null}">
-                        <p:outputLabel value="#{bundle.CreateKiadoLabel_id}" for="id" />
-                        <p:inputText id="id" value="#{kiadoController.selected.id}" title="#{bundle.CreateKiadoTitle_id}" required="true" requiredMessage="#{bundle.CreateKiadoRequiredMessage_id}"/>
                         <p:outputLabel value="#{bundle.CreateKiadoLabel_nev}" for="nev" />
                         <p:inputText id="nev" value="#{kiadoController.selected.nev}" title="#{bundle.CreateKiadoTitle_nev}" required="true" requiredMessage="#{bundle.CreateKiadoRequiredMessage_nev}"/>
                     </p:panelGrid>

@@ -12,8 +12,6 @@
             <h:form id="MufajCreateForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{mufajController.selected != null}">
-                        <p:outputLabel value="#{bundle.CreateMufajLabel_id}" for="id" />
-                        <p:inputText id="id" value="#{mufajController.selected.id}" title="#{bundle.CreateMufajTitle_id}" required="true" requiredMessage="#{bundle.CreateMufajRequiredMessage_id}"/>
                         <p:outputLabel value="#{bundle.CreateMufajLabel_nev}" for="nev" />
                         <p:inputText id="nev" value="#{mufajController.selected.nev}" title="#{bundle.CreateMufajTitle_nev}" required="true" requiredMessage="#{bundle.CreateMufajRequiredMessage_nev}"/>
                     </p:panelGrid>

@@ -12,8 +12,6 @@
             <h:form id="SorozatViewForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{sorozatController.selected != null}">
-                        <h:outputText value="#{bundle.ViewSorozatLabel_id}"/>
-                        <h:outputText value="#{sorozatController.selected.id}" title="#{bundle.ViewSorozatTitle_id}"/>
                         <h:outputText value="#{bundle.ViewSorozatLabel_nev}"/>
                         <h:outputText value="#{sorozatController.selected.nev}" title="#{bundle.ViewSorozatTitle_nev}"/>
                     </p:panelGrid>

@@ -12,8 +12,6 @@
             <h:form id="KonyvCreateForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{konyvController.selected != null}">
-                        <p:outputLabel value="#{bundle.CreateKonyvLabel_id}" for="id" />
-                        <p:inputText id="id" value="#{konyvController.selected.id}" title="#{bundle.CreateKonyvTitle_id}" required="true" requiredMessage="#{bundle.CreateKonyvRequiredMessage_id}"/>
                         <p:outputLabel value="#{bundle.CreateKonyvLabel_katal}" for="katal" />
                         <p:inputText id="katal" value="#{konyvController.selected.katal}" title="#{bundle.CreateKonyvTitle_katal}" required="true" requiredMessage="#{bundle.CreateKonyvRequiredMessage_katal}"/>
                         <p:outputLabel value="#{bundle.CreateKonyvLabel_cim}" for="cim" />
@@ -23,7 +21,7 @@
                         <p:outputLabel value="#{bundle.CreateKonyvLabel_kiadszam}" for="kiadszam" />
                         <p:inputText id="kiadszam" value="#{konyvController.selected.kiadszam}" title="#{bundle.CreateKonyvTitle_kiadszam}" />
                         <p:outputLabel value="#{bundle.CreateKonyvLabel_kiadev}" for="kiadev" />
-                        <p:calendar id="kiadev" pattern="MM/dd/yyyy" value="#{konyvController.selected.kiadev}" title="#{bundle.EditKonyvTitle_kiadev}"  showOn="button"/>
+                        <p:calendar id="kiadev" pattern="yyyy-MM-dd" value="#{konyvController.selected.kiadev}" title="#{bundle.EditKonyvTitle_kiadev}"  showOn="button"/>
                         <p:outputLabel value="#{bundle.CreateKonyvLabel_mufaj}" for="mufaj" />
                         <p:inputText id="mufaj" value="#{konyvController.selected.mufaj}" title="#{bundle.CreateKonyvTitle_mufaj}" required="true" requiredMessage="#{bundle.CreateKonyvRequiredMessage_mufaj}"/>
                         <p:outputLabel value="#{bundle.CreateKonyvLabel_beszerzesiAr}" for="beszerzesiAr" />

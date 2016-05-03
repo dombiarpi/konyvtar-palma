@@ -12,8 +12,6 @@
             <h:form id="KimitirtViewForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{kimitirtController.selected != null}">
-                        <h:outputText value="#{bundle.ViewKimitirtLabel_id}"/>
-                        <h:outputText value="#{kimitirtController.selected.id}" title="#{bundle.ViewKimitirtTitle_id}"/>
                         <h:outputText value="#{bundle.ViewKimitirtLabel_szerzo}"/>
                         <h:outputText value="#{kimitirtController.selected.szerzo}" title="#{bundle.ViewKimitirtTitle_szerzo}"/>
                         <h:outputText value="#{bundle.ViewKimitirtLabel_konyv}"/>

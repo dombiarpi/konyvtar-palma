@@ -12,8 +12,6 @@
             <h:form id="UtalasCreateForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{utalasController.selected != null}">
-                        <p:outputLabel value="#{bundle.CreateUtalasLabel_id}" for="id" />
-                        <p:inputText id="id" value="#{utalasController.selected.id}" title="#{bundle.CreateUtalasTitle_id}" required="true" requiredMessage="#{bundle.CreateUtalasRequiredMessage_id}"/>
                         <p:outputLabel value="#{bundle.CreateUtalasLabel_konyv}" for="konyv" />
                         <p:selectOneMenu id="konyv" value="#{utalasController.selected.konyv}" required="true" requiredMessage="#{bundle.EditUtalasRequiredMessage_konyv}">
                             <f:selectItems value="#{konyvController.itemsAvailableSelectOne}"

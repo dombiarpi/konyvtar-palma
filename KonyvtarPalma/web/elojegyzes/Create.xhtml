@@ -12,10 +12,8 @@
             <h:form id="ElojegyzesCreateForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{elojegyzesController.selected != null}">
-                        <p:outputLabel value="#{bundle.CreateElojegyzesLabel_id}" for="id" />
-                        <p:inputText id="id" value="#{elojegyzesController.selected.id}" title="#{bundle.CreateElojegyzesTitle_id}" required="true" requiredMessage="#{bundle.CreateElojegyzesRequiredMessage_id}"/>
                         <p:outputLabel value="#{bundle.CreateElojegyzesLabel_datum}" for="datum" />
-                        <p:calendar id="datum" pattern="MM/dd/yyyy" value="#{elojegyzesController.selected.datum}" title="#{bundle.EditElojegyzesTitle_datum}" required="true" requiredMessage="#{bundle.EditElojegyzesRequiredMessage_datum}" showOn="button"/>
+                        <p:calendar id="datum" pattern="yyyy-MM-dd" value="#{elojegyzesController.selected.datum}" title="#{bundle.EditElojegyzesTitle_datum}" required="true" requiredMessage="#{bundle.EditElojegyzesRequiredMessage_datum}" showOn="button"/>
                         <p:outputLabel value="#{bundle.CreateElojegyzesLabel_szemely}" for="szemely" />
                         <p:selectOneMenu id="szemely" value="#{elojegyzesController.selected.szemely}" required="true" requiredMessage="#{bundle.EditElojegyzesRequiredMessage_szemely}">
                             <f:selectItems value="#{szemelyController.itemsAvailableSelectOne}"

@@ -12,8 +12,6 @@
             <h:form id="NyelvViewForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{nyelvController.selected != null}">
-                        <h:outputText value="#{bundle.ViewNyelvLabel_id}"/>
-                        <h:outputText value="#{nyelvController.selected.id}" title="#{bundle.ViewNyelvTitle_id}"/>
                         <h:outputText value="#{bundle.ViewNyelvLabel_nev}"/>
                         <h:outputText value="#{nyelvController.selected.nev}" title="#{bundle.ViewNyelvTitle_nev}"/>
                     </p:panelGrid>

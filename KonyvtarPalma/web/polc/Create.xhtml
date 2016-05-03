@@ -12,8 +12,6 @@
             <h:form id="PolcCreateForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{polcController.selected != null}">
-                        <p:outputLabel value="#{bundle.CreatePolcLabel_id}" for="id" />
-                        <p:inputText id="id" value="#{polcController.selected.id}" title="#{bundle.CreatePolcTitle_id}" required="true" requiredMessage="#{bundle.CreatePolcRequiredMessage_id}"/>
                         <p:outputLabel value="#{bundle.CreatePolcLabel_szekreny}" for="szekreny" />
                         <p:inputText id="szekreny" value="#{polcController.selected.szekreny}" title="#{bundle.CreatePolcTitle_szekreny}" required="true" requiredMessage="#{bundle.CreatePolcRequiredMessage_szekreny}"/>
                         <p:outputLabel value="#{bundle.CreatePolcLabel_polc}" for="polc" />

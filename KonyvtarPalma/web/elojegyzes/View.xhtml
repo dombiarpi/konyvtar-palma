@@ -12,11 +12,9 @@
             <h:form id="ElojegyzesViewForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{elojegyzesController.selected != null}">
-                        <h:outputText value="#{bundle.ViewElojegyzesLabel_id}"/>
-                        <h:outputText value="#{elojegyzesController.selected.id}" title="#{bundle.ViewElojegyzesTitle_id}"/>
                         <h:outputText value="#{bundle.ViewElojegyzesLabel_datum}"/>
                         <h:outputText value="#{elojegyzesController.selected.datum}" title="#{bundle.ViewElojegyzesTitle_datum}">
-                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                            <f:convertDateTime pattern="yyyy-MM-dd" />
                         </h:outputText>
                         <h:outputText value="#{bundle.ViewElojegyzesLabel_szemely}"/>
                         <h:outputText value="#{elojegyzesController.selected.szemely}" title="#{bundle.ViewElojegyzesTitle_szemely}"/>

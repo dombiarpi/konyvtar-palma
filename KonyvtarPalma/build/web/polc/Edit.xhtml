@@ -12,8 +12,6 @@
             <h:form id="PolcEditForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{polcController.selected != null}">
-                        <p:outputLabel value="#{bundle.EditPolcLabel_id}" for="id" />
-                        <p:inputText id="id" value="#{polcController.selected.id}" title="#{bundle.EditPolcTitle_id}" required="true" requiredMessage="#{bundle.EditPolcRequiredMessage_id}"/>
                         <p:outputLabel value="#{bundle.EditPolcLabel_szekreny}" for="szekreny" />
                         <p:inputText id="szekreny" value="#{polcController.selected.szekreny}" title="#{bundle.EditPolcTitle_szekreny}" required="true" requiredMessage="#{bundle.EditPolcRequiredMessage_szekreny}"/>
                         <p:outputLabel value="#{bundle.EditPolcLabel_polc}" for="polc" />

@@ -29,12 +29,6 @@
 
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListSzemelyTitle_id}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.id}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
                                 <h:outputText value="#{bundle.ListSzemelyTitle_nev}"/>
                             </f:facet>
                             <h:outputText value="#{item.nev}"/>
@@ -50,7 +44,7 @@
                                 <h:outputText value="#{bundle.ListSzemelyTitle_beiratkozas}"/>
                             </f:facet>
                             <h:outputText value="#{item.beiratkozas}">
-                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                                <f:convertDateTime pattern="yyyy-MM-dd" />
                             </h:outputText>
                         </p:column>
                         <p:column>

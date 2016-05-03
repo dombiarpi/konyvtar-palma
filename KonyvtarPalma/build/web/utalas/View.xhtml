@@ -12,8 +12,6 @@
             <h:form id="UtalasViewForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{utalasController.selected != null}">
-                        <h:outputText value="#{bundle.ViewUtalasLabel_id}"/>
-                        <h:outputText value="#{utalasController.selected.id}" title="#{bundle.ViewUtalasTitle_id}"/>
                         <h:outputText value="#{bundle.ViewUtalasLabel_konyv}"/>
                         <h:outputText value="#{utalasController.selected.konyv}" title="#{bundle.ViewUtalasTitle_konyv}"/>
                         <h:outputText value="#{bundle.ViewUtalasLabel_fogalom}"/>

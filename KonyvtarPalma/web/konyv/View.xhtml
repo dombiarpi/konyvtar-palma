@@ -12,8 +12,6 @@
             <h:form id="KonyvViewForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{konyvController.selected != null}">
-                        <h:outputText value="#{bundle.ViewKonyvLabel_id}"/>
-                        <h:outputText value="#{konyvController.selected.id}" title="#{bundle.ViewKonyvTitle_id}"/>
                         <h:outputText value="#{bundle.ViewKonyvLabel_katal}"/>
                         <h:outputText value="#{konyvController.selected.katal}" title="#{bundle.ViewKonyvTitle_katal}"/>
                         <h:outputText value="#{bundle.ViewKonyvLabel_cim}"/>
@@ -24,7 +22,7 @@
                         <h:outputText value="#{konyvController.selected.kiadszam}" title="#{bundle.ViewKonyvTitle_kiadszam}"/>
                         <h:outputText value="#{bundle.ViewKonyvLabel_kiadev}"/>
                         <h:outputText value="#{konyvController.selected.kiadev}" title="#{bundle.ViewKonyvTitle_kiadev}">
-                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                            <f:convertDateTime pattern="yyyy-MM-dd" />
                         </h:outputText>
                         <h:outputText value="#{bundle.ViewKonyvLabel_mufaj}"/>
                         <h:outputText value="#{konyvController.selected.mufaj}" title="#{bundle.ViewKonyvTitle_mufaj}"/>

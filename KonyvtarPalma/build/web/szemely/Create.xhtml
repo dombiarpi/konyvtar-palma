@@ -12,8 +12,6 @@
             <h:form id="SzemelyCreateForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{szemelyController.selected != null}">
-                        <p:outputLabel value="#{bundle.CreateSzemelyLabel_id}" for="id" />
-                        <p:inputText id="id" value="#{szemelyController.selected.id}" title="#{bundle.CreateSzemelyTitle_id}" required="true" requiredMessage="#{bundle.CreateSzemelyRequiredMessage_id}"/>
                         <p:outputLabel value="#{bundle.CreateSzemelyLabel_nev}" for="nev" />
                         <p:inputText id="nev" value="#{szemelyController.selected.nev}" title="#{bundle.CreateSzemelyTitle_nev}" required="true" requiredMessage="#{bundle.CreateSzemelyRequiredMessage_nev}"/>
                         <p:outputLabel value="#{bundle.CreateSzemelyLabel_leanykoriNev}" for="leanykoriNev" />

@@ -12,15 +12,13 @@
             <h:form id="SzemelyViewForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{szemelyController.selected != null}">
-                        <h:outputText value="#{bundle.ViewSzemelyLabel_id}"/>
-                        <h:outputText value="#{szemelyController.selected.id}" title="#{bundle.ViewSzemelyTitle_id}"/>
                         <h:outputText value="#{bundle.ViewSzemelyLabel_nev}"/>
                         <h:outputText value="#{szemelyController.selected.nev}" title="#{bundle.ViewSzemelyTitle_nev}"/>
                         <h:outputText value="#{bundle.ViewSzemelyLabel_leanykoriNev}"/>
                         <h:outputText value="#{szemelyController.selected.leanykoriNev}" title="#{bundle.ViewSzemelyTitle_leanykoriNev}"/>
                         <h:outputText value="#{bundle.ViewSzemelyLabel_beiratkozas}"/>
                         <h:outputText value="#{szemelyController.selected.beiratkozas}" title="#{bundle.ViewSzemelyTitle_beiratkozas}">
-                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                            <f:convertDateTime pattern="yyyy-MM-dd" />
                         </h:outputText>
                         <h:outputText value="#{bundle.ViewSzemelyLabel_elofizTipus}"/>
                         <h:outputText value="#{szemelyController.selected.elofizTipus}" title="#{bundle.ViewSzemelyTitle_elofizTipus}"/>

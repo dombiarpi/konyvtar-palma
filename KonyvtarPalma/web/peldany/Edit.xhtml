@@ -12,8 +12,6 @@
             <h:form id="PeldanyEditForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{peldanyController.selected != null}">
-                        <p:outputLabel value="#{bundle.EditPeldanyLabel_id}" for="id" />
-                        <p:inputText id="id" value="#{peldanyController.selected.id}" title="#{bundle.EditPeldanyTitle_id}" required="true" requiredMessage="#{bundle.EditPeldanyRequiredMessage_id}"/>
                         <p:outputLabel value="#{bundle.EditPeldanyLabel_konyv}" for="konyv" />
                         <p:inputText id="konyv" value="#{peldanyController.selected.konyv}" title="#{bundle.EditPeldanyTitle_konyv}" required="true" requiredMessage="#{bundle.EditPeldanyRequiredMessage_konyv}"/>
                         <p:outputLabel value="#{bundle.EditPeldanyLabel_konyvPeldany}" for="konyvPeldany" />

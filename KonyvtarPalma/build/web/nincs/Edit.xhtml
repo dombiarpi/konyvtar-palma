@@ -12,12 +12,10 @@
             <h:form id="NincsEditForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{nincsController.selected != null}">
-                        <p:outputLabel value="#{bundle.EditNincsLabel_id}" for="id" />
-                        <p:inputText id="id" value="#{nincsController.selected.id}" title="#{bundle.EditNincsTitle_id}" required="true" requiredMessage="#{bundle.EditNincsRequiredMessage_id}"/>
                         <p:outputLabel value="#{bundle.EditNincsLabel_peldany}" for="peldany" />
                         <p:inputText id="peldany" value="#{nincsController.selected.peldany}" title="#{bundle.EditNincsTitle_peldany}" required="true" requiredMessage="#{bundle.EditNincsRequiredMessage_peldany}"/>
                         <p:outputLabel value="#{bundle.EditNincsLabel_kelt}" for="kelt" />
-                        <p:calendar id="kelt" pattern="MM/dd/yyyy" value="#{nincsController.selected.kelt}" title="#{bundle.EditNincsTitle_kelt}" required="true" requiredMessage="#{bundle.EditNincsRequiredMessage_kelt}" showOn="button"/>
+                        <p:calendar id="kelt" pattern="yyyy-MM-dd" value="#{nincsController.selected.kelt}" title="#{bundle.EditNincsTitle_kelt}" required="true" requiredMessage="#{bundle.EditNincsRequiredMessage_kelt}" showOn="button"/>
                         <p:outputLabel value="#{bundle.EditNincsLabel_selejtLopott}" for="selejtLopott" />
                         <p:inputText id="selejtLopott" value="#{nincsController.selected.selejtLopott}" title="#{bundle.EditNincsTitle_selejtLopott}" required="true" requiredMessage="#{bundle.EditNincsRequiredMessage_selejtLopott}"/>
                     </p:panelGrid>

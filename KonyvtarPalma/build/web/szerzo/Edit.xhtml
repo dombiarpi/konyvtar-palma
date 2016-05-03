@@ -12,8 +12,6 @@
             <h:form id="SzerzoEditForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{szerzoController.selected != null}">
-                        <p:outputLabel value="#{bundle.EditSzerzoLabel_id}" for="id" />
-                        <p:inputText id="id" value="#{szerzoController.selected.id}" title="#{bundle.EditSzerzoTitle_id}" required="true" requiredMessage="#{bundle.EditSzerzoRequiredMessage_id}"/>
                         <p:outputLabel value="#{bundle.EditSzerzoLabel_nev}" for="nev" />
                         <p:inputText id="nev" value="#{szerzoController.selected.nev}" title="#{bundle.EditSzerzoTitle_nev}" required="true" requiredMessage="#{bundle.EditSzerzoRequiredMessage_nev}"/>
                     </p:panelGrid>

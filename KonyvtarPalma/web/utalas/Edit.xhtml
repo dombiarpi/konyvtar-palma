@@ -12,8 +12,6 @@
             <h:form id="UtalasEditForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{utalasController.selected != null}">
-                        <p:outputLabel value="#{bundle.EditUtalasLabel_id}" for="id" />
-                        <p:inputText id="id" value="#{utalasController.selected.id}" title="#{bundle.EditUtalasTitle_id}" required="true" requiredMessage="#{bundle.EditUtalasRequiredMessage_id}"/>
                         <p:outputLabel value="#{bundle.EditUtalasLabel_konyv}" for="konyv" />
                         <p:selectOneMenu id="konyv" value="#{utalasController.selected.konyv}" required="true" requiredMessage="#{bundle.EditUtalasRequiredMessage_konyv}">
                             <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>

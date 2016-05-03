@@ -12,8 +12,6 @@
             <h:form id="MufajViewForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{mufajController.selected != null}">
-                        <h:outputText value="#{bundle.ViewMufajLabel_id}"/>
-                        <h:outputText value="#{mufajController.selected.id}" title="#{bundle.ViewMufajTitle_id}"/>
                         <h:outputText value="#{bundle.ViewMufajLabel_nev}"/>
                         <h:outputText value="#{mufajController.selected.nev}" title="#{bundle.ViewMufajTitle_nev}"/>
                     </p:panelGrid>
