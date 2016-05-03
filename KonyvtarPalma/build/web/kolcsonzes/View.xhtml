@@ -12,15 +12,13 @@
             <h:form id="KolcsonzesViewForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{kolcsonzesController.selected != null}">
-                        <h:outputText value="#{bundle.ViewKolcsonzesLabel_id}"/>
-                        <h:outputText value="#{kolcsonzesController.selected.id}" title="#{bundle.ViewKolcsonzesTitle_id}"/>
                         <h:outputText value="#{bundle.ViewKolcsonzesLabel_datum}"/>
                         <h:outputText value="#{kolcsonzesController.selected.datum}" title="#{bundle.ViewKolcsonzesTitle_datum}">
-                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                            <f:convertDateTime pattern="yyyy-MM-dd" />
                         </h:outputText>
                         <h:outputText value="#{bundle.ViewKolcsonzesLabel_visszahozDatum}"/>
                         <h:outputText value="#{kolcsonzesController.selected.visszahozDatum}" title="#{bundle.ViewKolcsonzesTitle_visszahozDatum}">
-                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                            <f:convertDateTime pattern="yyyy-MM-dd" />
                         </h:outputText>
                         <h:outputText value="#{bundle.ViewKolcsonzesLabel_felszolit}"/>
                         <h:outputText value="#{kolcsonzesController.selected.felszolit}" title="#{bundle.ViewKolcsonzesTitle_felszolit}"/>

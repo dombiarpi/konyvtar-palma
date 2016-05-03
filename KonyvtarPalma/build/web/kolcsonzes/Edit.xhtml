@@ -12,12 +12,10 @@
             <h:form id="KolcsonzesEditForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{kolcsonzesController.selected != null}">
-                        <p:outputLabel value="#{bundle.EditKolcsonzesLabel_id}" for="id" />
-                        <p:inputText id="id" value="#{kolcsonzesController.selected.id}" title="#{bundle.EditKolcsonzesTitle_id}" required="true" requiredMessage="#{bundle.EditKolcsonzesRequiredMessage_id}"/>
                         <p:outputLabel value="#{bundle.EditKolcsonzesLabel_datum}" for="datum" />
-                        <p:calendar id="datum" pattern="MM/dd/yyyy" value="#{kolcsonzesController.selected.datum}" title="#{bundle.EditKolcsonzesTitle_datum}" required="true" requiredMessage="#{bundle.EditKolcsonzesRequiredMessage_datum}" showOn="button"/>
+                        <p:calendar id="datum" pattern="yyyy-MM-dd" value="#{kolcsonzesController.selected.datum}" title="#{bundle.EditKolcsonzesTitle_datum}" required="true" requiredMessage="#{bundle.EditKolcsonzesRequiredMessage_datum}" showOn="button"/>
                         <p:outputLabel value="#{bundle.EditKolcsonzesLabel_visszahozDatum}" for="visszahozDatum" />
-                        <p:calendar id="visszahozDatum" pattern="MM/dd/yyyy" value="#{kolcsonzesController.selected.visszahozDatum}" title="#{bundle.EditKolcsonzesTitle_visszahozDatum}"  showOn="button"/>
+                        <p:calendar id="visszahozDatum" pattern="yyyy-MM-dd" value="#{kolcsonzesController.selected.visszahozDatum}" title="#{bundle.EditKolcsonzesTitle_visszahozDatum}"  showOn="button"/>
                         <p:outputLabel value="#{bundle.EditKolcsonzesLabel_felszolit}" for="felszolit" />
                         <p:inputText id="felszolit" value="#{kolcsonzesController.selected.felszolit}" title="#{bundle.EditKolcsonzesTitle_felszolit}" />
                         <p:outputLabel value="#{bundle.EditKolcsonzesLabel_maxKolcs}" for="maxKolcs" />
