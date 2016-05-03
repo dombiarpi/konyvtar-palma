@@ -6,9 +6,13 @@
 package facade;
 
 import entity.Konyv;
+import entity.Szerzo;
+import java.util.ArrayList;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -27,6 +31,20 @@ public class KonyvFacade extends AbstractFacade<Konyv> {
 
     public KonyvFacade() {
         super(Konyv.class);
+    }
+    
+    public List<Konyv> findAllWithSzerzo() {
+        List<Konyv> result = new ArrayList<>();
+        Query q = em.createNamedQuery("Konyv.findAllWithSzerzo");
+        List list = q.getResultList();
+        for (Object object : list) {
+            Object[] konyvSzerzovel = (Object[])object;
+            Konyv konyv = (Konyv)konyvSzerzovel[0];
+            Szerzo szerzo = (Szerzo)konyvSzerzovel[1];
+            konyv.setSzerzoNev(szerzo.getNev());
+            result.add(konyv);
+        }
+        return result;
     }
     
 }

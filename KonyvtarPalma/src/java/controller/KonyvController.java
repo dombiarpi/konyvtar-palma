@@ -76,7 +76,7 @@ public class KonyvController implements Serializable {
 
     public List<Konyv> getItems() {
         if (items == null) {
-            items = getFacade().findAll();
+            items = getFacade().findAllWithSzerzo();
         }
         return items;
     }

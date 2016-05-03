@@ -23,6 +23,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -38,6 +39,7 @@ import javax.validation.constraints.Size;
 @NamedQueries({
     @NamedQuery(name = "Konyv.findAll", query = "SELECT k FROM Konyv k"),
     @NamedQuery(name = "Konyv.findById", query = "SELECT k FROM Konyv k WHERE k.id = :id"),
+    @NamedQuery(name = "Konyv.findAllWithSzerzo", query = "SELECT k, s FROM Konyv k join k.kimitirtCollection i join i.szerzo s"),
     @NamedQuery(name = "Konyv.findByKatal", query = "SELECT k FROM Konyv k WHERE k.katal = :katal"),
     @NamedQuery(name = "Konyv.findByCim", query = "SELECT k FROM Konyv k WHERE k.cim = :cim"),
     @NamedQuery(name = "Konyv.findByAlcim", query = "SELECT k FROM Konyv k WHERE k.alcim = :alcim"),
@@ -115,6 +117,8 @@ public class Konyv implements Serializable {
     private Collection<Elojegyzes> elojegyzesCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "konyv")
     private Collection<Kimitirt> kimitirtCollection;
+    @Transient
+    private String szerzoNev;
 
     public Konyv() {
     }
@@ -278,7 +282,7 @@ public class Konyv implements Serializable {
     public void setKimitirtCollection(Collection<Kimitirt> kimitirtCollection) {
         this.kimitirtCollection = kimitirtCollection;
     }
-
+    
     @Override
     public int hashCode() {
         int hash = 0;
@@ -302,6 +306,14 @@ public class Konyv implements Serializable {
     @Override
     public String toString() {
         return cim + ", " + kiado.getNev() + ", " + kiadev;
+    }
+
+    public String getSzerzoNev() {
+        return szerzoNev;
+    }
+
+    public void setSzerzoNev(String szerzoNev) {
+        this.szerzoNev = szerzoNev;
     }
     
 }

@@ -35,6 +35,12 @@
                         </p:column>
                         <p:column>
                             <f:facet name="header">
+                                <h:outputText value="#{bundle.ListSzerzoTitle_nev}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.szerzoNev}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
                                 <h:outputText value="#{bundle.ListKonyvTitle_cim}"/>
                             </f:facet>
                             <h:outputText value="#{item.cim}"/>
@@ -56,7 +62,7 @@
                                 <h:outputText value="#{bundle.ListKonyvTitle_kiadev}"/>
                             </f:facet>
                             <h:outputText value="#{item.kiadev}">
-                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                                <f:convertDateTime pattern="yyyy-MM-dd" />
                             </h:outputText>
                         </p:column>
                         <p:column>
