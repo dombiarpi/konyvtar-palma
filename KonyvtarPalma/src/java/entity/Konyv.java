@@ -6,12 +6,17 @@
 package entity;
 
 import java.io.Serializable;
+import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -55,6 +60,10 @@ import javax.validation.constraints.Size;
 public class Konyv implements Serializable {
 
     private static final long serialVersionUID = 1L;
+
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
+    }
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
@@ -75,12 +84,10 @@ public class Konyv implements Serializable {
     @Column(name = "kiadszam")
     private Integer kiadszam;
     @Column(name = "kiadev")
-    @Temporal(TemporalType.DATE)
-    private Date kiadev;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "mufaj", nullable = false)
-    private int mufaj;
+    private Integer kiadev;
+    @JoinColumn(name = "mufaj", referencedColumnName = "id", nullable = false)
+    @ManyToOne(optional = false)    
+    private Mufaj mufaj;
     @Basic(optional = false)
     @NotNull
     @Column(name = "beszerzesi_ar", nullable = false)
@@ -96,15 +103,12 @@ public class Konyv implements Serializable {
     @Size(max = 50)
     @Column(name = "megjegyzes", length = 50)
     private String megjegyzes;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 42)
-    @Column(name = "media", nullable = false, length = 42)
-    private String media;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "nyelv", nullable = false)
-    private int nyelv;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "media", nullable = false)
+    private Media media;
+    @JoinColumn(name = "nyelv", referencedColumnName = "id", nullable = false)
+    @ManyToOne(optional = false)    
+    private Nyelv nyelv;
     @JoinColumn(name = "sorozat", referencedColumnName = "id")
     @ManyToOne
     private Sorozat sorozat;
@@ -119,6 +123,8 @@ public class Konyv implements Serializable {
     private Collection<Kimitirt> kimitirtCollection;
     @Transient
     private String szerzoNev;
+    @Transient
+    private Media[] mediak;
 
     public Konyv() {
     }
@@ -127,17 +133,14 @@ public class Konyv implements Serializable {
         this.id = id;
     }
 
-    public Konyv(Integer id, int katal, String cim, int mufaj, int beszerzesiAr, int egysAr, double szorzo, String media, int nyelv) {
+    public Konyv(Integer id, int katal, String cim, int beszerzesiAr, int egysAr, double szorzo) {
         this.id = id;
         this.katal = katal;
         this.cim = cim;
-        this.mufaj = mufaj;
         this.beszerzesiAr = beszerzesiAr;
         this.egysAr = egysAr;
         this.szorzo = szorzo;
-        this.media = media;
-        this.nyelv = nyelv;
-    }
+     }
 
     public Integer getId() {
         return id;
@@ -179,19 +182,19 @@ public class Konyv implements Serializable {
         this.kiadszam = kiadszam;
     }
 
-    public Date getKiadev() {
+    public Integer getKiadev() {
         return kiadev;
     }
 
-    public void setKiadev(Date kiadev) {
+    public void setKiadev(Integer kiadev) {
         this.kiadev = kiadev;
     }
 
-    public int getMufaj() {
+    public Mufaj getMufaj() {
         return mufaj;
     }
 
-    public void setMufaj(int mufaj) {
+    public void setMufaj(Mufaj mufaj) {
         this.mufaj = mufaj;
     }
 
@@ -227,19 +230,19 @@ public class Konyv implements Serializable {
         this.megjegyzes = megjegyzes;
     }
 
-    public String getMedia() {
+    public Media getMedia() {
         return media;
     }
 
-    public void setMedia(String media) {
+    public void setMedia(Media media) {
         this.media = media;
     }
 
-    public int getNyelv() {
+    public Nyelv getNyelv() {
         return nyelv;
     }
 
-    public void setNyelv(int nyelv) {
+    public void setNyelv(Nyelv nyelv) {
         this.nyelv = nyelv;
     }
 
@@ -314,6 +317,10 @@ public class Konyv implements Serializable {
 
     public void setSzerzoNev(String szerzoNev) {
         this.szerzoNev = szerzoNev;
+    }
+
+    public Media[] getMediak() {
+        return Media.values();
     }
     
 }

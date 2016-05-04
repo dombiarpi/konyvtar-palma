@@ -21,9 +21,13 @@
                         <p:outputLabel value="#{bundle.CreateKonyvLabel_kiadszam}" for="kiadszam" />
                         <p:inputText id="kiadszam" value="#{konyvController.selected.kiadszam}" title="#{bundle.CreateKonyvTitle_kiadszam}" />
                         <p:outputLabel value="#{bundle.CreateKonyvLabel_kiadev}" for="kiadev" />
-                        <p:calendar id="kiadev" pattern="yyyy-MM-dd" value="#{konyvController.selected.kiadev}" title="#{bundle.EditKonyvTitle_kiadev}"  showOn="button"/>
+                        <p:inputText id="kiadev" value="#{konyvController.selected.kiadev}" title="#{bundle.EditKonyvTitle_kiadev}"  />
                         <p:outputLabel value="#{bundle.CreateKonyvLabel_mufaj}" for="mufaj" />
-                        <p:inputText id="mufaj" value="#{konyvController.selected.mufaj}" title="#{bundle.CreateKonyvTitle_mufaj}" required="true" requiredMessage="#{bundle.CreateKonyvRequiredMessage_mufaj}"/>
+                        <p:selectOneMenu id="mufaj" value="#{konyvController.selected.mufaj}" required="true" requiredMessage="#{bundle.CreateKonyvRequiredMessage_mufaj}">
+                            <f:selectItems value="#{mufajController.itemsAvailableSelectOne}"
+                                           var="mufajItem"
+                                           itemValue="#{mufajItem}"/>
+                        </p:selectOneMenu>                        
                         <p:outputLabel value="#{bundle.CreateKonyvLabel_beszerzesiAr}" for="beszerzesiAr" />
                         <p:inputText id="beszerzesiAr" value="#{konyvController.selected.beszerzesiAr}" title="#{bundle.CreateKonyvTitle_beszerzesiAr}" required="true" requiredMessage="#{bundle.CreateKonyvRequiredMessage_beszerzesiAr}"/>
                         <p:outputLabel value="#{bundle.CreateKonyvLabel_egysAr}" for="egysAr" />
@@ -33,9 +37,17 @@
                         <p:outputLabel value="#{bundle.CreateKonyvLabel_megjegyzes}" for="megjegyzes" />
                         <p:inputText id="megjegyzes" value="#{konyvController.selected.megjegyzes}" title="#{bundle.CreateKonyvTitle_megjegyzes}" />
                         <p:outputLabel value="#{bundle.CreateKonyvLabel_media}" for="media" />
-                        <p:inputText id="media" value="#{konyvController.selected.media}" title="#{bundle.CreateKonyvTitle_media}" required="true" requiredMessage="#{bundle.CreateKonyvRequiredMessage_media}"/>
+                        <p:selectOneMenu id="media" value="#{konyvController.selected.media}" required="true" requiredMessage="#{bundle.CreateKonyvRequiredMessage_media}">
+                            <f:selectItems value="#{konyvController.selected.mediak}"
+                                           var="mediaItem"
+                                           itemValue="#{mediaItem}" itemLabel="#{mediaItem.name}" />/>
+                        </p:selectOneMenu>                              
                         <p:outputLabel value="#{bundle.CreateKonyvLabel_nyelv}" for="nyelv" />
-                        <p:inputText id="nyelv" value="#{konyvController.selected.nyelv}" title="#{bundle.CreateKonyvTitle_nyelv}" required="true" requiredMessage="#{bundle.CreateKonyvRequiredMessage_nyelv}"/>
+                        <p:selectOneMenu id="nyelv" value="#{konyvController.selected.nyelv}" required="true" requiredMessage="#{bundle.CreateKonyvRequiredMessage_nyelv}">
+                            <f:selectItems value="#{nyelvController.itemsAvailableSelectOne}"
+                                           var="nyelvItem"
+                                           itemValue="#{nyelvItem}"/>
+                        </p:selectOneMenu>                        
                         <p:outputLabel value="#{bundle.CreateKonyvLabel_sorozat}" for="sorozat" />
                         <p:selectOneMenu id="sorozat" value="#{konyvController.selected.sorozat}" >
                             <f:selectItems value="#{sorozatController.itemsAvailableSelectOne}"
@@ -50,7 +62,7 @@
                         </p:selectOneMenu>
                     </p:panelGrid>
                     <p:commandButton actionListener="#{konyvController.create}" value="#{bundle.Save}" update="display,:KonyvListForm:datalist,:growl" oncomplete="handleSubmit(args,'KonyvCreateDialog');"/>
-                    <p:commandButton value="#{bundle.Cancel}" onclick="KonyvCreateDialog.hide()"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="KonyvCreateDialog.hide()" immediate="true"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

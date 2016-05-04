@@ -61,9 +61,7 @@
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListKonyvTitle_kiadev}"/>
                             </f:facet>
-                            <h:outputText value="#{item.kiadev}">
-                                <f:convertDateTime pattern="yyyy-MM-dd" />
-                            </h:outputText>
+                            <h:outputText value="#{item.kiadev}" />
                         </p:column>
                         <p:column>
                             <f:facet name="header">
@@ -99,13 +97,13 @@
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListKonyvTitle_media}"/>
                             </f:facet>
-                            <h:outputText value="#{item.media}"/>
+                            <h:outputText value="#{item.media.name}"/>
                         </p:column>
                         <p:column>
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListKonyvTitle_nyelv}"/>
                             </f:facet>
-                            <h:outputText value="#{item.nyelv}"/>
+                            <h:outputText value="#{item.nyelv.nev}"/>
                         </p:column>
                         <p:column>
                             <f:facet name="header">
@@ -117,7 +115,7 @@
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListKonyvTitle_kiado}"/>
                             </f:facet>
-                            <h:outputText value="#{item.kiado}"/>
+                            <h:outputText value="#{item.kiado.nev}"/>
                         </p:column>
                         <f:facet name="footer">
                             <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{konyvController.prepareCreate}" update=":KonyvCreateForm" oncomplete="PF('KonyvCreateDialog').show()"/>

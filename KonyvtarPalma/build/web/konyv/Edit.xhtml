@@ -21,9 +21,13 @@
                         <p:outputLabel value="#{bundle.EditKonyvLabel_kiadszam}" for="kiadszam" />
                         <p:inputText id="kiadszam" value="#{konyvController.selected.kiadszam}" title="#{bundle.EditKonyvTitle_kiadszam}" />
                         <p:outputLabel value="#{bundle.EditKonyvLabel_kiadev}" for="kiadev" />
-                        <p:calendar id="kiadev" pattern="yyyy-MM-dd" value="#{konyvController.selected.kiadev}" title="#{bundle.EditKonyvTitle_kiadev}"  showOn="button"/>
+                        <p:inputText id="kiadev" value="#{konyvController.selected.kiadev}" title="#{bundle.EditKonyvTitle_kiadev}" />
                         <p:outputLabel value="#{bundle.EditKonyvLabel_mufaj}" for="mufaj" />
-                        <p:inputText id="mufaj" value="#{konyvController.selected.mufaj}" title="#{bundle.EditKonyvTitle_mufaj}" required="true" requiredMessage="#{bundle.EditKonyvRequiredMessage_mufaj}"/>
+                        <p:selectOneMenu id="mufaj" value="#{konyvController.selected.mufaj}" required="true" requiredMessage="#{bundle.CreateKonyvRequiredMessage_mufaj}">
+                            <f:selectItems value="#{mufajController.itemsAvailableSelectOne}"
+                                           var="mufajItem"
+                                           itemValue="#{mufajItem}"/>
+                        </p:selectOneMenu>   
                         <p:outputLabel value="#{bundle.EditKonyvLabel_beszerzesiAr}" for="beszerzesiAr" />
                         <p:inputText id="beszerzesiAr" value="#{konyvController.selected.beszerzesiAr}" title="#{bundle.EditKonyvTitle_beszerzesiAr}" required="true" requiredMessage="#{bundle.EditKonyvRequiredMessage_beszerzesiAr}"/>
                         <p:outputLabel value="#{bundle.EditKonyvLabel_egysAr}" for="egysAr" />
@@ -35,7 +39,11 @@
                         <p:outputLabel value="#{bundle.EditKonyvLabel_media}" for="media" />
                         <p:inputText id="media" value="#{konyvController.selected.media}" title="#{bundle.EditKonyvTitle_media}" required="true" requiredMessage="#{bundle.EditKonyvRequiredMessage_media}"/>
                         <p:outputLabel value="#{bundle.EditKonyvLabel_nyelv}" for="nyelv" />
-                        <p:inputText id="nyelv" value="#{konyvController.selected.nyelv}" title="#{bundle.EditKonyvTitle_nyelv}" required="true" requiredMessage="#{bundle.EditKonyvRequiredMessage_nyelv}"/>
+                        <p:selectOneMenu id="nyelv" value="#{konyvController.selected.nyelv}" required="true" requiredMessage="#{bundle.CreateKonyvRequiredMessage_nyelv}">
+                            <f:selectItems value="#{nyelvController.itemsAvailableSelectOne}"
+                                           var="nyelvItem"
+                                           itemValue="#{nyelvItem}"/>
+                        </p:selectOneMenu>      
                         <p:outputLabel value="#{bundle.EditKonyvLabel_sorozat}" for="sorozat" />
                         <p:selectOneMenu id="sorozat" value="#{konyvController.selected.sorozat}" >
                             <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>

@@ -14,6 +14,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -45,10 +47,9 @@ public class Peldany implements Serializable {
     @Basic(optional = false)
     @Column(name = "id", nullable = false)
     private Integer id;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "konyv", nullable = false)
-    private int konyv;
+    @JoinColumn(name = "konyv", referencedColumnName = "id", nullable = false)
+    @ManyToOne(optional = false)    
+    private Konyv konyv;
     @Basic(optional = false)
     @NotNull
     @Column(name = "konyv_peldany", nullable = false)
@@ -77,9 +78,8 @@ public class Peldany implements Serializable {
         this.id = id;
     }
 
-    public Peldany(Integer id, int konyv, int konyvPeldany, String kikolcs, String aktKolcs, int polc) {
+    public Peldany(Integer id, int konyvPeldany, String kikolcs, String aktKolcs, int polc) {
         this.id = id;
-        this.konyv = konyv;
         this.konyvPeldany = konyvPeldany;
         this.kikolcs = kikolcs;
         this.aktKolcs = aktKolcs;
@@ -94,11 +94,11 @@ public class Peldany implements Serializable {
         this.id = id;
     }
 
-    public int getKonyv() {
+    public Konyv getKonyv() {
         return konyv;
     }
 
-    public void setKonyv(int konyv) {
+    public void setKonyv(Konyv konyv) {
         this.konyv = konyv;
     }
 

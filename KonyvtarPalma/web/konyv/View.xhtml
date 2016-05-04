@@ -21,9 +21,7 @@
                         <h:outputText value="#{bundle.ViewKonyvLabel_kiadszam}"/>
                         <h:outputText value="#{konyvController.selected.kiadszam}" title="#{bundle.ViewKonyvTitle_kiadszam}"/>
                         <h:outputText value="#{bundle.ViewKonyvLabel_kiadev}"/>
-                        <h:outputText value="#{konyvController.selected.kiadev}" title="#{bundle.ViewKonyvTitle_kiadev}">
-                            <f:convertDateTime pattern="yyyy-MM-dd" />
-                        </h:outputText>
+                        <h:outputText value="#{konyvController.selected.kiadev}" title="#{bundle.ViewKonyvTitle_kiadev}" />
                         <h:outputText value="#{bundle.ViewKonyvLabel_mufaj}"/>
                         <h:outputText value="#{konyvController.selected.mufaj}" title="#{bundle.ViewKonyvTitle_mufaj}"/>
                         <h:outputText value="#{bundle.ViewKonyvLabel_beszerzesiAr}"/>
@@ -35,7 +33,7 @@
                         <h:outputText value="#{bundle.ViewKonyvLabel_megjegyzes}"/>
                         <h:outputText value="#{konyvController.selected.megjegyzes}" title="#{bundle.ViewKonyvTitle_megjegyzes}"/>
                         <h:outputText value="#{bundle.ViewKonyvLabel_media}"/>
-                        <h:outputText value="#{konyvController.selected.media}" title="#{bundle.ViewKonyvTitle_media}"/>
+                        <h:outputText value="#{konyvController.selected.media.name}" title="#{bundle.ViewKonyvTitle_media}"/>
                         <h:outputText value="#{bundle.ViewKonyvLabel_nyelv}"/>
                         <h:outputText value="#{konyvController.selected.nyelv}" title="#{bundle.ViewKonyvTitle_nyelv}"/>
                         <h:outputText value="#{bundle.ViewKonyvLabel_sorozat}"/>

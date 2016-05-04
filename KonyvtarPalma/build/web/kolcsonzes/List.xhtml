@@ -45,7 +45,15 @@
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListKolcsonzesTitle_peldany}"/>
                             </f:facet>
-                            <h:outputText value="#{item.peldany}"/>
+                            <h:outputText value="#{item.peldany.konyv.cim} (#{item.peldany.konyvPeldany}. példány)"/>
+                        </p:column>     
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Határidő"/>
+                            </f:facet>
+                            <h:outputText value="#{item.hatarido}">
+                                <f:convertDateTime pattern="yyyy-MM-dd" />
+                            </h:outputText>
                         </p:column>                        
                         <p:column>
                             <f:facet name="header">

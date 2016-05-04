@@ -6,7 +6,9 @@
 package entity;
 
 import java.io.Serializable;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -20,6 +22,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
 
@@ -133,6 +136,14 @@ public class Kolcsonzes implements Serializable {
 
     public void setPeldany(Peldany peldany) {
         this.peldany = peldany;
+    }
+    
+    @Transient
+    public Date getHatarido() {
+        Calendar calendar = new GregorianCalendar();
+        calendar.setTime(datum);
+        calendar.add(Calendar.DATE, maxKolcs);
+        return calendar.getTime();
     }
 
     @Override
