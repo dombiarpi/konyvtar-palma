@@ -18,6 +18,15 @@
                         <p:inputText id="cim" value="#{konyvController.selected.cim}" title="#{bundle.EditKonyvTitle_cim}" required="true" requiredMessage="#{bundle.EditKonyvRequiredMessage_cim}"/>
                         <p:outputLabel value="#{bundle.EditKonyvLabel_alcim}" for="alcim" />
                         <p:inputText id="alcim" value="#{konyvController.selected.alcim}" title="#{bundle.EditKonyvTitle_alcim}" />
+                        
+                        <p:outputLabel value="Szerző" for="szerzo" />
+                        <p:selectManyMenu id="szerzo" value="#{konyvController.szerzok}" required="true" requiredMessage="#{bundle.EditKonyvRequiredMessage_kiado}">
+                            <f:selectItems value="#{szerzoController.items}"
+                                           var="szerzoItem"
+                                           itemValue="#{szerzoItem}"/>
+                        </p:selectManyMenu>                           
+                        
+                        
                         <p:outputLabel value="#{bundle.EditKonyvLabel_kiadszam}" for="kiadszam" />
                         <p:inputText id="kiadszam" value="#{konyvController.selected.kiadszam}" title="#{bundle.EditKonyvTitle_kiadszam}" />
                         <p:outputLabel value="#{bundle.EditKonyvLabel_kiadev}" for="kiadev" />

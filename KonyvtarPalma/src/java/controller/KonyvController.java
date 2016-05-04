@@ -3,6 +3,9 @@ package controller;
 import entity.Konyv;
 import controller.util.JsfUtil;
 import controller.util.JsfUtil.PersistAction;
+import entity.Kimitirt;
+import entity.Szerzo;
+import facade.KimitirtFacade;
 import facade.KonyvFacade;
 
 import java.io.Serializable;
@@ -25,8 +28,17 @@ public class KonyvController implements Serializable {
 
     @EJB
     private facade.KonyvFacade ejbFacade;
+    @EJB
+    private facade.SzerzoFacade szerzoFacade;
+    @EJB
+    private facade.KimitirtFacade kimitirtFacade;
+
+    public KimitirtFacade getKimitirtFacade() {
+        return kimitirtFacade;
+    }
     private List<Konyv> items = null;
     private Konyv selected;
+    private List<String> szerzok;
 
     public KonyvController() {
     }
@@ -51,9 +63,17 @@ public class KonyvController implements Serializable {
 
     public Konyv prepareCreate() {
         selected = new Konyv();
+        setDefaultsOfNewKonyv();
         initializeEmbeddableKey();
         return selected;
     }
+
+    private void setDefaultsOfNewKonyv() {
+        Integer katalog = getFacade().findMaxKatalogNumber();
+        selected.setKatal(katalog + 1);
+        selected.setSzorzo(1.5);
+        selected.setEgysAr(1000);
+     }
 
     public void create() {
         persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("KonyvCreated"));
@@ -80,13 +100,28 @@ public class KonyvController implements Serializable {
         }
         return items;
     }
+    
+    private void setupSzerzok(Konyv konyv) {
+//        Kimitirt kimitirt = kimitirtFacade.find(selected);
+//        if (kimitirt == null) {
+        for (String item : szerzok) {
+            Integer key = Integer.valueOf(item);
+            Szerzo szerzo = szerzoFacade.find(key);
+            Kimitirt kimitirt = new Kimitirt();
+            kimitirt.setKonyv(konyv);
+            kimitirt.setSzerzo(szerzo);
+            kimitirtFacade.create(kimitirt);
+        }
+    }
 
     private void persist(PersistAction persistAction, String successMessage) {
         if (selected != null) {
             setEmbeddableKeys();
             try {
                 if (persistAction != PersistAction.DELETE) {
-                    getFacade().edit(selected);
+                    // kimitirtFacade also persists the konyv
+                    Konyv k = getFacade().editKonyv(selected);
+                    setupSzerzok(k);
                 } else {
                     getFacade().remove(selected);
                 }
@@ -119,6 +154,18 @@ public class KonyvController implements Serializable {
 
     public List<Konyv> getItemsAvailableSelectOne() {
         return getFacade().findAll();
+    }
+
+    public facade.SzerzoFacade getSzerzoFacade() {
+        return szerzoFacade;
+    }
+
+    public List<String> getSzerzok() {
+        return szerzok;
+    }
+
+    public void setSzerzok(List<String> szerzok) {
+        this.szerzok = szerzok;
     }
 
     @FacesConverter(forClass = Konyv.class)

@@ -7,6 +7,7 @@ package entity;
 
 import java.io.Serializable;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -28,7 +29,8 @@ import javax.persistence.UniqueConstraint;
     @UniqueConstraint(columnNames = {"konyv", "szerzo"})})
 @NamedQueries({
     @NamedQuery(name = "Kimitirt.findAll", query = "SELECT k FROM Kimitirt k"),
-    @NamedQuery(name = "Kimitirt.findById", query = "SELECT k FROM Kimitirt k WHERE k.id = :id")})
+    @NamedQuery(name = "Kimitirt.findById", query = "SELECT k FROM Kimitirt k WHERE k.id = :id"),
+    @NamedQuery(name = "Kimitirt.findByKonyv", query = "SELECT k FROM Kimitirt k WHERE k.konyv = :konyv")})
 public class Kimitirt implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -41,7 +43,7 @@ public class Kimitirt implements Serializable {
     @ManyToOne(optional = false)
     private Szerzo szerzo;
     @JoinColumn(name = "konyv", referencedColumnName = "id", nullable = false)
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false, cascade = CascadeType.MERGE)
     private Konyv konyv;
 
     public Kimitirt() {

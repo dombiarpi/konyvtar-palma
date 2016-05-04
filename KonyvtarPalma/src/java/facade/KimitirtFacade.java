@@ -6,9 +6,11 @@
 package facade;
 
 import entity.Kimitirt;
+import entity.Konyv;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -28,5 +30,12 @@ public class KimitirtFacade extends AbstractFacade<Kimitirt> {
     public KimitirtFacade() {
         super(Kimitirt.class);
     }
+    
+    public Kimitirt find(Konyv konyv) {
+        Query q = getEntityManager().createNamedQuery("Kimitirt.findByKonyv", Kimitirt.class);
+        q.setParameter("konyv", konyv);
+        Kimitirt km = (Kimitirt)q.getSingleResult();
+        return km;
+    }    
     
 }

@@ -33,18 +33,41 @@ public class KonyvFacade extends AbstractFacade<Konyv> {
         super(Konyv.class);
     }
     
+    public int findMaxKatalogNumber() {
+         Query q = em.createNativeQuery("select max(konyv.katal) from konyv");
+         Object obj = q.getSingleResult();
+         Integer result = (Integer)obj;
+         return result;
+    }
+    
     public List<Konyv> findAllWithSzerzo() {
-        List<Konyv> result = new ArrayList<>();
+        List<Konyv> result = findAll();
         Query q = em.createNamedQuery("Konyv.findAllWithSzerzo");
-        List list = q.getResultList();
-        for (Object object : list) {
-            Object[] konyvSzerzovel = (Object[])object;
-            Konyv konyv = (Konyv)konyvSzerzovel[0];
-            Szerzo szerzo = (Szerzo)konyvSzerzovel[1];
-            konyv.setSzerzoNev(szerzo.getNev());
-            result.add(konyv);
+        for (Konyv konyv : result) {
+            q.setParameter("id", konyv.getId());
+            List l = q.getResultList();
+            StringBuilder sb = new StringBuilder();
+            int count = 0;
+            for (Object object : l) {
+                String delimiter = count > 0 ? ", ":"";
+                sb.append(delimiter).append(object.toString());
+                count++;
+            }
+            konyv.setSzerzoNev(sb.toString());
         }
+//        List list = q.getResultList();
+//        for (Object object : list) {
+//            Object[] konyvSzerzovel = (Object[])object;
+//            Konyv konyv = (Konyv)konyvSzerzovel[0];
+//            Szerzo szerzo = (Szerzo)konyvSzerzovel[1];
+//            konyv.setSzerzoNev(szerzo.getNev());
+//            result.add(konyv);
+//        }
         return result;
+    }
+    
+    public Konyv editKonyv(Konyv konyv) {
+        return em.merge(konyv);
     }
     
 }

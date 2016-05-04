@@ -13,11 +13,20 @@
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{konyvController.selected != null}">
                         <p:outputLabel value="#{bundle.CreateKonyvLabel_katal}" for="katal" />
-                        <p:inputText id="katal" value="#{konyvController.selected.katal}" title="#{bundle.CreateKonyvTitle_katal}" required="true" requiredMessage="#{bundle.CreateKonyvRequiredMessage_katal}"/>
+                        <p:outputLabel id="katal" value="#{konyvController.selected.katal}" title="#{bundle.CreateKonyvTitle_katal}" />
                         <p:outputLabel value="#{bundle.CreateKonyvLabel_cim}" for="cim" />
                         <p:inputText id="cim" value="#{konyvController.selected.cim}" title="#{bundle.CreateKonyvTitle_cim}" required="true" requiredMessage="#{bundle.CreateKonyvRequiredMessage_cim}"/>
                         <p:outputLabel value="#{bundle.CreateKonyvLabel_alcim}" for="alcim" />
                         <p:inputText id="alcim" value="#{konyvController.selected.alcim}" title="#{bundle.CreateKonyvTitle_alcim}" />
+                        
+                        
+                        <p:outputLabel value="Szerző" for="szerzo" />
+                        <p:selectManyMenu id="szerzo" value="#{konyvController.szerzok}" required="true" requiredMessage="#{bundle.EditKonyvRequiredMessage_kiado}">
+                            <f:selectItems value="#{szerzoController.items}"
+                                           var="szerzoItem"
+                                           itemValue="#{szerzoItem.id}" itemLabel="#{szerzoItem}"/>
+                        </p:selectManyMenu>                        
+                        
                         <p:outputLabel value="#{bundle.CreateKonyvLabel_kiadszam}" for="kiadszam" />
                         <p:inputText id="kiadszam" value="#{konyvController.selected.kiadszam}" title="#{bundle.CreateKonyvTitle_kiadszam}" />
                         <p:outputLabel value="#{bundle.CreateKonyvLabel_kiadev}" for="kiadev" />

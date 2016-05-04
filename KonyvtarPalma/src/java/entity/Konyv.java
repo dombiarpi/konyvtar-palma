@@ -11,6 +11,7 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -44,7 +45,7 @@ import javax.validation.constraints.Size;
 @NamedQueries({
     @NamedQuery(name = "Konyv.findAll", query = "SELECT k FROM Konyv k"),
     @NamedQuery(name = "Konyv.findById", query = "SELECT k FROM Konyv k WHERE k.id = :id"),
-    @NamedQuery(name = "Konyv.findAllWithSzerzo", query = "SELECT k, s FROM Konyv k join k.kimitirtCollection i join i.szerzo s"),
+    @NamedQuery(name = "Konyv.findAllWithSzerzo", query = "SELECT s FROM Konyv k join k.kimitirtCollection i join i.szerzo s where k.id = :id"),
     @NamedQuery(name = "Konyv.findByKatal", query = "SELECT k FROM Konyv k WHERE k.katal = :katal"),
     @NamedQuery(name = "Konyv.findByCim", query = "SELECT k FROM Konyv k WHERE k.cim = :cim"),
     @NamedQuery(name = "Konyv.findByAlcim", query = "SELECT k FROM Konyv k WHERE k.alcim = :alcim"),
@@ -125,6 +126,8 @@ public class Konyv implements Serializable {
     private String szerzoNev;
     @Transient
     private Media[] mediak;
+    @Transient
+    private static final AtomicInteger count = new AtomicInteger(0); 
 
     public Konyv() {
     }
@@ -159,6 +162,7 @@ public class Konyv implements Serializable {
     }
 
     public String getCim() {
+        
         return cim;
     }
 
