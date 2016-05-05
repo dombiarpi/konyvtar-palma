@@ -17,9 +17,9 @@
                             <f:convertDateTime pattern="yyyy-MM-dd" />
                         </h:outputText>
                         <h:outputText value="#{bundle.ViewElojegyzesLabel_szemely}"/>
-                        <h:outputText value="#{elojegyzesController.selected.szemely}" title="#{bundle.ViewElojegyzesTitle_szemely}"/>
+                        <h:outputText value="#{elojegyzesController.selected.szemely.nev}" title="#{bundle.ViewElojegyzesTitle_szemely}"/>
                         <h:outputText value="#{bundle.ViewElojegyzesLabel_konyv}"/>
-                        <h:outputText value="#{elojegyzesController.selected.konyv}" title="#{bundle.ViewElojegyzesTitle_konyv}"/>
+                        <h:outputText value="#{elojegyzesController.selected.konyv.cim}" title="#{bundle.ViewElojegyzesTitle_konyv}"/>
                     </p:panelGrid>
                     <p:commandButton value="#{bundle.Close}" onclick="ElojegyzesViewDialog.hide()"/>
                 </h:panelGroup>

@@ -32,20 +32,20 @@
                                 <h:outputText value="#{bundle.ListElojegyzesTitle_datum}"/>
                             </f:facet>
                             <h:outputText value="#{item.datum}">
-                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                                <f:convertDateTime pattern="yyyy-MM-dd" />
                             </h:outputText>
                         </p:column>
                         <p:column>
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListElojegyzesTitle_szemely}"/>
                             </f:facet>
-                            <h:outputText value="#{item.szemely}"/>
+                            <h:outputText value="#{item.szemely.nev}"/>
                         </p:column>
                         <p:column>
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListElojegyzesTitle_konyv}"/>
                             </f:facet>
-                            <h:outputText value="#{item.konyv}"/>
+                            <h:outputText value="#{item.konyv.cim}"/>
                         </p:column>
                         <f:facet name="footer">
                             <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{elojegyzesController.prepareCreate}" update=":ElojegyzesCreateForm" oncomplete="PF('ElojegyzesCreateDialog').show()"/>
