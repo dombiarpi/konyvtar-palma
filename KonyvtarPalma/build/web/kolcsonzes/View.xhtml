@@ -25,9 +25,9 @@
                         <h:outputText value="#{bundle.ViewKolcsonzesLabel_maxKolcs}"/>
                         <h:outputText value="#{kolcsonzesController.selected.maxKolcs}" title="#{bundle.ViewKolcsonzesTitle_maxKolcs}"/>
                         <h:outputText value="#{bundle.ViewKolcsonzesLabel_szemely}"/>
-                        <h:outputText value="#{kolcsonzesController.selected.szemely}" title="#{bundle.ViewKolcsonzesTitle_szemely}"/>
+                        <h:outputText value="#{kolcsonzesController.selected.szemely.nev}" title="#{bundle.ViewKolcsonzesTitle_szemely}"/>
                         <h:outputText value="#{bundle.ViewKolcsonzesLabel_peldany}"/>
-                        <h:outputText value="#{kolcsonzesController.selected.peldany}" title="#{bundle.ViewKolcsonzesTitle_peldany}"/>
+                        <h:outputText value="#{kolcsonzesController.selected.peldany.konyv}" title="#{bundle.ViewKolcsonzesTitle_peldany}"/>
                     </p:panelGrid>
                     <p:commandButton value="#{bundle.Close}" onclick="KolcsonzesViewDialog.hide()"/>
                 </h:panelGroup>

@@ -37,6 +37,7 @@ public class KonyvController implements Serializable {
         return kimitirtFacade;
     }
     private List<Konyv> items = null;
+    private List<Konyv> filteredItems = null;
     private Konyv selected;
     private List<String> szerzok;
 
@@ -166,6 +167,14 @@ public class KonyvController implements Serializable {
 
     public void setSzerzok(List<String> szerzok) {
         this.szerzok = szerzok;
+    }
+
+    public List<Konyv> getFilteredItems() {
+        return filteredItems;
+    }
+
+    public void setFilteredItems(List<Konyv> filteredItems) {
+        this.filteredItems = filteredItems;
     }
 
     @FacesConverter(forClass = Konyv.class)
