@@ -72,6 +72,8 @@ public class Kolcsonzes implements Serializable {
     private Date hatarido;
     @Transient
     private String kesesben;
+    @Transient
+    private final int NAPI_KESESI_DIJ = 50;
 
     public Kolcsonzes() {
     }
@@ -147,6 +149,23 @@ public class Kolcsonzes implements Serializable {
         calendar.setTime(datum);
         calendar.add(Calendar.DATE, maxKolcs);
         return calendar.getTime();
+    }
+    
+    public int getKesett() {
+        int diffInDays = 0;
+        if (visszahozDatum != null) {
+            diffInDays =  (int)( (visszahozDatum.getTime() - getHatarido().getTime()) 
+                 / (1000 * 60 * 60 * 24) );
+        } else {
+            diffInDays = (int)( ((new Date()).getTime() - getHatarido().getTime()) 
+                 / (1000 * 60 * 60 * 24) );
+        }
+        if (diffInDays < 0) {diffInDays = 0;}
+        return diffInDays;
+    }
+    
+    public int getFizetendo() {
+        return getKesett() * NAPI_KESESI_DIJ;
     }
     
     public String getKesesben() {

@@ -51,7 +51,13 @@
                                 <h:outputText value="#{bundle.ListKolcsonzesTitle_peldany}"/>
                             </f:facet>
                             <h:outputText value="#{item.peldany.konyv.cim} (#{item.peldany.konyvPeldany}. példány)"/>
-                        </p:column>     
+                        </p:column>   
+                        <p:column sortBy="#{item.maxKolcs}" >
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListKolcsonzesTitle_maxKolcs}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.maxKolcs}"/>
+                        </p:column>                        
                         <p:column sortBy="#{item.hatarido}" >
                             <f:facet name="header">
                                 <h:outputText value="Határidő"/>
@@ -68,18 +74,25 @@
                                 <f:convertDateTime pattern="yyyy-MM-dd" />
                             </h:outputText>
                         </p:column>
+                        <p:column sortBy="#{item.kesett}" >
+                            <f:facet name="header">
+                                <h:outputText value="Késett"/>
+                            </f:facet>
+                            <h:outputText value="#{item.kesett} nap"/>
+                        </p:column>
+                        <p:column sortBy="#{item.fizetendo}" >
+                            <f:facet name="header">
+                                <h:outputText value="Fizetnie kell"/>
+                            </f:facet>
+                            <h:outputText value="#{item.fizetendo} Forint"/>
+                        </p:column>
+
                         <p:column sortBy="#{item.felszolit}" >
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListKolcsonzesTitle_felszolit}"/>
                             </f:facet>
                             <h:outputText value="#{item.felszolit}"/>
-                        </p:column>
-                        <p:column sortBy="#{item.maxKolcs}" >
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListKolcsonzesTitle_maxKolcs}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.maxKolcs}"/>
-                        </p:column>
+                        </p:column>                        
                         <f:facet name="footer">
                             <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{kolcsonzesController.prepareCreate}" update=":KolcsonzesCreateForm" oncomplete="PF('KolcsonzesCreateDialog').show()"/>
                             <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":KolcsonzesViewForm" oncomplete="PF('KolcsonzesViewDialog').show()" disabled="#{empty kolcsonzesController.selected}"/>
