@@ -51,7 +51,7 @@
                             <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{nincsController.prepareCreate}" update=":NincsCreateForm" oncomplete="PF('NincsCreateDialog').show()"/>
                             <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":NincsViewForm" oncomplete="PF('NincsViewDialog').show()" disabled="#{empty nincsController.selected}"/>
                             <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":NincsEditForm" oncomplete="PF('NincsEditDialog').show()" disabled="#{empty nincsController.selected}"/>
-                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{nincsController.destroy}" update=":growl,datalist" disabled="#{empty nincsController.selected}"/>
+                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" onclick="return confirm('#{bundle.ConfirmDeleteMessage}');" actionListener="#{nincsController.destroy}" update=":growl,datalist" disabled="#{empty nincsController.selected}"/>
                         </f:facet>
                     </p:dataTable>
                 </p:panel>

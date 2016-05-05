@@ -13,9 +13,9 @@
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{kimitirtController.selected != null}">
                         <h:outputText value="#{bundle.ViewKimitirtLabel_szerzo}"/>
-                        <h:outputText value="#{kimitirtController.selected.szerzo}" title="#{bundle.ViewKimitirtTitle_szerzo}"/>
+                        <h:outputText value="#{kimitirtController.selected.szerzo.nev}" title="#{bundle.ViewKimitirtTitle_szerzo}"/>
                         <h:outputText value="#{bundle.ViewKimitirtLabel_konyv}"/>
-                        <h:outputText value="#{kimitirtController.selected.konyv}" title="#{bundle.ViewKimitirtTitle_konyv}"/>
+                        <h:outputText value="#{kimitirtController.selected.konyv.cim}" title="#{bundle.ViewKimitirtTitle_konyv}"/>
                     </p:panelGrid>
                     <p:commandButton value="#{bundle.Close}" onclick="KimitirtViewDialog.hide()"/>
                 </h:panelGroup>

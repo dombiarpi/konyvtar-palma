@@ -43,7 +43,7 @@
                             <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{utalasController.prepareCreate}" update=":UtalasCreateForm" oncomplete="PF('UtalasCreateDialog').show()"/>
                             <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":UtalasViewForm" oncomplete="PF('UtalasViewDialog').show()" disabled="#{empty utalasController.selected}"/>
                             <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":UtalasEditForm" oncomplete="PF('UtalasEditDialog').show()" disabled="#{empty utalasController.selected}"/>
-                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{utalasController.destroy}" update=":growl,datalist" disabled="#{empty utalasController.selected}"/>
+                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" onclick="return confirm('#{bundle.ConfirmDeleteMessage}');" actionListener="#{utalasController.destroy}" update=":growl,datalist" disabled="#{empty utalasController.selected}"/>
                         </f:facet>
                     </p:dataTable>
                 </p:panel>

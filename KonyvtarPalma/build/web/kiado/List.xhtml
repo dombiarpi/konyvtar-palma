@@ -37,7 +37,7 @@
                             <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{kiadoController.prepareCreate}" update=":KiadoCreateForm" oncomplete="PF('KiadoCreateDialog').show()"/>
                             <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":KiadoViewForm" oncomplete="PF('KiadoViewDialog').show()" disabled="#{empty kiadoController.selected}"/>
                             <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":KiadoEditForm" oncomplete="PF('KiadoEditDialog').show()" disabled="#{empty kiadoController.selected}"/>
-                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{kiadoController.destroy}" update=":growl,datalist" disabled="#{empty kiadoController.selected}"/>
+                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" onclick="return confirm('#{bundle.ConfirmDeleteMessage}');" actionListener="#{kiadoController.destroy}" update=":growl,datalist" disabled="#{empty kiadoController.selected}"/>
                         </f:facet>
                     </p:dataTable>
                 </p:panel>

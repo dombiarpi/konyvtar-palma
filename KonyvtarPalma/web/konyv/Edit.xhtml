@@ -23,8 +23,8 @@
                         <p:selectManyMenu id="szerzo" value="#{konyvController.szerzok}" required="true" requiredMessage="#{bundle.EditKonyvRequiredMessage_kiado}">
                             <f:selectItems value="#{szerzoController.items}"
                                            var="szerzoItem"
-                                           itemValue="#{szerzoItem}"/>
-                        </p:selectManyMenu>                           
+                                           itemValue="#{szerzoItem.id}" itemLabel="#{szerzoItem}"/>
+                        </p:selectManyMenu>            
                         
                         
                         <p:outputLabel value="#{bundle.EditKonyvLabel_kiadszam}" for="kiadszam" />

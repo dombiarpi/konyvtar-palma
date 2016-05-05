@@ -37,7 +37,7 @@
                             <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{szerzoController.prepareCreate}" update=":SzerzoCreateForm" oncomplete="PF('SzerzoCreateDialog').show()"/>
                             <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":SzerzoViewForm" oncomplete="PF('SzerzoViewDialog').show()" disabled="#{empty szerzoController.selected}"/>
                             <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":SzerzoEditForm" oncomplete="PF('SzerzoEditDialog').show()" disabled="#{empty szerzoController.selected}"/>
-                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{szerzoController.destroy}" update=":growl,datalist" disabled="#{empty szerzoController.selected}"/>
+                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" onclick="return confirm('#{bundle.ConfirmDeleteMessage}');" actionListener="#{szerzoController.destroy}" update=":growl,datalist" disabled="#{empty szerzoController.selected}"/>
                         </f:facet>
                     </p:dataTable>
                 </p:panel>

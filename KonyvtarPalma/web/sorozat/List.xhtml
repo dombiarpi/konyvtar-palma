@@ -37,7 +37,7 @@
                             <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{sorozatController.prepareCreate}" update=":SorozatCreateForm" oncomplete="PF('SorozatCreateDialog').show()"/>
                             <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":SorozatViewForm" oncomplete="PF('SorozatViewDialog').show()" disabled="#{empty sorozatController.selected}"/>
                             <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":SorozatEditForm" oncomplete="PF('SorozatEditDialog').show()" disabled="#{empty sorozatController.selected}"/>
-                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{sorozatController.destroy}" update=":growl,datalist" disabled="#{empty sorozatController.selected}"/>
+                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" onclick="return confirm('#{bundle.ConfirmDeleteMessage}');" actionListener="#{sorozatController.destroy}" update=":growl,datalist" disabled="#{empty sorozatController.selected}"/>
                         </f:facet>
                     </p:dataTable>
                 </p:panel>

@@ -61,7 +61,7 @@
                             <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{peldanyController.prepareCreate}" update=":PeldanyCreateForm" oncomplete="PF('PeldanyCreateDialog').show()"/>
                             <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":PeldanyViewForm" oncomplete="PF('PeldanyViewDialog').show()" disabled="#{empty peldanyController.selected}"/>
                             <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":PeldanyEditForm" oncomplete="PF('PeldanyEditDialog').show()" disabled="#{empty peldanyController.selected}"/>
-                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{peldanyController.destroy}" update=":growl,datalist" disabled="#{empty peldanyController.selected}"/>
+                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" onclick="return confirm('#{bundle.ConfirmDeleteMessage}');" actionListener="#{peldanyController.destroy}" update=":growl,datalist" disabled="#{empty peldanyController.selected}"/>
                         </f:facet>
                     </p:dataTable>
                 </p:panel>

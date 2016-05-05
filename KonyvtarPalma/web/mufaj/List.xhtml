@@ -37,7 +37,7 @@
                             <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{mufajController.prepareCreate}" update=":MufajCreateForm" oncomplete="PF('MufajCreateDialog').show()"/>
                             <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":MufajViewForm" oncomplete="PF('MufajViewDialog').show()" disabled="#{empty mufajController.selected}"/>
                             <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":MufajEditForm" oncomplete="PF('MufajEditDialog').show()" disabled="#{empty mufajController.selected}"/>
-                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{mufajController.destroy}" update=":growl,datalist" disabled="#{empty mufajController.selected}"/>
+                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" onclick="return confirm('#{bundle.ConfirmDeleteMessage}');" actionListener="#{mufajController.destroy}" update=":growl,datalist" disabled="#{empty mufajController.selected}"/>
                         </f:facet>
                     </p:dataTable>
                 </p:panel>

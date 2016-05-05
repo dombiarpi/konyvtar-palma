@@ -43,7 +43,7 @@
                             <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{polcController.prepareCreate}" update=":PolcCreateForm" oncomplete="PF('PolcCreateDialog').show()"/>
                             <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":PolcViewForm" oncomplete="PF('PolcViewDialog').show()" disabled="#{empty polcController.selected}"/>
                             <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":PolcEditForm" oncomplete="PF('PolcEditDialog').show()" disabled="#{empty polcController.selected}"/>
-                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{polcController.destroy}" update=":growl,datalist" disabled="#{empty polcController.selected}"/>
+                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" onclick="return confirm('#{bundle.ConfirmDeleteMessage}');" actionListener="#{polcController.destroy}" update=":growl,datalist" disabled="#{empty polcController.selected}"/>
                         </f:facet>
                     </p:dataTable>
                 </p:panel>

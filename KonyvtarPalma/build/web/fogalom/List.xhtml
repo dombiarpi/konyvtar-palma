@@ -37,7 +37,7 @@
                             <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{fogalomController.prepareCreate}" update=":FogalomCreateForm" oncomplete="PF('FogalomCreateDialog').show()"/>
                             <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":FogalomViewForm" oncomplete="PF('FogalomViewDialog').show()" disabled="#{empty fogalomController.selected}"/>
                             <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":FogalomEditForm" oncomplete="PF('FogalomEditDialog').show()" disabled="#{empty fogalomController.selected}"/>
-                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{fogalomController.destroy}" update=":growl,datalist" disabled="#{empty fogalomController.selected}"/>
+                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" onclick="return confirm('#{bundle.ConfirmDeleteMessage}');" actionListener="#{fogalomController.destroy}" update=":growl,datalist" disabled="#{empty fogalomController.selected}"/>
                         </f:facet>
                     </p:dataTable>
                 </p:panel>
