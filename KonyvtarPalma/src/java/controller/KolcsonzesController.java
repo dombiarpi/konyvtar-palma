@@ -6,6 +6,7 @@ import controller.util.JsfUtil.PersistAction;
 import facade.KolcsonzesFacade;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -120,7 +121,7 @@ public class KolcsonzesController implements Serializable {
     public List<Kolcsonzes> getItemsAvailableSelectOne() {
         return getFacade().findAll();
     }
-
+    
     @FacesConverter(forClass = Kolcsonzes.class)
     public static class KolcsonzesControllerConverter implements Converter {
 

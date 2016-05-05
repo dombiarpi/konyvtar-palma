@@ -22,12 +22,17 @@
                                  rowKey="#{item.id}"
                                  rows="10"
                                  rowsPerPageTemplate="10,20,30,40,50"
+                                 draggableColumns="true"
+                                 rowStyleClass="#{item.kesesben}"
                                  >
 
                         <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
                         <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
-
-                        <p:column>
+                       <f:facet name="header">
+                            <p:commandButton id="toggler" type="button" value="Oszlopok" style="float:right" icon="ui-icon-calculator" />
+                            <p:columnToggler datasource="datalist" trigger="toggler" />
+                        </f:facet>
+                        <p:column sortBy="#{item.datum}" >
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListKolcsonzesTitle_datum}"/>
                             </f:facet>
@@ -35,19 +40,19 @@
                                 <f:convertDateTime pattern="yyyy-MM-dd" />
                             </h:outputText>
                         </p:column>
-                        <p:column>
+                        <p:column sortBy="#{item.szemely.nev}" >
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListKolcsonzesTitle_szemely}"/>
                             </f:facet>
                             <h:outputText value="#{item.szemely.nev}"/>
                         </p:column>   
-                        <p:column>
+                        <p:column sortBy="#{item.peldany.konyv.cim}" >
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListKolcsonzesTitle_peldany}"/>
                             </f:facet>
                             <h:outputText value="#{item.peldany.konyv.cim} (#{item.peldany.konyvPeldany}. példány)"/>
                         </p:column>     
-                        <p:column>
+                        <p:column sortBy="#{item.hatarido}" >
                             <f:facet name="header">
                                 <h:outputText value="Határidő"/>
                             </f:facet>
@@ -55,7 +60,7 @@
                                 <f:convertDateTime pattern="yyyy-MM-dd" />
                             </h:outputText>
                         </p:column>                        
-                        <p:column>
+                        <p:column sortBy="#{item.visszahozDatum}" >
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListKolcsonzesTitle_visszahozDatum}"/>
                             </f:facet>
@@ -63,13 +68,13 @@
                                 <f:convertDateTime pattern="yyyy-MM-dd" />
                             </h:outputText>
                         </p:column>
-                        <p:column>
+                        <p:column sortBy="#{item.felszolit}" >
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListKolcsonzesTitle_felszolit}"/>
                             </f:facet>
                             <h:outputText value="#{item.felszolit}"/>
                         </p:column>
-                        <p:column>
+                        <p:column sortBy="#{item.maxKolcs}" >
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListKolcsonzesTitle_maxKolcs}"/>
                             </f:facet>

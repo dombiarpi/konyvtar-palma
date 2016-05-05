@@ -68,6 +68,10 @@ public class Kolcsonzes implements Serializable {
     @JoinColumn(name = "peldany", referencedColumnName = "id", nullable = false)
     @ManyToOne(optional = false)
     private Peldany peldany;
+    @Transient
+    private Date hatarido;
+    @Transient
+    private String kesesben;
 
     public Kolcsonzes() {
     }
@@ -138,14 +142,18 @@ public class Kolcsonzes implements Serializable {
         this.peldany = peldany;
     }
     
-    @Transient
     public Date getHatarido() {
         Calendar calendar = new GregorianCalendar();
         calendar.setTime(datum);
         calendar.add(Calendar.DATE, maxKolcs);
         return calendar.getTime();
     }
-
+    
+    public String getKesesben() {
+        kesesben = getHatarido().before(new Date()) ? "kesesben":"";
+        return kesesben;
+    }
+    
     @Override
     public int hashCode() {
         int hash = 0;
