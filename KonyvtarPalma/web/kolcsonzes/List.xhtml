@@ -32,7 +32,7 @@
                             <p:commandButton id="toggler" type="button" value="Oszlopok" style="float:right" icon="ui-icon-calculator" />
                             <p:columnToggler datasource="datalist" trigger="toggler" />
                         </f:facet>
-                        <p:column sortBy="#{item.datum}" >
+                        <p:column sortBy="#{item.datum}" filterBy="#{item.datum}" filterMatchMode="contains">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListKolcsonzesTitle_datum}"/>
                             </f:facet>
@@ -40,25 +40,25 @@
                                 <f:convertDateTime pattern="yyyy-MM-dd" />
                             </h:outputText>
                         </p:column>
-                        <p:column sortBy="#{item.szemely.nev}" >
+                        <p:column sortBy="#{item.szemely.nev}" filterBy="#{item.szemely.nev}" filterMatchMode="contains" >
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListKolcsonzesTitle_szemely}"/>
                             </f:facet>
                             <h:outputText value="#{item.szemely.nev}"/>
                         </p:column>   
-                        <p:column sortBy="#{item.peldany.konyv.cim}" >
+                        <p:column sortBy="#{item.peldany.konyv.cim}"  filterBy="#{item.peldany.konyv.cim}" filterMatchMode="contains">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListKolcsonzesTitle_peldany}"/>
                             </f:facet>
                             <h:outputText value="#{item.peldany.konyv.cim} (#{item.peldany.konyvPeldany}. példány)"/>
                         </p:column>   
-                        <p:column sortBy="#{item.maxKolcs}" >
+                        <p:column sortBy="#{item.maxKolcs}"  filterBy="#{item.maxKolcs}" filterMatchMode="contains">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListKolcsonzesTitle_maxKolcs}"/>
                             </f:facet>
                             <h:outputText value="#{item.maxKolcs}"/>
                         </p:column>                        
-                        <p:column sortBy="#{item.hatarido}" >
+                        <p:column sortBy="#{item.hatarido}"  filterBy="#{item.hatarido}" filterMatchMode="contains">
                             <f:facet name="header">
                                 <h:outputText value="Határidő"/>
                             </f:facet>
@@ -66,7 +66,7 @@
                                 <f:convertDateTime pattern="yyyy-MM-dd" />
                             </h:outputText>
                         </p:column>                        
-                        <p:column sortBy="#{item.visszahozDatum}" >
+                        <p:column sortBy="#{item.visszahozDatum}"  filterBy="#{item.visszahozDatum}" filterMatchMode="contains">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListKolcsonzesTitle_visszahozDatum}"/>
                             </f:facet>
@@ -74,20 +74,20 @@
                                 <f:convertDateTime pattern="yyyy-MM-dd" />
                             </h:outputText>
                         </p:column>
-                        <p:column sortBy="#{item.kesett}" >
+                        <p:column sortBy="#{item.kesett}"  filterBy="#{item.kesett}" filterMatchMode="contains">
                             <f:facet name="header">
                                 <h:outputText value="Késett"/>
                             </f:facet>
                             <h:outputText value="#{item.kesett}" />
                         </p:column>
-                        <p:column sortBy="#{item.fizetendo}" >
+                        <p:column sortBy="#{item.fizetendo}"  filterBy="#{item.fizetendo}" filterMatchMode="contains">
                             <f:facet name="header">
                                 <h:outputText value="Fizetnie kell"/>
                             </f:facet>
                             <h:outputText value="#{item.fizetendo}"/>
                         </p:column>
 
-                        <p:column sortBy="#{item.felszolit}" >
+                        <p:column sortBy="#{item.felszolit}"  filterBy="#{item.felszolit}" filterMatchMode="contains">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListKolcsonzesTitle_felszolit}"/>
                             </f:facet>

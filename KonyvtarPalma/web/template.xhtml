@@ -20,6 +20,10 @@
                 <h:form id="menuForm">
                     <p:menubar>
                         <p:menuitem value="#{bundle.Home}" outcome="/index" icon="ui-icon-home"/>
+                        <p:submenu label="Kölcsönzés">
+                            <p:menuitem value="Kölcsönzés" outcome="/kolcsonzes/List.xhtml" />
+                            <p:menuitem value="Előjegyzés" outcome="/elojegyzes/List.xhtml" />                           
+                        </p:submenu>
                         <p:submenu label="#{bundle.Maintenance}">
                             <p:menuitem value="Olvasó" outcome="/szemely/List.xhtml" />
                             <p:menuitem value="Szerző" outcome="/szerzo/List.xhtml" />
