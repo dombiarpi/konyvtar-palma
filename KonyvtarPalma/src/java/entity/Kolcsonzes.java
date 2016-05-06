@@ -151,8 +151,8 @@ public class Kolcsonzes implements Serializable {
         return calendar.getTime();
     }
     
-    public int getKesett() {
-        int diffInDays = 0;
+    public Integer getKesett() {
+        Integer diffInDays = 0;
         if (visszahozDatum != null) {
             diffInDays =  (int)( (visszahozDatum.getTime() - getHatarido().getTime()) 
                  / (1000 * 60 * 60 * 24) );
@@ -160,16 +160,17 @@ public class Kolcsonzes implements Serializable {
             diffInDays = (int)( ((new Date()).getTime() - getHatarido().getTime()) 
                  / (1000 * 60 * 60 * 24) );
         }
-        if (diffInDays < 0) {diffInDays = 0;}
+        if (0 >= diffInDays) {diffInDays = null;}
         return diffInDays;
     }
     
-    public int getFizetendo() {
+    public Integer getFizetendo() {
+        if (getKesett() == null) {return null;}
         return getKesett() * NAPI_KESESI_DIJ;
     }
     
     public String getKesesben() {
-        kesesben = getHatarido().before(new Date()) ? "kesesben":"";
+        kesesben = getKesett() == null ? "":"kesesben";
         return kesesben;
     }
     
