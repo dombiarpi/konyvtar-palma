@@ -31,7 +31,7 @@
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListPeldanyTitle_konyv}"/>
                             </f:facet>
-                            <h:outputText value="#{item.konyv}"/>
+                            <h:outputText value="#{item.konyv.cim}"/>
                         </p:column>
                         <p:column>
                             <f:facet name="header">
@@ -55,7 +55,7 @@
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListPeldanyTitle_polc}"/>
                             </f:facet>
-                            <h:outputText value="#{item.polc}"/>
+                            <h:outputText value="#{item.polc.szekreny} #{item.polc.polc}"/>
                         </p:column>
                         <f:facet name="footer">
                             <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{peldanyController.prepareCreate}" update=":PeldanyCreateForm" oncomplete="PF('PeldanyCreateDialog').show()"/>

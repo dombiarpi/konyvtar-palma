@@ -13,7 +13,7 @@
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{peldanyController.selected != null}">
                         <h:outputText value="#{bundle.ViewPeldanyLabel_konyv}"/>
-                        <h:outputText value="#{peldanyController.selected.konyv}" title="#{bundle.ViewPeldanyTitle_konyv}"/>
+                        <h:outputText value="#{peldanyController.selected.konyv.cim}" title="#{bundle.ViewPeldanyTitle_konyv}"/>
                         <h:outputText value="#{bundle.ViewPeldanyLabel_konyvPeldany}"/>
                         <h:outputText value="#{peldanyController.selected.konyvPeldany}" title="#{bundle.ViewPeldanyTitle_konyvPeldany}"/>
                         <h:outputText value="#{bundle.ViewPeldanyLabel_kikolcs}"/>
@@ -21,7 +21,7 @@
                         <h:outputText value="#{bundle.ViewPeldanyLabel_aktKolcs}"/>
                         <h:outputText value="#{peldanyController.selected.aktKolcs}" title="#{bundle.ViewPeldanyTitle_aktKolcs}"/>
                         <h:outputText value="#{bundle.ViewPeldanyLabel_polc}"/>
-                        <h:outputText value="#{peldanyController.selected.polc}" title="#{bundle.ViewPeldanyTitle_polc}"/>
+                        <h:outputText value="#{peldanyController.selected.polc.szekreny} #{peldanyController.selected.polc.polc}" title="#{bundle.ViewPeldanyTitle_polc}"/>
                     </p:panelGrid>
                     <p:commandButton value="#{bundle.Close}" onclick="PeldanyViewDialog.hide()"/>
                 </h:panelGroup>

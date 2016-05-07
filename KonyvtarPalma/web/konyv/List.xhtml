@@ -126,7 +126,7 @@
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListKonyvTitle_sorozat}"/>
                             </f:facet>
-                            <h:outputText value="#{item.sorozat}"/>
+                            <h:outputText value="#{item.sorozat.nev}"/>
                         </p:column>
                         <p:column sortBy="#{item.kiado.nev}" filterBy="#{item.kiado.nev}" filterMatchMode="contains">
                             <f:facet name="header">

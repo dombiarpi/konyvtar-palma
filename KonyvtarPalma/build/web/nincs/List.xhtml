@@ -31,7 +31,7 @@
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListNincsTitle_peldany}"/>
                             </f:facet>
-                            <h:outputText value="#{item.peldany}"/>
+                            <h:outputText value="#{item.peldany.konyv.cim} (#{item.peldany.konyvPeldany}. példány)"/>
                         </p:column>
                         <p:column>
                             <f:facet name="header">

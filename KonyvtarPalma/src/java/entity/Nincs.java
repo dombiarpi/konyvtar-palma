@@ -13,6 +13,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -43,10 +45,9 @@ public class Nincs implements Serializable {
     @Basic(optional = false)
     @Column(name = "id", nullable = false)
     private Integer id;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "peldany", nullable = false)
-    private int peldany;
+    @JoinColumn(name = "peldany", referencedColumnName = "id", nullable = false)
+    @ManyToOne(optional = false)    
+    private Peldany peldany;
     @Basic(optional = false)
     @NotNull
     @Column(name = "kelt", nullable = false)
@@ -65,9 +66,9 @@ public class Nincs implements Serializable {
         this.id = id;
     }
 
-    public Nincs(Integer id, int peldany, Date kelt, String selejtLopott) {
+    public Nincs(Integer id, Date kelt, String selejtLopott) {
         this.id = id;
-        this.peldany = peldany;
+
         this.kelt = kelt;
         this.selejtLopott = selejtLopott;
     }
@@ -80,11 +81,11 @@ public class Nincs implements Serializable {
         this.id = id;
     }
 
-    public int getPeldany() {
+    public Peldany getPeldany() {
         return peldany;
     }
 
-    public void setPeldany(int peldany) {
+    public void setPeldany(Peldany peldany) {
         this.peldany = peldany;
     }
 

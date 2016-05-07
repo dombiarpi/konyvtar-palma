@@ -31,13 +31,13 @@
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListUtalasTitle_konyv}"/>
                             </f:facet>
-                            <h:outputText value="#{item.konyv}"/>
+                            <h:outputText value="#{item.konyv.cim}"/>
                         </p:column>
                         <p:column>
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListUtalasTitle_fogalom}"/>
                             </f:facet>
-                            <h:outputText value="#{item.fogalom}"/>
+                            <h:outputText value="#{item.fogalom.nev}"/>
                         </p:column>
                         <f:facet name="footer">
                             <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{utalasController.prepareCreate}" update=":UtalasCreateForm" oncomplete="PF('UtalasCreateDialog').show()"/>

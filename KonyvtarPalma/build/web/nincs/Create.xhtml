@@ -13,7 +13,11 @@
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{nincsController.selected != null}">
                         <p:outputLabel value="#{bundle.CreateNincsLabel_peldany}" for="peldany" />
-                        <p:inputText id="peldany" value="#{nincsController.selected.peldany}" title="#{bundle.CreateNincsTitle_peldany}" required="true" requiredMessage="#{bundle.CreateNincsRequiredMessage_peldany}"/>
+                        <p:selectOneMenu id="peldany" value="#{nincsController.selected.peldany}" required="true" requiredMessage="#{bundle.CreateNincsRequiredMessage_peldany}">
+                            <f:selectItems value="#{peldanyController.itemsAvailableSelectOne}"
+                                           var="peldanyItem"
+                                           itemValue="#{peldanyItem}"/>
+                        </p:selectOneMenu>                        
                         <p:outputLabel value="#{bundle.CreateNincsLabel_kelt}" for="kelt" />
                         <p:calendar id="kelt" pattern="yyyy-MM-dd" value="#{nincsController.selected.kelt}" title="#{bundle.EditNincsTitle_kelt}" required="true" requiredMessage="#{bundle.EditNincsRequiredMessage_kelt}" showOn="button"/>
                         <p:outputLabel value="#{bundle.CreateNincsLabel_selejtLopott}" for="selejtLopott" />

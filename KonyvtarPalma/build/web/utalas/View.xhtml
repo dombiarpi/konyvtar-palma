@@ -13,9 +13,9 @@
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{utalasController.selected != null}">
                         <h:outputText value="#{bundle.ViewUtalasLabel_konyv}"/>
-                        <h:outputText value="#{utalasController.selected.konyv}" title="#{bundle.ViewUtalasTitle_konyv}"/>
+                        <h:outputText value="#{utalasController.selected.konyv.cim}" title="#{bundle.ViewUtalasTitle_konyv}"/>
                         <h:outputText value="#{bundle.ViewUtalasLabel_fogalom}"/>
-                        <h:outputText value="#{utalasController.selected.fogalom}" title="#{bundle.ViewUtalasTitle_fogalom}"/>
+                        <h:outputText value="#{utalasController.selected.fogalom.nev}" title="#{bundle.ViewUtalasTitle_fogalom}"/>
                     </p:panelGrid>
                     <p:commandButton value="#{bundle.Close}" onclick="UtalasViewDialog.hide()"/>
                 </h:panelGroup>

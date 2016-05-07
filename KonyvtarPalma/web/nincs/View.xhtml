@@ -13,7 +13,7 @@
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{nincsController.selected != null}">
                         <h:outputText value="#{bundle.ViewNincsLabel_peldany}"/>
-                        <h:outputText value="#{nincsController.selected.peldany}" title="#{bundle.ViewNincsTitle_peldany}"/>
+                        <h:outputText value="#{nincsController.selected.peldany.konyv.cim} (#{nincsController.selected.peldany.konyvPeldany}. példány)" title="#{bundle.ViewNincsTitle_peldany}"/>
                         <h:outputText value="#{bundle.ViewNincsLabel_kelt}"/>
                         <h:outputText value="#{nincsController.selected.kelt}" title="#{bundle.ViewNincsTitle_kelt}">
                             <f:convertDateTime pattern="yyyy-MM-dd" />

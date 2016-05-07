@@ -64,10 +64,9 @@ public class Peldany implements Serializable {
     @Size(min = 1, max = 15)
     @Column(name = "akt_kolcs", nullable = false, length = 15)
     private String aktKolcs;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "polc", nullable = false)
-    private int polc;
+    @JoinColumn(name = "polc", referencedColumnName = "id", nullable = false)
+    @ManyToOne(optional = false)    
+    private Polc polc;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "peldany")
     private Collection<Kolcsonzes> kolcsonzesCollection;
 
@@ -78,12 +77,11 @@ public class Peldany implements Serializable {
         this.id = id;
     }
 
-    public Peldany(Integer id, int konyvPeldany, String kikolcs, String aktKolcs, int polc) {
+    public Peldany(Integer id, int konyvPeldany, String kikolcs, String aktKolcs) {
         this.id = id;
         this.konyvPeldany = konyvPeldany;
         this.kikolcs = kikolcs;
         this.aktKolcs = aktKolcs;
-        this.polc = polc;
     }
 
     public Integer getId() {
@@ -126,11 +124,11 @@ public class Peldany implements Serializable {
         this.aktKolcs = aktKolcs;
     }
 
-    public int getPolc() {
+    public Polc getPolc() {
         return polc;
     }
 
-    public void setPolc(int polc) {
+    public void setPolc(Polc polc) {
         this.polc = polc;
     }
 
