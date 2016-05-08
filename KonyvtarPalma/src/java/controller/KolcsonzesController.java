@@ -3,22 +3,33 @@ package controller;
 import entity.Kolcsonzes;
 import controller.util.JsfUtil;
 import controller.util.JsfUtil.PersistAction;
+import entity.Szemely;
 import facade.KolcsonzesFacade;
 
 import java.io.Serializable;
-import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.ejb.EJBException;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import javax.inject.Inject;
+
+import org.primefaces.event.CloseEvent;
+import org.primefaces.event.DashboardReorderEvent;
+import org.primefaces.event.ToggleEvent;
+import org.primefaces.model.DashboardColumn;
+import org.primefaces.model.DashboardModel;
+import org.primefaces.model.DefaultDashboardColumn;
+import org.primefaces.model.DefaultDashboardModel;
 
 @Named("kolcsonzesController")
 @SessionScoped
@@ -28,8 +39,72 @@ public class KolcsonzesController implements Serializable {
     private facade.KolcsonzesFacade ejbFacade;
     private List<Kolcsonzes> items = null;
     private Kolcsonzes selected;
+    
+    private DashboardModel model;
+    
+    @Inject
+    private SzemelyController szemelyController;
+    @Inject
+    private PeldanyController peldanyController;
 
     public KolcsonzesController() {
+    }
+    
+    // Init ---------------------------------------------------------------------------------------
+
+    @PostConstruct
+    public void init() {
+        szemelyController.setSelected(szemelyController.getItems().get(0));
+        // You can do here your initialization thing based on managed properties, if necessary.
+        
+                model = new DefaultDashboardModel();
+        DashboardColumn column1 = new DefaultDashboardColumn();
+        DashboardColumn column2 = new DefaultDashboardColumn();
+          
+        column1.addWidget("a");
+        column1.addWidget("c");
+        column1.addWidget("e");
+         
+        column2.addWidget("b");
+        column2.addWidget("d");
+        column2.addWidget("f");
+ 
+        model.addColumn(column1);
+        model.addColumn(column2);
+     }    
+    
+    public void handleReorder(DashboardReorderEvent event) {
+        FacesMessage message = new FacesMessage();
+        message.setSeverity(FacesMessage.SEVERITY_INFO);
+        message.setSummary("Reordered: " + event.getWidgetId());
+        message.setDetail("Item index: " + event.getItemIndex() + ", Column index: " + event.getColumnIndex() + ", Sender index: " + event.getSenderColumnIndex());
+         
+        addMessage(message);
+    }
+     
+    public void handleClose(CloseEvent event) {
+        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Panel Closed", "Closed panel id:'" + event.getComponent().getId() + "'");
+         
+        addMessage(message);
+    }
+     
+    public void handleToggle(ToggleEvent event) {
+        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, event.getComponent().getId() + " toggled", "Status:" + event.getVisibility().name());
+         
+        addMessage(message);
+    }
+     
+    private void addMessage(FacesMessage message) {
+        FacesContext.getCurrentInstance().addMessage(null, message);
+    }
+     
+    public DashboardModel getModel() {
+        return model;
+    }    
+    
+    public void szemelyPeldanyai() {
+        Szemely valasztottSzemely = szemelyController.getSelected();
+        peldanyController.setItems(ejbFacade.findPeldanyBySzemely(valasztottSzemely));
     }
 
     public Kolcsonzes getSelected() {
@@ -120,6 +195,22 @@ public class KolcsonzesController implements Serializable {
 
     public List<Kolcsonzes> getItemsAvailableSelectOne() {
         return getFacade().findAll();
+    }
+
+    public void setSzemelyController(SzemelyController szemelyController) {
+        this.szemelyController = szemelyController;
+    }
+
+    public SzemelyController getSzemelyController() {
+        return szemelyController;
+    }
+
+    public PeldanyController getPeldanyController() {
+        return peldanyController;
+    }
+
+    public void setPeldanyController(PeldanyController peldanyController) {
+        this.peldanyController = peldanyController;
     }
     
     @FacesConverter(forClass = Kolcsonzes.class)

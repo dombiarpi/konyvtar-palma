@@ -6,9 +6,15 @@
 package facade;
 
 import entity.Kolcsonzes;
+import entity.Peldany;
+import entity.Szemely;
+import java.util.AbstractList;
+import java.util.ArrayList;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -28,5 +34,15 @@ public class KolcsonzesFacade extends AbstractFacade<Kolcsonzes> {
     public KolcsonzesFacade() {
         super(Kolcsonzes.class);
     }
-    
+
+    public List<Peldany> findPeldanyBySzemely(Szemely szemely) {
+        if (szemely == null) {
+            szemely = new Szemely(); 
+            szemely.setId(1);
+        }
+        Query q = em.createNamedQuery("Kolcsonzes.findAllPeldanyBySzemely");
+        q.setParameter("szemely", szemely);
+        return q.getResultList();
+    }
+
 }
