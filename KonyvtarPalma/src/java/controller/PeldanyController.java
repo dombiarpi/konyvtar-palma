@@ -26,6 +26,8 @@ public class PeldanyController implements Serializable {
     @EJB
     private facade.PeldanyFacade ejbFacade;
     private List<Peldany> items = null;
+    private List<Peldany> szemelyPeldanyaiItems = null;
+    private List<Peldany> konyvPeldanyaiItems = null;
 
     private Peldany selected;
 
@@ -124,6 +126,22 @@ public class PeldanyController implements Serializable {
 
     public void setItems(List<Peldany> items) {
         this.items = items;
+    }
+
+    public List<Peldany> getSzemelyPeldanyaiItems() {
+        return szemelyPeldanyaiItems;
+    }
+
+    public void setSzemelyPeldanyaiItems(List<Peldany> szemelyPeldanyaiItems) {
+        this.szemelyPeldanyaiItems = szemelyPeldanyaiItems;
+    }
+
+    public List<Peldany> getKonyvPeldanyaiItems() {
+        return konyvPeldanyaiItems;
+    }
+
+    public void setKonyvPeldanyaiItems(List<Peldany> konyvPeldanyaiItems) {
+        this.konyvPeldanyaiItems = konyvPeldanyaiItems;
     }
 
     @FacesConverter(forClass = Peldany.class)

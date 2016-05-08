@@ -62,7 +62,7 @@
                                  filteredValue="#{konyvController.filteredItems}"
                                  resizableColumns="true"
                                  >
-                        <p:ajax event="rowSelect"   />
+                        <p:ajax event="rowSelect"  listener="#{kolcsonzesController.konyvPeldanyai}"  update="@widgetVar(elerhetoP)" />
                         <p:ajax event="rowUnselect" />
                         <f:facet name="header">
                             <p:outputPanel style="float: right">
@@ -106,7 +106,7 @@
             </p:panel>
  
             <p:panel id="c" header="Kölcsönözhető példányok" >
-                    <p:dataTable id="elerhetoPeldany" value="#{peldanyController.items}" var="item"
+                    <p:dataTable id="elerhetoPeldany" widgetVar="elerhetoP" value="#{peldanyController.konyvPeldanyaiItems}" var="item"
                                  selectionMode="single" selection="#{peldanyController.selected}"
                                  paginator="true"
                                  rowKey="#{item.id}"

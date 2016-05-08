@@ -6,6 +6,7 @@
 package facade;
 
 import entity.Kolcsonzes;
+import entity.Konyv;
 import entity.Peldany;
 import entity.Szemely;
 import java.util.AbstractList;
@@ -44,5 +45,17 @@ public class KolcsonzesFacade extends AbstractFacade<Kolcsonzes> {
         q.setParameter("szemely", szemely);
         return q.getResultList();
     }
+    
+    public List<Peldany> findPeldanyByKonyv(Konyv konyv) {
+        if (konyv == null) {
+            konyv = new Konyv(); 
+            konyv.setId(1);
+        }
+        Query q = em.createNamedQuery("Kolcsonzes.findAllPeldanyByKonyv");
+        q.setParameter("konyv", konyv);
+        return q.getResultList();
+    }
+    
+    
 
 }

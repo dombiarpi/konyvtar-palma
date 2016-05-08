@@ -3,6 +3,7 @@ package controller;
 import entity.Kolcsonzes;
 import controller.util.JsfUtil;
 import controller.util.JsfUtil.PersistAction;
+import entity.Konyv;
 import entity.Szemely;
 import facade.KolcsonzesFacade;
 
@@ -45,6 +46,8 @@ public class KolcsonzesController implements Serializable {
     @Inject
     private SzemelyController szemelyController;
     @Inject
+    private KonyvController konyvController;
+    @Inject
     private PeldanyController peldanyController;
 
     public KolcsonzesController() {
@@ -55,9 +58,10 @@ public class KolcsonzesController implements Serializable {
     @PostConstruct
     public void init() {
         szemelyController.setSelected(szemelyController.getItems().get(0));
+        konyvController.setSelected(konyvController.getItems().get(0));
         // You can do here your initialization thing based on managed properties, if necessary.
         
-                model = new DefaultDashboardModel();
+        model = new DefaultDashboardModel();
         DashboardColumn column1 = new DefaultDashboardColumn();
         DashboardColumn column2 = new DefaultDashboardColumn();
           
@@ -105,6 +109,11 @@ public class KolcsonzesController implements Serializable {
     public void szemelyPeldanyai() {
         Szemely valasztottSzemely = szemelyController.getSelected();
         peldanyController.setItems(ejbFacade.findPeldanyBySzemely(valasztottSzemely));
+    }
+    
+    public void konyvPeldanyai() {
+        Konyv valasztottKonyv = konyvController.getSelected();
+        peldanyController.setKonyvPeldanyaiItems(ejbFacade.findPeldanyByKonyv(valasztottKonyv));
     }
 
     public Kolcsonzes getSelected() {
