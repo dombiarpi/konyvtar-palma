@@ -18,29 +18,28 @@
             <h:form id="KolcsonzesListForm">
                 
         <p:growl id="msgs" showDetail="true" />
- 
-        <p:dashboard id="board" model="#{kolcsonzesController.model}">
+        
+         <p:dashboard id="board" model="#{kolcsonzesController.model}">
             <p:ajax event="reorder" listener="#{kolcsonzesController.handleReorder}" update="msgs" />
  
-            <p:panel id="a" header="Olvasó" >
+            <p:panel id="a" header="Olvasó" styleClass="dashboard-panel">
                     <p:dataTable id="szemely" value="#{kolcsonzesController.szemelyController.items}" var="item"
                                  selectionMode="single" selection="#{kolcsonzesController.szemelyController.selected}"
                                  paginator="true"
                                  rowKey="#{item.id}"
-                                 rows="10"
-                                 rowsPerPageTemplate="10,20,30,40,50"
+                                 rows="14"
                                  >
 
                         <p:ajax event="rowSelect" listener="#{kolcsonzesController.szemelyPeldanyai}"  update="@widgetVar(valasztottP)"/>
                         <p:ajax event="rowUnselect" />
 
-                        <p:column>
+                        <p:column sortBy="#{item.nev}" filterBy="#{item.nev}" filterMatchMode="contains">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListSzemelyTitle_nev}"/>
                             </f:facet>
                             <h:outputText value="#{item.nev}"/>
                         </p:column>
-                        <p:column>
+                        <p:column sortBy="#{item.leanykoriNev}" filterBy="#{item.leanykoriNev}" filterMatchMode="contains">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListSzemelyTitle_leanykoriNev}"/>
                             </f:facet>
@@ -50,14 +49,13 @@
                     </p:dataTable>  
             </p:panel>
  
-            <p:panel id="b" header="Könyvek" >
+            <p:panel id="b" header="Könyvek" styleClass="dashboard-panel">
                     <p:dataTable id="konyv" value="#{konyvController.items}" var="item"
                                  widgetVar="konyvek"
                                  selectionMode="single" selection="#{konyvController.selected}"
                                  paginator="true"
                                  rowKey="#{item.id}"
-                                 rows="10"
-                                 rowsPerPageTemplate="10,20,30,40,50"
+                                 rows="13"
                                  emptyMessage="Nincs találat az adott feltételekkel"
                                  filteredValue="#{konyvController.filteredItems}"
                                  resizableColumns="true"
@@ -102,10 +100,16 @@
                             </f:facet>
                             <h:outputText value="#{item.kiado.nev}"/>
                         </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Előjegyzi"/>
+                            </f:facet>
+                            <p:commandLink id="elojegyez" value="Előjegyzi" action="#{kolcsonzesController.elojegyzi(item)}" update="@widgetVar(konyvek) @widgetVar(elojegyzesek)"/>
+                         </p:column>                        
                     </p:dataTable>  
             </p:panel>
  
-            <p:panel id="c" header="Kölcsönözhető példányok" >
+            <p:panel id="c" header="Kölcsönözhető példányok" styleClass="dashboard-panel">
                     <p:dataTable id="elerhetoPeldany" widgetVar="elerhetoP" value="#{peldanyController.konyvPeldanyaiItems}" var="item"
                                  selectionMode="single" selection="#{peldanyController.selected}"
                                  paginator="true"
@@ -135,12 +139,18 @@
                             </f:facet>
                             <h:outputText value="#{item.polc.szekreny} #{item.polc.polc}"/>
                         </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Kölcsönzés"/>
+                            </f:facet>
+                            <p:commandButton id="kolcsonoz" icon="ui-icon-plus" value="Kölcsönzi" action="#{kolcsonzesController.kolcsonoz(item)}" update="@widgetVar(elerhetoP) @widgetVar(valasztottP)"/>
+                         </p:column>
                     </p:dataTable>  
             </p:panel>
- 
-            <p:panel id="d" header="Kikölcsönzött példányok" >
-                    <p:dataTable id="valasztottPeldany" widgetVar="valasztottP" value="#{kolcsonzesController.peldanyController.items}" var="item"
-                                 selectionMode="single" selection="#{kolcsonzesController.peldanyController.selected}"
+
+            <p:panel id="d" header="Kikölcsönzött példányok" styleClass="dashboard-panel">
+                    <p:dataTable id="valasztottPeldany" widgetVar="valasztottP" value="#{peldanyController.szemelyPeldanyaiItems}" var="item"
+                                 selectionMode="single" selection="#{peldanyController.selected}"
                                  paginator="true"
                                  rowKey="#{item.id}"
                                  rows="10"
@@ -168,10 +178,16 @@
                             </f:facet>
                             <h:outputText value="#{item.polc.szekreny} #{item.polc.polc}"/>
                         </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Visszahozta"/>
+                            </f:facet>
+                            <p:commandButton id="visszahozta" icon="ui-icon-minus" value="Visszahozta" action="#{kolcsonzesController.visszahoz(item)}" update="@widgetVar(elerhetoP) @widgetVar(valasztottP)"/>
+                        </p:column>
                     </p:dataTable>       
             </p:panel>
- 
-            <p:panel id="e" header="Kölcsönzések" >
+  
+            <p:panel id="e" header="Kölcsönzések" styleClass="dashboard-panel">
                     <p:dataTable id="kolcsonzes" value="#{kolcsonzesController.items}" var="item"
                                  selectionMode="single" selection="#{kolcsonzesController.selected}"
                                  paginator="true"
@@ -231,8 +247,9 @@
                         </p:column>                        
                     </p:dataTable>
             </p:panel>
-            <p:panel id="f" header="Előjegyzések" >
+            <p:panel id="f" header="Előjegyzések" styleClass="dashboard-panel">
                     <p:dataTable id="elojegyzes" value="#{elojegyzesController.items}" var="item"
+                                 widgetVar="elojegyzesek"
                                  selectionMode="single" selection="#{elojegyzesController.selected}"
                                  paginator="true"
                                  rowKey="#{item.id}"

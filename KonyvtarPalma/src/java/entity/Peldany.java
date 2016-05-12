@@ -48,22 +48,15 @@ public class Peldany implements Serializable {
     @Column(name = "id", nullable = false)
     private Integer id;
     @JoinColumn(name = "konyv", referencedColumnName = "id", nullable = false)
-    @ManyToOne(optional = false)    
+    @ManyToOne(optional = false, cascade = CascadeType.MERGE)    
     private Konyv konyv;
     @Basic(optional = false)
     @NotNull
     @Column(name = "konyv_peldany", nullable = false)
     private int konyvPeldany;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 2)
-    @Column(name = "kikolcs", nullable = false, length = 2)
-    private String kikolcs;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 15)
-    @Column(name = "akt_kolcs", nullable = false, length = 15)
-    private String aktKolcs;
+    private Boolean kikolcs;
+    @Column(name = "akt_kolcs")
+    private Boolean aktKolcs;
     @JoinColumn(name = "polc", referencedColumnName = "id", nullable = false)
     @ManyToOne(optional = false)    
     private Polc polc;
@@ -77,7 +70,7 @@ public class Peldany implements Serializable {
         this.id = id;
     }
 
-    public Peldany(Integer id, int konyvPeldany, String kikolcs, String aktKolcs) {
+    public Peldany(Integer id, int konyvPeldany, Boolean kikolcs, Boolean aktKolcs) {
         this.id = id;
         this.konyvPeldany = konyvPeldany;
         this.kikolcs = kikolcs;
@@ -108,19 +101,19 @@ public class Peldany implements Serializable {
         this.konyvPeldany = konyvPeldany;
     }
 
-    public String getKikolcs() {
+    public Boolean getKikolcs() {
         return kikolcs;
     }
 
-    public void setKikolcs(String kikolcs) {
+    public void setKikolcs(Boolean kikolcs) {
         this.kikolcs = kikolcs;
     }
 
-    public String getAktKolcs() {
+    public Boolean getAktKolcs() {
         return aktKolcs;
     }
 
-    public void setAktKolcs(String aktKolcs) {
+    public void setAktKolcs(Boolean aktKolcs) {
         this.aktKolcs = aktKolcs;
     }
 

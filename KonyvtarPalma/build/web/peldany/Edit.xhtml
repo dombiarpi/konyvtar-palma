@@ -22,9 +22,9 @@
                         <p:outputLabel value="#{bundle.EditPeldanyLabel_konyvPeldany}" for="konyvPeldany" />
                         <p:inputText id="konyvPeldany" value="#{peldanyController.selected.konyvPeldany}" title="#{bundle.EditPeldanyTitle_konyvPeldany}" required="true" requiredMessage="#{bundle.EditPeldanyRequiredMessage_konyvPeldany}"/>
                         <p:outputLabel value="#{bundle.EditPeldanyLabel_kikolcs}" for="kikolcs" />
-                        <p:inputText id="kikolcs" value="#{peldanyController.selected.kikolcs}" title="#{bundle.EditPeldanyTitle_kikolcs}" required="true" requiredMessage="#{bundle.EditPeldanyRequiredMessage_kikolcs}"/>
+                        <p:selectBooleanCheckbox id="kikolcs" value="#{peldanyController.selected.kikolcs}" required="true" requiredMessage="#{bundle.EditPeldanyRequiredMessage_kikolcs}"/>
                         <p:outputLabel value="#{bundle.EditPeldanyLabel_aktKolcs}" for="aktKolcs" />
-                        <p:inputText id="aktKolcs" value="#{peldanyController.selected.aktKolcs}" title="#{bundle.EditPeldanyTitle_aktKolcs}" required="true" requiredMessage="#{bundle.EditPeldanyRequiredMessage_aktKolcs}"/>
+                        <p:selectBooleanCheckbox id="aktKolcs" value="#{peldanyController.selected.aktKolcs}" required="true" requiredMessage="#{bundle.EditPeldanyRequiredMessage_aktKolcs}"/>
                         <p:outputLabel value="#{bundle.EditPeldanyLabel_polc}" for="polc" />
                         <p:selectOneMenu id="polc" value="#{peldanyController.selected.polc}" required="true" requiredMessage="#{bundle.EditPeldanyRequiredMessage_polc}">
                             <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>

@@ -19,7 +19,7 @@
                             <f:convertDateTime pattern="yyyy-MM-dd" />
                         </h:outputText>
                         <h:outputText value="#{bundle.ViewNincsLabel_selejtLopott}"/>
-                        <h:outputText value="#{nincsController.selected.selejtLopott}" title="#{bundle.ViewNincsTitle_selejtLopott}"/>
+                        <p:selectBooleanCheckbox value="#{nincsController.selected.selejtLopott}" disabled="true"/>
                     </p:panelGrid>
                     <p:commandButton value="#{bundle.Close}" onclick="NincsViewDialog.hide()"/>
                 </h:panelGroup>

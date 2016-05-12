@@ -9,17 +9,9 @@
         <title><ui:insert name="title">Default Title</ui:insert></title>
         <h:outputStylesheet library="css" name="jsfcrud.css"/>
         <h:outputScript library="js" name="jsfcrud.js"/>
-                    		<style type="text/css">
-			.ui-panel, div.ui-state-hover {
-				margin: 10px;
-				width:600px;
-                                height: 300px;
-			}
-			
-			.ui-dashboard-column {
-				width:620px;
-			}
-		</style>
+        <style type="text/css">
+
+        </style>
     </h:head>
 
     <h:body>
@@ -30,11 +22,10 @@
             <p:layoutUnit position="north" size="65" header="#{bundle.AppName}">
                 <h:form id="menuForm">
                     <p:menubar>
+                        <p:menuitem value="Főoldal" outcome="/kolcsonzes/Main.xhtml" />                        
                         <p:submenu label="Fájl">
-                         <p:menuitem value="Nyomtatás" outcome="/elojegyzes/List.xhtml" />
-                         </p:submenu>
-                         <p:menuitem value="Vezérlőpult" outcome="/kolcsonzes/Main.xhtml" />
-                        
+                            <p:menuitem value="Nyomtatás" outcome="/elojegyzes/List.xhtml" />
+                        </p:submenu>
                         <p:submenu label="Kölcsönzés/Előjegyzés">
                             <p:menuitem value="Olvasó" outcome="/szemely/List.xhtml" />
                             <p:menuitem value="Kölcsönzés" outcome="/kolcsonzes/List.xhtml" />

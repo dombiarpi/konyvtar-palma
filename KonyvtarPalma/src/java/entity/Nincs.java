@@ -53,11 +53,8 @@ public class Nincs implements Serializable {
     @Column(name = "kelt", nullable = false)
     @Temporal(TemporalType.DATE)
     private Date kelt;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 2)
-    @Column(name = "selejt_lopott", nullable = false, length = 2)
-    private String selejtLopott;
+   
+    private Boolean selejtLopott;
 
     public Nincs() {
     }
@@ -66,9 +63,8 @@ public class Nincs implements Serializable {
         this.id = id;
     }
 
-    public Nincs(Integer id, Date kelt, String selejtLopott) {
+    public Nincs(Integer id, Date kelt, Boolean selejtLopott) {
         this.id = id;
-
         this.kelt = kelt;
         this.selejtLopott = selejtLopott;
     }
@@ -97,11 +93,11 @@ public class Nincs implements Serializable {
         this.kelt = kelt;
     }
 
-    public String getSelejtLopott() {
+    public Boolean getSelejtLopott() {
         return selejtLopott;
     }
 
-    public void setSelejtLopott(String selejtLopott) {
+    public void setSelejtLopott(Boolean selejtLopott) {
         this.selejtLopott = selejtLopott;
     }
 

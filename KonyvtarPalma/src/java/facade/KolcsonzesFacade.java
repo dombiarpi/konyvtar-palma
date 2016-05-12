@@ -37,24 +37,40 @@ public class KolcsonzesFacade extends AbstractFacade<Kolcsonzes> {
     }
 
     public List<Peldany> findPeldanyBySzemely(Szemely szemely) {
-        if (szemely == null) {
-            szemely = new Szemely(); 
-            szemely.setId(1);
-        }
+//        if (szemely == null) {
+//            szemely = new Szemely(); 
+//            szemely.setId(1);
+//        }
         Query q = em.createNamedQuery("Kolcsonzes.findAllPeldanyBySzemely");
         q.setParameter("szemely", szemely);
+        q.setParameter("aktKolcs", Boolean.FALSE);
+        q.setParameter("kikolcs", Boolean.TRUE);        
         return q.getResultList();
     }
     
     public List<Peldany> findPeldanyByKonyv(Konyv konyv) {
-        if (konyv == null) {
-            konyv = new Konyv(); 
-            konyv.setId(1);
-        }
+//        if (konyv == null) {
+//            konyv = new Konyv(); 
+//            konyv.setId(1);
+//        }
         Query q = em.createNamedQuery("Kolcsonzes.findAllPeldanyByKonyv");
         q.setParameter("konyv", konyv);
+        q.setParameter("aktKolcs", Boolean.TRUE);
+        q.setParameter("kikolcs", Boolean.FALSE);
         return q.getResultList();
     }
+    
+    public List<Kolcsonzes> findAllBySzemelyAndPeldany(Szemely szemely, Peldany peldany) {
+        if (szemely == null || peldany == null) {
+            return null;
+        }
+        Query q = em.createNamedQuery("Kolcsonzes.findAllBySzemelyAndPeldany");
+        q.setParameter("szemely", szemely);
+        q.setParameter("peldany", peldany);
+        return q.getResultList();
+    }
+    
+    
     
     
 

@@ -21,7 +21,7 @@
                         <p:outputLabel value="#{bundle.EditNincsLabel_kelt}" for="kelt" />
                         <p:calendar id="kelt" pattern="yyyy-MM-dd" value="#{nincsController.selected.kelt}" title="#{bundle.EditNincsTitle_kelt}" required="true" requiredMessage="#{bundle.EditNincsRequiredMessage_kelt}" showOn="button"/>
                         <p:outputLabel value="#{bundle.EditNincsLabel_selejtLopott}" for="selejtLopott" />
-                        <p:inputText id="selejtLopott" value="#{nincsController.selected.selejtLopott}" title="#{bundle.EditNincsTitle_selejtLopott}" required="true" requiredMessage="#{bundle.EditNincsRequiredMessage_selejtLopott}"/>
+                        <p:selectBooleanCheckbox id="selejtLopott" value="#{nincsController.selected.selejtLopott}" required="true" requiredMessage="#{bundle.EditNincsRequiredMessage_selejtLopott}"/>
                     </p:panelGrid>
                     <p:commandButton actionListener="#{nincsController.update}" value="#{bundle.Save}" update="display,:NincsListForm:datalist,:growl" oncomplete="handleSubmit(args, 'NincsEditDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="NincsEditDialog.hide()"/>

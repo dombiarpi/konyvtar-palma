@@ -10,6 +10,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -36,8 +37,9 @@ import javax.validation.constraints.NotNull;
 @NamedQueries({
     @NamedQuery(name = "Kolcsonzes.findAll", query = "SELECT k FROM Kolcsonzes k"),
     @NamedQuery(name = "Kolcsonzes.findById", query = "SELECT k FROM Kolcsonzes k WHERE k.id = :id"),
-    @NamedQuery(name = "Kolcsonzes.findAllPeldanyBySzemely", query = "SELECT DISTINCT p FROM Kolcsonzes k, Szemely s, Peldany p where k.szemely = s and k.peldany = p and k.szemely = :szemely"),    
-    @NamedQuery(name = "Kolcsonzes.findAllPeldanyByKonyv", query = "SELECT p FROM Peldany p join p.konyv k where k = :konyv"),    
+    @NamedQuery(name = "Kolcsonzes.findAllPeldanyBySzemely", query = "SELECT DISTINCT p FROM Kolcsonzes k, Szemely s, Peldany p where k.szemely = s and k.peldany = p and k.szemely = :szemely and p.aktKolcs = :aktKolcs and p.kikolcs = :kikolcs"),    
+    @NamedQuery(name = "Kolcsonzes.findAllBySzemelyAndPeldany", query = "SELECT DISTINCT k FROM Kolcsonzes k, Szemely s, Peldany p where k.szemely = s and k.peldany = p and k.szemely = :szemely and k.peldany = :peldany"),    
+    @NamedQuery(name = "Kolcsonzes.findAllPeldanyByKonyv", query = "SELECT p FROM Peldany p join p.konyv k where k = :konyv and p.aktKolcs = :aktKolcs and p.kikolcs = :kikolcs"),    
     @NamedQuery(name = "Kolcsonzes.findByDatum", query = "SELECT k FROM Kolcsonzes k WHERE k.datum = :datum"),
     @NamedQuery(name = "Kolcsonzes.findByVisszahozDatum", query = "SELECT k FROM Kolcsonzes k WHERE k.visszahozDatum = :visszahozDatum"),
     @NamedQuery(name = "Kolcsonzes.findByFelszolit", query = "SELECT k FROM Kolcsonzes k WHERE k.felszolit = :felszolit"),
@@ -65,10 +67,10 @@ public class Kolcsonzes implements Serializable {
     @Column(name = "max_kolcs", nullable = false)
     private int maxKolcs;
     @JoinColumn(name = "szemely", referencedColumnName = "id", nullable = false)
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false, cascade = CascadeType.MERGE)
     private Szemely szemely;
     @JoinColumn(name = "peldany", referencedColumnName = "id", nullable = false)
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false, cascade = CascadeType.MERGE)
     private Peldany peldany;
     @Transient
     private Date hatarido;

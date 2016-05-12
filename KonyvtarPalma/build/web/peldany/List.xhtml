@@ -43,13 +43,13 @@
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListPeldanyTitle_kikolcs}"/>
                             </f:facet>
-                            <h:outputText value="#{item.kikolcs}"/>
+                            <p:selectBooleanCheckbox value="#{item.kikolcs}" disabled="true"/>                            
                         </p:column>
                         <p:column>
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListPeldanyTitle_aktKolcs}"/>
                             </f:facet>
-                            <h:outputText value="#{item.aktKolcs}"/>
+                            <p:selectBooleanCheckbox value="#{item.aktKolcs}" disabled="true"/>                            
                         </p:column>
                         <p:column>
                             <f:facet name="header">

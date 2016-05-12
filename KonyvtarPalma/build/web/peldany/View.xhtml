@@ -17,9 +17,9 @@
                         <h:outputText value="#{bundle.ViewPeldanyLabel_konyvPeldany}"/>
                         <h:outputText value="#{peldanyController.selected.konyvPeldany}" title="#{bundle.ViewPeldanyTitle_konyvPeldany}"/>
                         <h:outputText value="#{bundle.ViewPeldanyLabel_kikolcs}"/>
-                        <h:outputText value="#{peldanyController.selected.kikolcs}" title="#{bundle.ViewPeldanyTitle_kikolcs}"/>
+                        <p:selectBooleanCheckbox value="#{peldanyController.selected.kikolcs}" disabled="true"/>
                         <h:outputText value="#{bundle.ViewPeldanyLabel_aktKolcs}"/>
-                        <h:outputText value="#{peldanyController.selected.aktKolcs}" title="#{bundle.ViewPeldanyTitle_aktKolcs}"/>
+                        <p:selectBooleanCheckbox value="#{peldanyController.selected.aktKolcs}" disabled="true"/>
                         <h:outputText value="#{bundle.ViewPeldanyLabel_polc}"/>
                         <h:outputText value="#{peldanyController.selected.polc.szekreny} #{peldanyController.selected.polc.polc}" title="#{bundle.ViewPeldanyTitle_polc}"/>
                     </p:panelGrid>

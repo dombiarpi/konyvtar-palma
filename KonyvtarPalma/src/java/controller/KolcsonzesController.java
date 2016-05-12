@@ -3,11 +3,14 @@ package controller;
 import entity.Kolcsonzes;
 import controller.util.JsfUtil;
 import controller.util.JsfUtil.PersistAction;
+import entity.Elojegyzes;
 import entity.Konyv;
+import entity.Peldany;
 import entity.Szemely;
 import facade.KolcsonzesFacade;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -18,6 +21,7 @@ import javax.ejb.EJBException;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
@@ -26,6 +30,7 @@ import javax.inject.Inject;
 
 import org.primefaces.event.CloseEvent;
 import org.primefaces.event.DashboardReorderEvent;
+import org.primefaces.event.DragDropEvent;
 import org.primefaces.event.ToggleEvent;
 import org.primefaces.model.DashboardColumn;
 import org.primefaces.model.DashboardModel;
@@ -35,6 +40,8 @@ import org.primefaces.model.DefaultDashboardModel;
 @Named("kolcsonzesController")
 @SessionScoped
 public class KolcsonzesController implements Serializable {
+    
+    private final static int MAX_KOLCSONZESI_IDO = 30;
 
     @EJB
     private facade.KolcsonzesFacade ejbFacade;
@@ -49,6 +56,12 @@ public class KolcsonzesController implements Serializable {
     private KonyvController konyvController;
     @Inject
     private PeldanyController peldanyController;
+    @Inject
+    private ElojegyzesController elojegyzesController;
+    
+    private Peldany kolcsonzi;
+ 
+    private Peldany visszahozta;
 
     public KolcsonzesController() {
     }
@@ -59,6 +72,8 @@ public class KolcsonzesController implements Serializable {
     public void init() {
         szemelyController.setSelected(szemelyController.getItems().get(0));
         konyvController.setSelected(konyvController.getItems().get(0));
+        szemelyPeldanyai();
+        konyvPeldanyai();
         // You can do here your initialization thing based on managed properties, if necessary.
         
         model = new DefaultDashboardModel();
@@ -66,11 +81,11 @@ public class KolcsonzesController implements Serializable {
         DashboardColumn column2 = new DefaultDashboardColumn();
           
         column1.addWidget("a");
-        column1.addWidget("c");
+        column1.addWidget("d");
         column1.addWidget("e");
          
         column2.addWidget("b");
-        column2.addWidget("d");
+        column2.addWidget("c");
         column2.addWidget("f");
  
         model.addColumn(column1);
@@ -104,16 +119,85 @@ public class KolcsonzesController implements Serializable {
      
     public DashboardModel getModel() {
         return model;
-    }    
+    }
+
+    public void onPeldanyDrop(DragDropEvent ddEvent) {
+        Peldany peld = ((Peldany) ddEvent.getData());
+        peldanyController.getKonyvPeldanyaiItems().add(peld);
+        peldanyController.getItems().remove(peld);
+     }
     
     public void szemelyPeldanyai() {
         Szemely valasztottSzemely = szemelyController.getSelected();
-        peldanyController.setItems(ejbFacade.findPeldanyBySzemely(valasztottSzemely));
+        List<Peldany> friss = ejbFacade.findPeldanyBySzemely(valasztottSzemely);
+        peldanyController.setSzemelyPeldanyaiItems(ejbFacade.findPeldanyBySzemely(valasztottSzemely));
+    }
+    
+    public String visszahoz(Peldany peldany) {
+        Szemely kolcsonzo = szemelyController.getSelected();
+        if (kolcsonzo == null) {
+            return null;
+        }
+        peldanyController.setSelected(peldany);
+        peldany.setKikolcs(Boolean.FALSE);
+        peldany.setAktKolcs(Boolean.TRUE);
+        peldanyController.update();        
+        selected = ejbFacade.findAllBySzemelyAndPeldany(kolcsonzo, peldany).get(0);// can be only one
+        selected.setVisszahozDatum(new Date());
+        update();
+        peldanyController.getSzemelyPeldanyaiItems().remove(peldany);
+        szemelyPeldanyai();
+        konyvPeldanyai();
+        return null;
     }
     
     public void konyvPeldanyai() {
         Konyv valasztottKonyv = konyvController.getSelected();
+        List<Peldany> friss = ejbFacade.findPeldanyByKonyv(valasztottKonyv);
         peldanyController.setKonyvPeldanyaiItems(ejbFacade.findPeldanyByKonyv(valasztottKonyv));
+    }
+    
+    public String kolcsonoz(Peldany peldany) {
+        Szemely kolcsonzo = szemelyController.getSelected();
+        if (kolcsonzo == null) {
+            return null;
+        }
+        
+        peldany.setKikolcs(Boolean.TRUE);
+        peldany.setAktKolcs(Boolean.FALSE);   
+        
+        createKolcsonzes(kolcsonzo, peldany);
+        peldanyController.getKonyvPeldanyaiItems().remove(peldany); 
+        peldanyController.getSzemelyPeldanyaiItems().add(peldany);
+        szemelyPeldanyai();
+        konyvPeldanyai();        
+        return null;
+    }
+
+    private void createKolcsonzes(Szemely kolcsonzo, Peldany peldany) {
+        Kolcsonzes kolcsonzes = prepareCreate();
+        kolcsonzes.setSzemely(kolcsonzo);
+        kolcsonzes.setPeldany(peldany);
+        kolcsonzes.setDatum(new Date());
+        kolcsonzes.setMaxKolcs(MAX_KOLCSONZESI_IDO);
+        create();
+    }
+    
+    public String elojegyzi(Konyv konyv) {
+        Szemely elojegyzo = szemelyController.getSelected();
+        if (elojegyzo == null) {
+            return null;
+        }
+        createElojegyzes(elojegyzo, konyv);
+        return null;
+    }
+
+    private void createElojegyzes(Szemely elojegyzo, Konyv konyv) {
+        Elojegyzes elojegy = elojegyzesController.prepareCreate();
+        elojegy.setSzemely(elojegyzo);
+        elojegy.setKonyv(konyv);
+        elojegy.setDatum(new Date());
+        elojegyzesController.create();
     }
 
     public Kolcsonzes getSelected() {
@@ -220,6 +304,34 @@ public class KolcsonzesController implements Serializable {
 
     public void setPeldanyController(PeldanyController peldanyController) {
         this.peldanyController = peldanyController;
+    }
+
+    /**
+     * @return the kolcsonzi
+     */
+    public Peldany getKolcsonzi() {
+        return kolcsonzi;
+    }
+
+    /**
+     * @param kolcsonzi the kolcsonzi to set
+     */
+    public void setKolcsonzi(Peldany kolcsonzi) {
+        this.kolcsonzi = kolcsonzi;
+    }
+
+    /**
+     * @return the visszahozta
+     */
+    public Peldany getVisszahozta() {
+        return visszahozta;
+    }
+
+    /**
+     * @param visszahozta the visszahozta to set
+     */
+    public void setVisszahozta(Peldany visszahozta) {
+        this.visszahozta = visszahozta;
     }
     
     @FacesConverter(forClass = Kolcsonzes.class)
