@@ -27,31 +27,31 @@
                         <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
                         <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
 
-                        <p:column>
+                        <p:column sortBy="#{item.konyv.cim}" filterBy="#{item.konyv.cim}" filterMatchMode="contains">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListPeldanyTitle_konyv}"/>
                             </f:facet>
                             <h:outputText value="#{item.konyv.cim}"/>
                         </p:column>
-                        <p:column>
+                        <p:column sortBy="#{item.konyvPeldany}" filterBy="#{item.konyvPeldany}" filterMatchMode="contains">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListPeldanyTitle_konyvPeldany}"/>
                             </f:facet>
                             <h:outputText value="#{item.konyvPeldany}"/>
                         </p:column>
-                        <p:column>
+                        <p:column sortBy="#{item.kikolcs}" filterBy="#{item.kikolcs}" filterMatchMode="contains">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListPeldanyTitle_kikolcs}"/>
                             </f:facet>
                             <p:selectBooleanCheckbox value="#{item.kikolcs}" disabled="true"/>                            
                         </p:column>
-                        <p:column>
+                        <p:column sortBy="#{item.aktKolcs}" filterBy="#{item.aktKolcs}" filterMatchMode="contains">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListPeldanyTitle_aktKolcs}"/>
                             </f:facet>
                             <p:selectBooleanCheckbox value="#{item.aktKolcs}" disabled="true"/>                            
                         </p:column>
-                        <p:column>
+                        <p:column sortBy="#{item.polc.szekreny} #{item.polc.polc}" filterBy="#{item.polc.szekreny} #{item.polc.polc}" filterMatchMode="contains">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListPeldanyTitle_polc}"/>
                             </f:facet>

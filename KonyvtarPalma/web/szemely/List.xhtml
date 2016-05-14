@@ -27,19 +27,19 @@
                         <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
                         <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
 
-                        <p:column>
+                        <p:column sortBy="#{item.nev}" filterBy="#{item.nev}" filterMatchMode="contains">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListSzemelyTitle_nev}"/>
                             </f:facet>
                             <h:outputText value="#{item.nev}"/>
                         </p:column>
-                        <p:column>
+                        <p:column sortBy="#{item.leanykoriNev}" filterBy="#{item.leanykoriNev}" filterMatchMode="contains">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListSzemelyTitle_leanykoriNev}"/>
                             </f:facet>
                             <h:outputText value="#{item.leanykoriNev}"/>
                         </p:column>
-                        <p:column>
+                        <p:column sortBy="#{item.beiratkozas}" filterBy="#{item.beiratkozas}" filterMatchMode="contains">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListSzemelyTitle_beiratkozas}"/>
                             </f:facet>
@@ -47,37 +47,37 @@
                                 <f:convertDateTime pattern="yyyy-MM-dd" />
                             </h:outputText>
                         </p:column>
-                        <p:column>
+                        <p:column sortBy="#{item.elofizTipus}" filterBy="#{item.elofizTipus}" filterMatchMode="contains">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListSzemelyTitle_elofizTipus}"/>
                             </f:facet>
                             <h:outputText value="#{item.elofizTipus}"/>
                         </p:column>
-                        <p:column>
+                        <p:column sortBy="#{item.tagdij}" filterBy="#{item.tagdij}" filterMatchMode="contains">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListSzemelyTitle_tagdij}"/>
                             </f:facet>
                             <h:outputText value="#{item.tagdij}"/>
                         </p:column>
-                        <p:column>
+                        <p:column sortBy="#{item.email}" filterBy="#{item.email}" filterMatchMode="contains">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListSzemelyTitle_email}"/>
                             </f:facet>
                             <h:outputText value="#{item.email}"/>
                         </p:column>
-                        <p:column>
+                        <p:column sortBy="#{item.mobil}" filterBy="#{item.mobil}" filterMatchMode="contains">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListSzemelyTitle_mobil}"/>
                             </f:facet>
                             <h:outputText value="#{item.mobil}"/>
                         </p:column>
-                        <p:column>
+                        <p:column sortBy="#{item.cim}" filterBy="#{item.cim}" filterMatchMode="contains">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListSzemelyTitle_cim}"/>
                             </f:facet>
                             <h:outputText value="#{item.cim}"/>
                         </p:column>
-                        <p:column>
+                        <p:column sortBy="#{item.megjegyzes}" filterBy="#{item.megjegyzes}" filterMatchMode="contains">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListSzemelyTitle_megjegyzes}"/>
                             </f:facet>

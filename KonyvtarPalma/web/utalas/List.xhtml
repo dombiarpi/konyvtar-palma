@@ -27,13 +27,13 @@
                         <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
                         <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
 
-                        <p:column>
+                        <p:column sortBy="#{item.konyv.cim}" filterBy="#{item.konyv.cim}" filterMatchMode="contains">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListUtalasTitle_konyv}"/>
                             </f:facet>
                             <h:outputText value="#{item.konyv.cim}"/>
                         </p:column>
-                        <p:column>
+                        <p:column sortBy="#{item.fogalom.nev}" filterBy="#{item.fogalom.nev}" filterMatchMode="contains">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListUtalasTitle_fogalom}"/>
                             </f:facet>

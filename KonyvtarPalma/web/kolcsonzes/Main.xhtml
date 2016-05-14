@@ -258,7 +258,7 @@
                                  >
                         <p:ajax event="rowSelect"   />
                         <p:ajax event="rowUnselect" />
-                        <p:column>
+                        <p:column sortBy="#{item.datum}" filterBy="#{item.datum}" filterMatchMode="contains">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListElojegyzesTitle_datum}" />
                             </f:facet>
@@ -266,13 +266,13 @@
                                 <f:convertDateTime pattern="yyyy-MM-dd" />
                             </h:outputText>
                         </p:column>
-                        <p:column>
+                        <p:column sortBy="#{item.szemely.nev}" filterBy="#{item.szemely.nev}" filterMatchMode="contains">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListElojegyzesTitle_szemely}"/>
                             </f:facet>
                             <h:outputText value="#{item.szemely.nev}"/>
                         </p:column>                        
-                        <p:column>
+                        <p:column sortBy="#{item.konyv.cim}" filterBy="#{item.konyv.cim}" filterMatchMode="contains">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListElojegyzesTitle_konyv}"/>
                             </f:facet>

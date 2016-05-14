@@ -27,13 +27,13 @@
                         <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
                         <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
 
-                        <p:column>
+                        <p:column sortBy="#{item.peldany.konyv.cim} (#{item.peldany.konyvPeldany}. példány)" filterBy="#{item.peldany.konyv.cim} (#{item.peldany.konyvPeldany}. példány)" filterMatchMode="contains">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListNincsTitle_peldany}"/>
                             </f:facet>
                             <h:outputText value="#{item.peldany.konyv.cim} (#{item.peldany.konyvPeldany}. példány)"/>
                         </p:column>
-                        <p:column>
+                        <p:column sortBy="#{item.kelt}" filterBy="#{item.kelt}" filterMatchMode="contains">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListNincsTitle_kelt}"/>
                             </f:facet>
@@ -41,7 +41,7 @@
                                 <f:convertDateTime pattern="yyyy-MM-dd" />
                             </h:outputText>
                         </p:column>
-                        <p:column>
+                        <p:column sortBy="#{item.selejtLopott}" filterBy="#{item.selejtLopott}" filterMatchMode="contains">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListNincsTitle_selejtLopott}"/>
                             </f:facet>
