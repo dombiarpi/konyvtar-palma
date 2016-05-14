@@ -4,15 +4,19 @@ import entity.Konyv;
 import controller.util.JsfUtil;
 import controller.util.JsfUtil.PersistAction;
 import entity.Kimitirt;
+import entity.Oszlop;
 import entity.Szerzo;
 import facade.KimitirtFacade;
 import facade.KonyvFacade;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.ejb.EJBException;
 import javax.inject.Named;
@@ -21,6 +25,9 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import javax.inject.Inject;
+import org.primefaces.event.ToggleEvent;
+import org.primefaces.model.Visibility;
 
 @Named("konyvController")
 @SessionScoped
@@ -32,6 +39,8 @@ public class KonyvController implements Serializable {
     private facade.SzerzoFacade szerzoFacade;
     @EJB
     private facade.KimitirtFacade kimitirtFacade;
+    @Inject
+    private OszlopController oszlopController;
 
     public KimitirtFacade getKimitirtFacade() {
         return kimitirtFacade;
@@ -40,8 +49,36 @@ public class KonyvController implements Serializable {
     private List<Konyv> filteredItems = null;
     private Konyv selected;
     private List<String> szerzok;
+//    private List<Boolean> list;
+    private List<Oszlop> konyvOszlopok;
+
+    public List<Oszlop> getKonyvOszlopok() {
+        return konyvOszlopok;
+    }
 
     public KonyvController() {
+    }
+    
+    @PostConstruct
+    public void init() {
+//        list = new ArrayList<>();
+        konyvOszlopok = new ArrayList<>();
+        List<Oszlop> oszlopok = oszlopController.getItems();
+        for (Oszlop oszlop : oszlopok) {
+            if (oszlop != null && oszlop.getNev().startsWith("konyv")) {
+                konyvOszlopok.add(oszlop);
+            }
+        }
+//         list = Arrays.asList(true, true, true, true, true, true, true, true, true, true, true, true, true, true, true);
+    }    
+    
+    public void onToggle(ToggleEvent e) {
+        
+//        list.set((Integer) e.getData(), e.getVisibility() == Visibility.VISIBLE);
+        Oszlop oszlop = konyvOszlopok.get((Integer) e.getData());
+        oszlop.setLathatosag(e.getVisibility() == Visibility.VISIBLE);
+        oszlopController.setSelected(oszlop);
+        oszlopController.update();
     }
 
     public Konyv getSelected() {
@@ -176,6 +213,10 @@ public class KonyvController implements Serializable {
     public void setFilteredItems(List<Konyv> filteredItems) {
         this.filteredItems = filteredItems;
     }
+
+//    public List<Boolean> getList() {
+//        return list;
+//    }
 
     @FacesConverter(forClass = Konyv.class)
     public static class KonyvControllerConverter implements Converter {

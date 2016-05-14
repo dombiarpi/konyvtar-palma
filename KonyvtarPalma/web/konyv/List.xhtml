@@ -35,8 +35,7 @@
                             <p:outputPanel style="float: right">
                                 <p:outputLabel value="Keresés minden mezőben:" for="globalFilter"/>
                                 <p:inputText id="globalFilter" onkeyup="PF('konyvek').filter()" style="width:150px" placeholder="Kulcsszó"/>
-                                <p:commandButton id="toggler" type="button" value="Oszlopok" style="float:right" icon="ui-icon-calculator" />
-                                <p:columnToggler datasource="datalist" trigger="toggler" />                                
+                                   
                             </p:outputPanel>
 
 
@@ -44,91 +43,91 @@
 
                        
 
-                        <p:column sortBy="#{item.katal}" filterBy="#{item.katal}" filterMatchMode="contains">
+                        <p:column sortBy="#{item.katal}" filterBy="#{item.katal}" filterMatchMode="contains" visible="#{konyvController.konyvOszlopok[0].lathatosag}">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListKonyvTitle_katal}"/>
                             </f:facet>
                             <h:outputText value="#{item.katal}"/>
                         </p:column>
-                        <p:column sortBy="#{item.szerzoNev}" filterBy="#{item.szerzoNev}" filterMatchMode="contains">
+                        <p:column sortBy="#{item.szerzoNev}" filterBy="#{item.szerzoNev}" filterMatchMode="contains" visible="#{konyvController.konyvOszlopok[1].lathatosag}">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListSzerzoTitle_nev}"/>
                             </f:facet>
                             <h:outputText value="#{item.szerzoNev}"/>
                         </p:column>
-                        <p:column sortBy="#{item.cim}" filterBy="#{item.cim}" filterMatchMode="contains">
+                        <p:column sortBy="#{item.cim}" filterBy="#{item.cim}" filterMatchMode="contains" visible="#{konyvController.konyvOszlopok[2].lathatosag}">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListKonyvTitle_cim}"/>
                             </f:facet>
                             <h:outputText value="#{item.cim}"/>
                         </p:column>
-                        <p:column sortBy="#{item.alcim}" filterBy="#{item.alcim}" filterMatchMode="contains">
+                        <p:column sortBy="#{item.alcim}" filterBy="#{item.alcim}" filterMatchMode="contains" visible="#{konyvController.konyvOszlopok[3].lathatosag}">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListKonyvTitle_alcim}"/>
                             </f:facet>
                             <h:outputText value="#{item.alcim}"/>
                         </p:column>
-                        <p:column sortBy="#{item.kiadszam}" filterBy="#{item.kiadszam}" filterMatchMode="contains">
+                        <p:column sortBy="#{item.kiadszam}" filterBy="#{item.kiadszam}" filterMatchMode="contains" visible="#{konyvController.konyvOszlopok[4].lathatosag}">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListKonyvTitle_kiadszam}"/>
                             </f:facet>
                             <h:outputText value="#{item.kiadszam}"/>
                         </p:column>
-                        <p:column sortBy="#{item.kiadev}" filterBy="#{item.kiadev}" filterMatchMode="contains">
+                        <p:column sortBy="#{item.kiadev}" filterBy="#{item.kiadev}" filterMatchMode="contains" visible="#{konyvController.konyvOszlopok[5].lathatosag}">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListKonyvTitle_kiadev}"/>
                             </f:facet>
                             <h:outputText value="#{item.kiadev}" />
                         </p:column>
-                        <p:column sortBy="#{item.mufaj}" filterBy="#{item.mufaj}" filterMatchMode="contains">
+                        <p:column sortBy="#{item.mufaj}" filterBy="#{item.mufaj}" filterMatchMode="contains" visible="#{konyvController.konyvOszlopok[6].lathatosag}">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListKonyvTitle_mufaj}"/>
                             </f:facet>
                             <h:outputText value="#{item.mufaj.nev}"/>
                         </p:column>
-                        <p:column sortBy="#{item.beszerzesiAr}" filterBy="#{item.beszerzesiAr}" filterMatchMode="contains">
+                        <p:column sortBy="#{item.beszerzesiAr}" filterBy="#{item.beszerzesiAr}" filterMatchMode="contains" visible="#{konyvController.konyvOszlopok[7].lathatosag}">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListKonyvTitle_beszerzesiAr}"/>
                             </f:facet>
                             <h:outputText value="#{item.beszerzesiAr}"/>
                         </p:column>
-                        <p:column sortBy="#{item.egysAr}" filterBy="#{item.egysAr}" filterMatchMode="contains">
+                        <p:column sortBy="#{item.egysAr}" filterBy="#{item.egysAr}" filterMatchMode="contains" visible="#{konyvController.konyvOszlopok[8].lathatosag}">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListKonyvTitle_egysAr}"/>
                             </f:facet>
                             <h:outputText value="#{item.egysAr}"/>
                         </p:column>
-                        <p:column sortBy="#{item.szorzo}" filterBy="#{item.szorzo}" filterMatchMode="contains">
+                        <p:column sortBy="#{item.szorzo}" filterBy="#{item.szorzo}" filterMatchMode="contains" visible="#{konyvController.konyvOszlopok[9].lathatosag}">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListKonyvTitle_szorzo}"/>
                             </f:facet>
                             <h:outputText value="#{item.szorzo}"/>
                         </p:column>
-                        <p:column sortBy="#{item.megjegyzes}" filterBy="#{item.megjegyzes}" filterMatchMode="contains">
+                        <p:column sortBy="#{item.megjegyzes}" filterBy="#{item.megjegyzes}" filterMatchMode="contains" visible="#{konyvController.konyvOszlopok[10].lathatosag}">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListKonyvTitle_megjegyzes}"/>
                             </f:facet>
                             <h:outputText value="#{item.megjegyzes}"/>
                         </p:column>
-                        <p:column sortBy="#{item.media.name}" filterBy="#{item.media.name}" filterMatchMode="contains">
+                        <p:column sortBy="#{item.media.name}" filterBy="#{item.media.name}" filterMatchMode="contains" visible="#{konyvController.konyvOszlopok[11].lathatosag}">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListKonyvTitle_media}"/>
                             </f:facet>
                             <h:outputText value="#{item.media.name}"/>
                         </p:column>
-                        <p:column sortBy="#{item.nyelv.nev}" filterBy="#{item.nyelv.nev}" filterMatchMode="contains">
+                        <p:column sortBy="#{item.nyelv.nev}" filterBy="#{item.nyelv.nev}" filterMatchMode="contains" visible="#{konyvController.konyvOszlopok[12].lathatosag}">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListKonyvTitle_nyelv}"/>
                             </f:facet>
                             <h:outputText value="#{item.nyelv.nev}"/>
                         </p:column>
-                        <p:column sortBy="#{item.sorozat}" filterBy="#{item.sorozat}" filterMatchMode="contains">
+                        <p:column sortBy="#{item.sorozat}" filterBy="#{item.sorozat}" filterMatchMode="contains" visible="#{konyvController.konyvOszlopok[13].lathatosag}">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListKonyvTitle_sorozat}"/>
                             </f:facet>
                             <h:outputText value="#{item.sorozat.nev}"/>
                         </p:column>
-                        <p:column sortBy="#{item.kiado.nev}" filterBy="#{item.kiado.nev}" filterMatchMode="contains">
+                        <p:column sortBy="#{item.kiado.nev}" filterBy="#{item.kiado.nev}" filterMatchMode="contains" visible="#{konyvController.konyvOszlopok[14].lathatosag}">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListKonyvTitle_kiado}"/>
                             </f:facet>
@@ -145,6 +144,11 @@
                                 <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
                                 <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
                             </p:confirmDialog>
+                                <p:commandButton id="toggler" type="button" value="Oszlopok" style="float:right" icon="ui-icon-calculator" update="@all"/>
+                                <p:columnToggler datasource="datalist" trigger="toggler" >
+                                    <p:ajax event="toggle" listener="#{konyvController.onToggle}" update="@widgetVar(konyvek)" />
+                                </p:columnToggler> 
+                            
                         </f:facet>
                     </p:dataTable>
                 </p:panel>
