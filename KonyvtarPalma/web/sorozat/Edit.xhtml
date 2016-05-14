@@ -16,7 +16,7 @@
                         <p:inputText id="nev" value="#{sorozatController.selected.nev}" title="#{bundle.EditSorozatTitle_nev}" required="true" requiredMessage="#{bundle.EditSorozatRequiredMessage_nev}"/>
                     </p:panelGrid>
                     <p:commandButton actionListener="#{sorozatController.update}" value="#{bundle.Save}" update="display,:SorozatListForm:datalist,:growl" oncomplete="handleSubmit(args, 'SorozatEditDialog');"/>
-                    <p:commandButton value="#{bundle.Cancel}" onclick="SorozatEditDialog.hide()"/>
+                    <p:commandButton value="#{bundle.Cancel}" immediate="true"  onclick="SorozatEditDialog.hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

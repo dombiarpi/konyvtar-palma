@@ -16,7 +16,7 @@
                         <p:inputText id="nev" value="#{nyelvController.selected.nev}" title="#{bundle.CreateNyelvTitle_nev}" required="true" requiredMessage="#{bundle.CreateNyelvRequiredMessage_nev}"/>
                     </p:panelGrid>
                     <p:commandButton actionListener="#{nyelvController.create}" value="#{bundle.Save}" update="display,:NyelvListForm:datalist,:growl" oncomplete="handleSubmit(args,'NyelvCreateDialog');"/>
-                    <p:commandButton value="#{bundle.Cancel}" onclick="NyelvCreateDialog.hide()"/>
+                    <p:commandButton value="#{bundle.Cancel}" immediate="true"  onclick="NyelvCreateDialog.hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

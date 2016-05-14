@@ -16,7 +16,7 @@
                         <p:inputText id="nev" value="#{mufajController.selected.nev}" title="#{bundle.CreateMufajTitle_nev}" required="true" requiredMessage="#{bundle.CreateMufajRequiredMessage_nev}"/>
                     </p:panelGrid>
                     <p:commandButton actionListener="#{mufajController.create}" value="#{bundle.Save}" update="display,:MufajListForm:datalist,:growl" oncomplete="handleSubmit(args,'MufajCreateDialog');"/>
-                    <p:commandButton value="#{bundle.Cancel}" onclick="MufajCreateDialog.hide()"/>
+                    <p:commandButton value="#{bundle.Cancel}" immediate="true"  onclick="MufajCreateDialog.hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

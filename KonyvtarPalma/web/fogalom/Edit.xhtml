@@ -16,7 +16,7 @@
                         <p:inputText id="nev" value="#{fogalomController.selected.nev}" title="#{bundle.EditFogalomTitle_nev}" required="true" requiredMessage="#{bundle.EditFogalomRequiredMessage_nev}"/>
                     </p:panelGrid>
                     <p:commandButton actionListener="#{fogalomController.update}" value="#{bundle.Save}" update="display,:FogalomListForm:datalist,:growl" oncomplete="handleSubmit(args, 'FogalomEditDialog');"/>
-                    <p:commandButton value="#{bundle.Cancel}" onclick="FogalomEditDialog.hide()"/>
+                    <p:commandButton value="#{bundle.Cancel}" immediate="true"  onclick="FogalomEditDialog.hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

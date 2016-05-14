@@ -26,7 +26,7 @@
                         </p:selectOneMenu>
                     </p:panelGrid>
                     <p:commandButton actionListener="#{utalasController.create}" value="#{bundle.Save}" update="display,:UtalasListForm:datalist,:growl" oncomplete="handleSubmit(args,'UtalasCreateDialog');"/>
-                    <p:commandButton value="#{bundle.Cancel}" onclick="UtalasCreateDialog.hide()"/>
+                    <p:commandButton value="#{bundle.Cancel}" immediate="true"  onclick="UtalasCreateDialog.hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

@@ -34,7 +34,7 @@
                         </p:selectOneMenu>                                       
                     </p:panelGrid>
                     <p:commandButton actionListener="#{peldanyController.update}" value="#{bundle.Save}" update="display,:PeldanyListForm:datalist,:growl" oncomplete="handleSubmit(args, 'PeldanyEditDialog');"/>
-                    <p:commandButton value="#{bundle.Cancel}" onclick="PeldanyEditDialog.hide()"/>
+                    <p:commandButton value="#{bundle.Cancel}" immediate="true"  onclick="PeldanyEditDialog.hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

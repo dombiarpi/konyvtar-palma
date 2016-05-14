@@ -32,7 +32,7 @@
                         <p:inputText id="megjegyzes" value="#{szemelyController.selected.megjegyzes}" title="#{bundle.CreateSzemelyTitle_megjegyzes}" />
                     </p:panelGrid>
                     <p:commandButton actionListener="#{szemelyController.create}" value="#{bundle.Save}" update="display,:SzemelyListForm:datalist,:growl" oncomplete="handleSubmit(args,'SzemelyCreateDialog');"/>
-                    <p:commandButton value="#{bundle.Cancel}" onclick="SzemelyCreateDialog.hide()"/>
+                    <p:commandButton value="#{bundle.Cancel}" immediate="true"  onclick="SzemelyCreateDialog.hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

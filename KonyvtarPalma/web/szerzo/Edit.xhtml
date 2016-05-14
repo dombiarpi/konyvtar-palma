@@ -16,7 +16,7 @@
                         <p:inputText id="nev" value="#{szerzoController.selected.nev}" title="#{bundle.EditSzerzoTitle_nev}" required="true" requiredMessage="#{bundle.EditSzerzoRequiredMessage_nev}"/>
                     </p:panelGrid>
                     <p:commandButton actionListener="#{szerzoController.update}" value="#{bundle.Save}" update="display,:SzerzoListForm:datalist,:growl" oncomplete="handleSubmit(args, 'SzerzoEditDialog');"/>
-                    <p:commandButton value="#{bundle.Cancel}" onclick="SzerzoEditDialog.hide()"/>
+                    <p:commandButton value="#{bundle.Cancel}" immediate="true"  onclick="SzerzoEditDialog.hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

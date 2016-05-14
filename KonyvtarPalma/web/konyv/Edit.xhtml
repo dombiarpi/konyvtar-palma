@@ -69,7 +69,7 @@
                         </p:selectOneMenu>
                     </p:panelGrid>
                     <p:commandButton actionListener="#{konyvController.update}" value="#{bundle.Save}" update="display,:KonyvListForm:datalist,:growl" oncomplete="handleSubmit(args, 'KonyvEditDialog');"/>
-                    <p:commandButton value="#{bundle.Cancel}" onclick="KonyvEditDialog.hide()"/>
+                    <p:commandButton value="#{bundle.Cancel}" immediate="true"  onclick="KonyvEditDialog.hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

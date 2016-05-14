@@ -16,7 +16,7 @@
                         <p:inputText id="nev" value="#{kiadoController.selected.nev}" title="#{bundle.CreateKiadoTitle_nev}" required="true" requiredMessage="#{bundle.CreateKiadoRequiredMessage_nev}"/>
                     </p:panelGrid>
                     <p:commandButton actionListener="#{kiadoController.create}" value="#{bundle.Save}" update="display,:KiadoListForm:datalist,:growl" oncomplete="handleSubmit(args,'KiadoCreateDialog');"/>
-                    <p:commandButton value="#{bundle.Cancel}" onclick="KiadoCreateDialog.hide()"/>
+                    <p:commandButton value="#{bundle.Cancel}" immediate="true"  onclick="KiadoCreateDialog.hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

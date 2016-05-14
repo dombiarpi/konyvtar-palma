@@ -24,7 +24,7 @@
                         <p:selectBooleanCheckbox id="selejtLopott" value="#{nincsController.selected.selejtLopott}" required="true" requiredMessage="#{bundle.EditNincsRequiredMessage_selejtLopott}"/>
                     </p:panelGrid>
                     <p:commandButton actionListener="#{nincsController.update}" value="#{bundle.Save}" update="display,:NincsListForm:datalist,:growl" oncomplete="handleSubmit(args, 'NincsEditDialog');"/>
-                    <p:commandButton value="#{bundle.Cancel}" onclick="NincsEditDialog.hide()"/>
+                    <p:commandButton value="#{bundle.Cancel}" immediate="true"  onclick="NincsEditDialog.hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>
