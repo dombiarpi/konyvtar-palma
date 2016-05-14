@@ -13,7 +13,7 @@
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{peldanyController.selected != null}">
                         <p:outputLabel value="#{bundle.EditPeldanyLabel_konyv}" for="konyv" />
-                        <p:selectOneMenu id="konyv" value="#{peldanyController.selected.konyv}" required="true" requiredMessage="#{bundle.EditPeldanyRequiredMessage_konyv}">
+                        <p:selectOneMenu id="konyv" value="#{peldanyController.selected.konyv}" disabled="true">
                             <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
                             <f:selectItems value="#{konyvController.itemsAvailableSelectOne}"
                                            var="konyvItem"
@@ -22,9 +22,9 @@
                         <p:outputLabel value="#{bundle.EditPeldanyLabel_konyvPeldany}" for="konyvPeldany" />
                         <p:inputText id="konyvPeldany" value="#{peldanyController.selected.konyvPeldany}" title="#{bundle.EditPeldanyTitle_konyvPeldany}" required="true" requiredMessage="#{bundle.EditPeldanyRequiredMessage_konyvPeldany}"/>
                         <p:outputLabel value="#{bundle.EditPeldanyLabel_kikolcs}" for="kikolcs" />
-                        <p:selectBooleanCheckbox id="kikolcs" value="#{peldanyController.selected.kikolcs}" required="true" requiredMessage="#{bundle.EditPeldanyRequiredMessage_kikolcs}"/>
+                        <p:selectBooleanCheckbox id="kikolcs" value="#{peldanyController.selected.kikolcs}" disabled="true"/>
                         <p:outputLabel value="#{bundle.EditPeldanyLabel_aktKolcs}" for="aktKolcs" />
-                        <p:selectBooleanCheckbox id="aktKolcs" value="#{peldanyController.selected.aktKolcs}" required="true" requiredMessage="#{bundle.EditPeldanyRequiredMessage_aktKolcs}"/>
+                        <p:selectBooleanCheckbox id="aktKolcs" value="#{peldanyController.selected.aktKolcs}" />
                         <p:outputLabel value="#{bundle.EditPeldanyLabel_polc}" for="polc" />
                         <p:selectOneMenu id="polc" value="#{peldanyController.selected.polc}" required="true" requiredMessage="#{bundle.EditPeldanyRequiredMessage_polc}">
                             <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>

@@ -54,6 +54,8 @@ public class PeldanyController implements Serializable {
 
     public Peldany prepareCreate() {
         selected = new Peldany();
+        selected.setKikolcs(Boolean.FALSE);
+        selected.setAktKolcs(Boolean.TRUE);
         initializeEmbeddableKey();
         return selected;
     }

@@ -70,6 +70,8 @@ public class KolcsonzesFacade extends AbstractFacade<Kolcsonzes> {
         return q.getResultList();
     }
     
+   
+    
     
     
     

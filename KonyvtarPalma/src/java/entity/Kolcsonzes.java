@@ -77,7 +77,7 @@ public class Kolcsonzes implements Serializable {
     @Transient
     private String kesesben;
     @Transient
-    private final int NAPI_KESESI_DIJ = 50;
+    private final int NAPI_KESESI_DIJ = 10;
 
     public Kolcsonzes() {
     }

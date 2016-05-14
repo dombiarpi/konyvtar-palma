@@ -54,6 +54,7 @@ public class Nincs implements Serializable {
     @Temporal(TemporalType.DATE)
     private Date kelt;
    
+    @Column(name = "selejt_lopott", nullable = false)
     private Boolean selejtLopott;
 
     public Nincs() {

@@ -21,7 +21,7 @@
 }
 
 /* for dashboard */
-.dashboard-panel.ui-panel, div.ui-state-hover {
+.dashboard-panel.ui-panel, .dashboard-panel div.ui-state-hover {
         margin: 10px;
        /* width:600px;*/
         width:99%;

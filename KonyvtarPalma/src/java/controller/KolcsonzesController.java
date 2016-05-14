@@ -76,6 +76,10 @@ public class KolcsonzesController implements Serializable {
         konyvPeldanyai();
         // You can do here your initialization thing based on managed properties, if necessary.
         
+        setupDashboard();
+     }    
+
+    private void setupDashboard() {
         model = new DefaultDashboardModel();
         DashboardColumn column1 = new DefaultDashboardColumn();
         DashboardColumn column2 = new DefaultDashboardColumn();
@@ -90,7 +94,7 @@ public class KolcsonzesController implements Serializable {
  
         model.addColumn(column1);
         model.addColumn(column2);
-     }    
+    }    
     
     public void handleReorder(DashboardReorderEvent event) {
         FacesMessage message = new FacesMessage();
@@ -157,6 +161,14 @@ public class KolcsonzesController implements Serializable {
         peldanyController.setKonyvPeldanyaiItems(ejbFacade.findPeldanyByKonyv(valasztottKonyv));
     }
     
+    private void countKonyvPeldanyai() {
+        
+        for (Konyv item : konyvController.getItems()) {
+            List<Peldany> friss = ejbFacade.findPeldanyByKonyv(item);
+            
+        }
+    }
+    
     public String kolcsonoz(Peldany peldany) {
         Szemely kolcsonzo = szemelyController.getSelected();
         if (kolcsonzo == null) {
@@ -167,7 +179,6 @@ public class KolcsonzesController implements Serializable {
         peldany.setAktKolcs(Boolean.FALSE);   
         
         createKolcsonzes(kolcsonzo, peldany);
-        peldanyController.getKonyvPeldanyaiItems().remove(peldany); 
         peldanyController.getSzemelyPeldanyaiItems().add(peldany);
         szemelyPeldanyai();
         konyvPeldanyai();        
@@ -228,6 +239,7 @@ public class KolcsonzesController implements Serializable {
         persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("KolcsonzesCreated"));
         if (!JsfUtil.isValidationFailed()) {
             items = null;    // Invalidate list of items to trigger re-query.
+            peldanyController.setKonyvPeldanyaiItems(null);
         }
     }
 

@@ -55,14 +55,6 @@ public class KonyvFacade extends AbstractFacade<Konyv> {
             }
             konyv.setSzerzoNev(sb.toString());
         }
-//        List list = q.getResultList();
-//        for (Object object : list) {
-//            Object[] konyvSzerzovel = (Object[])object;
-//            Konyv konyv = (Konyv)konyvSzerzovel[0];
-//            Szerzo szerzo = (Szerzo)konyvSzerzovel[1];
-//            konyv.setSzerzoNev(szerzo.getNev());
-//            result.add(konyv);
-//        }
         return result;
     }
     

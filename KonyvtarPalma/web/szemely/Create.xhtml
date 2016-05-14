@@ -17,7 +17,7 @@
                         <p:outputLabel value="#{bundle.CreateSzemelyLabel_leanykoriNev}" for="leanykoriNev" />
                         <p:inputText id="leanykoriNev" value="#{szemelyController.selected.leanykoriNev}" title="#{bundle.CreateSzemelyTitle_leanykoriNev}" />
                         <p:outputLabel value="#{bundle.CreateSzemelyLabel_beiratkozas}" for="beiratkozas" />
-                        <p:calendar id="beiratkozas" pattern="MM/dd/yyyy" value="#{szemelyController.selected.beiratkozas}" title="#{bundle.EditSzemelyTitle_beiratkozas}" required="true" requiredMessage="#{bundle.EditSzemelyRequiredMessage_beiratkozas}" showOn="button"/>
+                        <p:calendar id="beiratkozas" pattern="yyyy-MM-dd" value="#{szemelyController.selected.beiratkozas}" title="#{bundle.EditSzemelyTitle_beiratkozas}" required="true" requiredMessage="#{bundle.EditSzemelyRequiredMessage_beiratkozas}" showOn="button"/>
                         <p:outputLabel value="#{bundle.CreateSzemelyLabel_elofizTipus}" for="elofizTipus" />
                         <p:inputText id="elofizTipus" value="#{szemelyController.selected.elofizTipus}" title="#{bundle.CreateSzemelyTitle_elofizTipus}" required="true" requiredMessage="#{bundle.CreateSzemelyRequiredMessage_elofizTipus}"/>
                         <p:outputLabel value="#{bundle.CreateSzemelyLabel_tagdij}" for="tagdij" />
