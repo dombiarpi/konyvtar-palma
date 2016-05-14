@@ -17,9 +17,15 @@
                         <p:outputLabel value="#{bundle.EditSzemelyLabel_leanykoriNev}" for="leanykoriNev" />
                         <p:inputText id="leanykoriNev" value="#{szemelyController.selected.leanykoriNev}" title="#{bundle.EditSzemelyTitle_leanykoriNev}" />
                         <p:outputLabel value="#{bundle.EditSzemelyLabel_beiratkozas}" for="beiratkozas" />
-                        <p:calendar id="beiratkozas" pattern="MM/dd/yyyy" value="#{szemelyController.selected.beiratkozas}" title="#{bundle.EditSzemelyTitle_beiratkozas}" required="true" requiredMessage="#{bundle.EditSzemelyRequiredMessage_beiratkozas}" showOn="button"/>
+                        <p:calendar id="beiratkozas" pattern="yyyy-MM-dd" value="#{szemelyController.selected.beiratkozas}" title="#{bundle.EditSzemelyTitle_beiratkozas}" required="true" requiredMessage="#{bundle.EditSzemelyRequiredMessage_beiratkozas}" showOn="button"/>
+                        <p:outputLabel value="Előfizetés dátuma" for="elofizDatum" />
+                        <p:calendar id="elofizDatum" pattern="yyyy-MM-dd" value="#{szemelyController.selected.elofizDatum}" title="Előfizetés dátuma" showOn="button"/>
                         <p:outputLabel value="#{bundle.EditSzemelyLabel_elofizTipus}" for="elofizTipus" />
-                        <p:inputText id="elofizTipus" value="#{szemelyController.selected.elofizTipus}" title="#{bundle.EditSzemelyTitle_elofizTipus}" required="true" requiredMessage="#{bundle.EditSzemelyRequiredMessage_elofizTipus}"/>
+                        <p:selectOneMenu id="elofizTipus" value="#{szemelyController.selected.elofizTipus}" required="true" requiredMessage="#{bundle.EditSzemelyRequiredMessage_elofizTipus}">
+                            <f:selectItems value="#{szemelyController.selected.elofizTipusok}"
+                                           var="elofizTipusItem"
+                                           itemValue="#{elofizTipusItem}" itemLabel="#{elofizTipusItem.name}" />/>
+                        </p:selectOneMenu>                                                 
                         <p:outputLabel value="#{bundle.EditSzemelyLabel_tagdij}" for="tagdij" />
                         <p:inputText id="tagdij" value="#{szemelyController.selected.tagdij}" title="#{bundle.EditSzemelyTitle_tagdij}" required="true" requiredMessage="#{bundle.EditSzemelyRequiredMessage_tagdij}"/>
                         <p:outputLabel value="#{bundle.EditSzemelyLabel_email}" for="email" />

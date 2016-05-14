@@ -20,6 +20,10 @@
                         <h:outputText value="#{szemelyController.selected.beiratkozas}" title="#{bundle.ViewSzemelyTitle_beiratkozas}">
                             <f:convertDateTime pattern="yyyy-MM-dd" />
                         </h:outputText>
+                        <h:outputText value="Előfizetés dátuma"/>                        
+                        <h:outputText value="#{szemelyController.selected.elofizDatum}" title="Előfizetés dátuma">
+                            <f:convertDateTime pattern="yyyy-MM-dd" />
+                        </h:outputText>
                         <h:outputText value="#{bundle.ViewSzemelyLabel_elofizTipus}"/>
                         <h:outputText value="#{szemelyController.selected.elofizTipus}" title="#{bundle.ViewSzemelyTitle_elofizTipus}"/>
                         <h:outputText value="#{bundle.ViewSzemelyLabel_tagdij}"/>

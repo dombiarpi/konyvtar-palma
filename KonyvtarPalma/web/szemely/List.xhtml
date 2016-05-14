@@ -47,6 +47,14 @@
                                 <f:convertDateTime pattern="yyyy-MM-dd" />
                             </h:outputText>
                         </p:column>
+                        <p:column sortBy="#{item.elofizDatum}" filterBy="#{item.elofizDatum}" filterMatchMode="contains">
+                            <f:facet name="header">
+                                <h:outputText value="Előfizetett"/>
+                            </f:facet>
+                            <h:outputText value="#{item.elofizDatum}">
+                                <f:convertDateTime pattern="yyyy-MM-dd" />
+                            </h:outputText>
+                        </p:column>
                         <p:column sortBy="#{item.elofizTipus}" filterBy="#{item.elofizTipus}" filterMatchMode="contains">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListSzemelyTitle_elofizTipus}"/>

@@ -13,7 +13,11 @@
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{polcController.selected != null}">
                         <p:outputLabel value="#{bundle.CreatePolcLabel_szekreny}" for="szekreny" />
-                        <p:inputText id="szekreny" value="#{polcController.selected.szekreny}" title="#{bundle.CreatePolcTitle_szekreny}" required="true" requiredMessage="#{bundle.CreatePolcRequiredMessage_szekreny}"/>
+                        <p:selectOneMenu id="szekreny" value="#{polcController.selected.szekreny}" required="true" requiredMessage="#{bundle.CreatePolcRequiredMessage_szekreny}">
+                            <f:selectItems value="#{polcController.selected.szekrenyek}"
+                                           var="szekrenyItem"
+                                           itemValue="#{szekrenyItem}" itemLabel="#{szekrenyItem.name}" />/>
+                        </p:selectOneMenu>                                                      
                         <p:outputLabel value="#{bundle.CreatePolcLabel_polc}" for="polc" />
                         <p:inputText id="polc" value="#{polcController.selected.polc}" title="#{bundle.CreatePolcTitle_polc}" required="true" requiredMessage="#{bundle.CreatePolcRequiredMessage_polc}"/>
                     </p:panelGrid>

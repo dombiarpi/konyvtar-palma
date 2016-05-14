@@ -21,6 +21,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -65,6 +66,11 @@ public class Szemely implements Serializable {
     @Column(name = "beiratkozas", nullable = false)
     @Temporal(TemporalType.DATE)
     private Date beiratkozas;
+    @Basic(optional = true)
+    @NotNull
+    @Column(name = "elofiz_datum", nullable = true)
+    @Temporal(TemporalType.DATE)
+    private Date elofizDatum;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 39)
@@ -90,6 +96,12 @@ public class Szemely implements Serializable {
     private Collection<Elojegyzes> elojegyzesCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "szemely")
     private Collection<Kolcsonzes> kolcsonzesCollection;
+    @Transient
+    private ElofizTipus[] elofizTipusok;
+
+    public ElofizTipus[] getElofizTipusok() {
+        return ElofizTipus.values();
+    }
 
     public Szemely() {
     }
@@ -225,6 +237,20 @@ public class Szemely implements Serializable {
     @Override
     public String toString() {
         return nev + (leanykoriNev == null ? "": (" " + leanykoriNev));
+    }
+
+    /**
+     * @return the elofizDatum
+     */
+    public Date getElofizDatum() {
+        return elofizDatum;
+    }
+
+    /**
+     * @param elofizDatum the elofizDatum to set
+     */
+    public void setElofizDatum(Date elofizDatum) {
+        this.elofizDatum = elofizDatum;
     }
     
 }

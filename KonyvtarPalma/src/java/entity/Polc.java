@@ -15,6 +15,7 @@ import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -48,6 +49,13 @@ public class Polc implements Serializable {
     @NotNull
     @Column(name = "polc", nullable = false)
     private int polc;
+    
+    @Transient
+    private Szekreny[] szekrenyek;
+
+    public Szekreny[] getSzekrenyek() {
+        return Szekreny.values();
+    }    
 
     public Polc() {
     }
