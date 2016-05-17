@@ -7,6 +7,8 @@ package facade;
 
 import entity.Kimitirt;
 import entity.Konyv;
+import entity.Szerzo;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -36,6 +38,17 @@ public class KimitirtFacade extends AbstractFacade<Kimitirt> {
         q.setParameter("konyv", konyv);
         Kimitirt km = (Kimitirt)q.getSingleResult();
         return km;
-    }    
+    } 
+    
+    public List<Kimitirt> find(Konyv konyv, Szerzo szerzo) {
+        List<Kimitirt> result = null;
+        Query q = getEntityManager().createNamedQuery("Kimitirt.findByKonyvAndSzerzo", Kimitirt.class);
+        q.setParameter("konyv", konyv);
+        q.setParameter("szerzo", szerzo);
+        result = (List<Kimitirt>)q.getResultList();
+        return result;
+    } 
+    
+    
     
 }

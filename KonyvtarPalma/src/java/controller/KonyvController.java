@@ -41,11 +41,17 @@ public class KonyvController implements Serializable {
     private facade.KimitirtFacade kimitirtFacade;
     @Inject
     private OszlopController oszlopController;
+    @Inject
+    private KimitirtController kimitirtController;
 
     public KimitirtFacade getKimitirtFacade() {
         return kimitirtFacade;
     }
     private List<Konyv> items = null;
+
+    public void setItems(List<Konyv> items) {
+        this.items = items;
+    }
     private List<Konyv> filteredItems = null;
     private Konyv selected;
     private List<Szerzo> szerzok;
@@ -120,6 +126,13 @@ public class KonyvController implements Serializable {
         initializeEmbeddableKey();
         return selected;
     }
+    
+    public void prepareUpdate() {
+        if (selected == null) {
+            return;
+        }
+        szerzok = ejbFacade.findSzerzokOfKonyv(selected);
+     }
 
     private void setDefaultsOfNewKonyv() {
         Integer katalog = getFacade().findMaxKatalogNumber();
@@ -137,6 +150,9 @@ public class KonyvController implements Serializable {
 
     public void update() {
         persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("KonyvUpdated"));
+         if (!JsfUtil.isValidationFailed()) {
+            kimitirtController.setItems(null);    // Invalidate list of items to trigger re-query.
+        }       
     }
 
     public void destroy() {
@@ -155,15 +171,15 @@ public class KonyvController implements Serializable {
     }
     
     private void setupSzerzok(Konyv konyv) {
-//        Kimitirt kimitirt = kimitirtFacade.find(selected);
-//        if (kimitirt == null) {
         for (Szerzo item : szerzok) {
-
             Szerzo szerzo = szerzoFacade.find(item.getId());
-            Kimitirt kimitirt = new Kimitirt();
-            kimitirt.setKonyv(konyv);
-            kimitirt.setSzerzo(szerzo);
-            kimitirtFacade.create(kimitirt);
+            List<Kimitirt> kimitirtak = kimitirtFacade.find(konyv, szerzo);
+            if (kimitirtak == null || kimitirtak.isEmpty()) {
+                Kimitirt kimitirt = new Kimitirt();
+                kimitirt.setKonyv(konyv);
+                kimitirt.setSzerzo(szerzo);
+                kimitirtFacade.create(kimitirt);
+            }
         }
     }
 

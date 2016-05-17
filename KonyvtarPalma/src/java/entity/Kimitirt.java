@@ -30,7 +30,8 @@ import javax.persistence.UniqueConstraint;
 @NamedQueries({
     @NamedQuery(name = "Kimitirt.findAll", query = "SELECT k FROM Kimitirt k"),
     @NamedQuery(name = "Kimitirt.findById", query = "SELECT k FROM Kimitirt k WHERE k.id = :id"),
-    @NamedQuery(name = "Kimitirt.findByKonyv", query = "SELECT k FROM Kimitirt k WHERE k.konyv = :konyv")})
+    @NamedQuery(name = "Kimitirt.findByKonyv", query = "SELECT k FROM Kimitirt k WHERE k.konyv = :konyv"),
+    @NamedQuery(name = "Kimitirt.findByKonyvAndSzerzo", query = "SELECT k FROM Kimitirt k WHERE k.konyv = :konyv and k.szerzo = :szerzo")})
 public class Kimitirt implements Serializable {
 
     private static final long serialVersionUID = 1L;

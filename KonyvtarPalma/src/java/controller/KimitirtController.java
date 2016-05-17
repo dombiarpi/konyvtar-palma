@@ -18,6 +18,7 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import javax.inject.Inject;
 
 @Named("kimitirtController")
 @SessionScoped
@@ -26,7 +27,13 @@ public class KimitirtController implements Serializable {
     @EJB
     private facade.KimitirtFacade ejbFacade;
     private List<Kimitirt> items = null;
+
+    public void setItems(List<Kimitirt> items) {
+        this.items = items;
+    }
     private Kimitirt selected;
+    @Inject
+    private KonyvController konyvController;
 
     public KimitirtController() {
     }
@@ -71,6 +78,7 @@ public class KimitirtController implements Serializable {
         if (!JsfUtil.isValidationFailed()) {
             selected = null; // Remove selection
             items = null;    // Invalidate list of items to trigger re-query.
+            konyvController.setItems(null);
         }
     }
 

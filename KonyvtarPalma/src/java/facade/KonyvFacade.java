@@ -58,6 +58,12 @@ public class KonyvFacade extends AbstractFacade<Konyv> {
         return result;
     }
     
+    public List<Szerzo> findSzerzokOfKonyv(Konyv konyv) {
+        Query q = em.createNamedQuery("Konyv.findAllWithSzerzo");
+        q.setParameter("id", konyv.getId());
+        return q.getResultList();
+    }
+    
     public Konyv editKonyv(Konyv konyv) {
         return em.merge(konyv);
     }

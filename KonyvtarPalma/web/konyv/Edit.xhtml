@@ -20,11 +20,13 @@
                         <p:inputText id="alcim" value="#{konyvController.selected.alcim}" title="#{bundle.EditKonyvTitle_alcim}" />
                         
                         <p:outputLabel value="Szerző" for="szerzo" />
-                        <p:selectManyMenu id="szerzo" value="#{konyvController.szerzok}" required="true" requiredMessage="#{bundle.EditKonyvRequiredMessage_kiado}">
-                            <f:selectItems value="#{szerzoController.items}"
-                                           var="szerzoItem"
-                                           itemValue="#{szerzoItem.id}" itemLabel="#{szerzoItem}"/>
-                        </p:selectManyMenu>            
+                      <p:autoComplete id="szerzo" dropdown="true" value="#{konyvController.szerzok}"
+                                        required="true" requiredMessage="#{bundle.EditKonyvRequiredMessage_kiado}"
+                                        completeMethod="#{konyvController.completeSzerzo}"
+                                        multiple="true"
+                                        forceSelection="true"
+                                        converter="szerzoControllerConverter"
+                                        var="szerzoItem" itemValue="#{szerzoItem}" itemLabel="#{szerzoItem}"/>        
                         
                         
                         <p:outputLabel value="#{bundle.EditKonyvLabel_kiadszam}" for="kiadszam" />
