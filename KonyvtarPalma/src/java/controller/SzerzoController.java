@@ -121,7 +121,7 @@ public class SzerzoController implements Serializable {
         return getFacade().findAll();
     }
 
-    @FacesConverter(forClass = Szerzo.class)
+    @FacesConverter(value="szerzoControllerConverter", forClass = Szerzo.class)
     public static class SzerzoControllerConverter implements Converter {
 
         @Override

@@ -11,7 +11,7 @@
         <p:dialog id="KonyvCreateDlg" widgetVar="KonyvCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateKonyvTitle}">
             <h:form id="KonyvCreateForm">
                 <h:panelGroup id="display">
-                    <p:panelGrid columns="2" rendered="#{konyvController.selected != null}">
+                    <p:panelGrid columns="4" rendered="#{konyvController.selected != null}">
                         <p:outputLabel value="#{bundle.CreateKonyvLabel_katal}" for="katal" />
                         <p:outputLabel id="katal" value="#{konyvController.selected.katal}" title="#{bundle.CreateKonyvTitle_katal}" />
                         <p:outputLabel value="#{bundle.CreateKonyvLabel_cim}" for="cim" />
@@ -21,11 +21,19 @@
                         
                         
                         <p:outputLabel value="Szerző" for="szerzo" />
-                        <p:selectManyMenu id="szerzo" value="#{konyvController.szerzok}" required="true" requiredMessage="#{bundle.EditKonyvRequiredMessage_kiado}">
-                            <f:selectItems value="#{szerzoController.items}"
-                                           var="szerzoItem"
-                                           itemValue="#{szerzoItem.id}" itemLabel="#{szerzoItem}"/>
-                        </p:selectManyMenu>                        
+                        
+                        <p:autoComplete id="szerzo" dropdown="true" value="#{konyvController.szerzok}"
+                                        required="true" requiredMessage="#{bundle.EditKonyvRequiredMessage_kiado}"
+                                        completeMethod="#{konyvController.completeSzerzo}"
+                                        multiple="true"
+                                        forceSelection="true"
+                                        converter="szerzoControllerConverter"
+                                        var="szerzoItem" itemValue="#{szerzoItem}" itemLabel="#{szerzoItem}"/>
+         
+                                        
+                        
+                        
+                                
                         
                         <p:outputLabel value="#{bundle.CreateKonyvLabel_kiadszam}" for="kiadszam" />
                         <p:inputText id="kiadszam" value="#{konyvController.selected.kiadszam}" title="#{bundle.CreateKonyvTitle_kiadszam}" />

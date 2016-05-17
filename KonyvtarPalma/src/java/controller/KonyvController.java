@@ -48,7 +48,7 @@ public class KonyvController implements Serializable {
     private List<Konyv> items = null;
     private List<Konyv> filteredItems = null;
     private Konyv selected;
-    private List<String> szerzok;
+    private List<Szerzo> szerzok;
 //    private List<Boolean> list;
     private List<Oszlop> konyvOszlopok;
 
@@ -80,6 +80,21 @@ public class KonyvController implements Serializable {
         oszlopController.setSelected(oszlop);
         oszlopController.update();
     }
+    
+    public List<Szerzo> completeSzerzo(String query) {
+        List<Szerzo> allSzerzo = szerzoFacade.findAll();
+        List<Szerzo> filteredSzerzo = new ArrayList<>();
+         
+        for (int i = 0; i < allSzerzo.size(); i++) {
+            Szerzo szerzo = allSzerzo.get(i);
+            if(szerzo.getNev().startsWith(query)) {
+                filteredSzerzo.add(szerzo);
+            }
+        }
+         
+        return filteredSzerzo;
+    }    
+    
 
     public Konyv getSelected() {
         return selected;
@@ -142,9 +157,9 @@ public class KonyvController implements Serializable {
     private void setupSzerzok(Konyv konyv) {
 //        Kimitirt kimitirt = kimitirtFacade.find(selected);
 //        if (kimitirt == null) {
-        for (String item : szerzok) {
-            Integer key = Integer.valueOf(item);
-            Szerzo szerzo = szerzoFacade.find(key);
+        for (Szerzo item : szerzok) {
+
+            Szerzo szerzo = szerzoFacade.find(item.getId());
             Kimitirt kimitirt = new Kimitirt();
             kimitirt.setKonyv(konyv);
             kimitirt.setSzerzo(szerzo);
@@ -198,11 +213,11 @@ public class KonyvController implements Serializable {
         return szerzoFacade;
     }
 
-    public List<String> getSzerzok() {
+    public List<Szerzo> getSzerzok() {
         return szerzok;
     }
 
-    public void setSzerzok(List<String> szerzok) {
+    public void setSzerzok(List<Szerzo> szerzok) {
         this.szerzok = szerzok;
     }
 
