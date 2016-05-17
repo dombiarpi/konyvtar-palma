@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ThemeViewDlg" widgetVar="ThemeViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundleTheme.ViewThemeTitle}">
+            <h:form id="ThemeViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{themeController.selected != null}">
+                        <h:outputText value="#{bundleTheme.ViewThemeLabel_id}"/>
+                        <h:outputText value="#{themeController.selected.id}" title="#{bundleTheme.ViewThemeTitle_id}"/>
+                        <h:outputText value="#{bundleTheme.ViewThemeLabel_displayName}"/>
+                        <h:outputText value="#{themeController.selected.displayName}" title="#{bundleTheme.ViewThemeTitle_displayName}"/>
+                        <h:outputText value="#{bundleTheme.ViewThemeLabel_name}"/>
+                        <h:outputText value="#{themeController.selected.name}" title="#{bundleTheme.ViewThemeTitle_name}"/>
+                        <h:outputText value="#{bundleTheme.ViewThemeLabel_active}"/>
+                        <p:selectBooleanCheckbox value="#{themeController.selected.active}" disabled="true"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundleTheme.Close}" onclick="ThemeViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

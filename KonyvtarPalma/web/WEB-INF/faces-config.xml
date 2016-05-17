@@ -12,5 +12,9 @@
             <base-name>/BundleOszlop</base-name>
             <var>bundleOszlop</var>
         </resource-bundle>
+        <resource-bundle>
+            <base-name>/BundleTheme</base-name>
+            <var>bundleTheme</var>
+        </resource-bundle>
     </application>
 </faces-config>
