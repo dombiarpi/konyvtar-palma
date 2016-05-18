@@ -13,13 +13,10 @@
 
         </style>
     </h:head>
-
     <h:body>
-
         <p:growl id="growl" life="3000" />
-
         <p:layout fullPage="true">
-            <p:layoutUnit position="north" size="65" header="#{bundle.AppName}">
+            <p:layoutUnit position="north">
                 <h:form id="menuForm">
                     <p:menubar>
                         <p:menuitem value="Főoldal" outcome="/kolcsonzes/Main.xhtml" />                        
@@ -56,11 +53,6 @@
                     </p:menubar>
                 </h:form>
             </p:layoutUnit>
-
-<!--            <p:layoutUnit position="south" size="60">
-                <ui:insert name="footer"/>
-            </p:layoutUnit>
--->
             <p:layoutUnit position="center">
                 <ui:insert name="body"/>
             </p:layoutUnit>

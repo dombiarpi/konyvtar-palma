@@ -5,11 +5,13 @@ import controller.util.JsfUtil;
 import controller.util.JsfUtil.PersistAction;
 import entity.Elojegyzes;
 import entity.Konyv;
+import entity.Oszlop;
 import entity.Peldany;
 import entity.Szemely;
 import facade.KolcsonzesFacade;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -36,6 +38,7 @@ import org.primefaces.model.DashboardColumn;
 import org.primefaces.model.DashboardModel;
 import org.primefaces.model.DefaultDashboardColumn;
 import org.primefaces.model.DefaultDashboardModel;
+import org.primefaces.model.Visibility;
 
 @Named("kolcsonzesController")
 @SessionScoped
@@ -58,10 +61,34 @@ public class KolcsonzesController implements Serializable {
     private PeldanyController peldanyController;
     @Inject
     private ElojegyzesController elojegyzesController;
+    @Inject
+    private OszlopController oszlopController;
     
     private Peldany kolcsonzi;
  
     private Peldany visszahozta;
+    private List<Oszlop> kolcsonzesOszlopok;
+
+    public List<Oszlop> getKolcsonzesOszlopok() {
+        return kolcsonzesOszlopok;
+    }
+
+    private void initKolcsonzesOszlopok() {
+        kolcsonzesOszlopok = new ArrayList<>();
+        List<Oszlop> oszlopok = oszlopController.getItems();
+        for (Oszlop oszlop : oszlopok) {
+            if (oszlop != null && oszlop.getNev().startsWith("kolcsonzes")) {
+                kolcsonzesOszlopok.add(oszlop);
+            }
+        }
+    }    
+    
+    public void onToggle(ToggleEvent e) {
+        Oszlop oszlop = kolcsonzesOszlopok.get((Integer) e.getData());
+        oszlop.setLathatosag(e.getVisibility() == Visibility.VISIBLE);
+        oszlopController.setSelected(oszlop);
+        oszlopController.update();
+    }
 
     public KolcsonzesController() {
     }
@@ -77,6 +104,7 @@ public class KolcsonzesController implements Serializable {
         // You can do here your initialization thing based on managed properties, if necessary.
         
         setupDashboard();
+        initKolcsonzesOszlopok();
      }    
 
     private void setupDashboard() {

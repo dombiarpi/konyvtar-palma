@@ -27,7 +27,7 @@
                         <h:outputText value="#{bundle.ViewKolcsonzesLabel_szemely}"/>
                         <h:outputText value="#{kolcsonzesController.selected.szemely.nev}" title="#{bundle.ViewKolcsonzesTitle_szemely}"/>
                         <h:outputText value="#{bundle.ViewKolcsonzesLabel_peldany}"/>
-                        <h:outputText value="#{item.peldany.konyv.cim} (#{item.peldany.konyvPeldany}. példány)" title="#{bundle.ViewKolcsonzesTitle_peldany}" style="width: 200px"/>
+                        <h:outputText value="#{kolcsonzesController.selected.peldany.konyv.cim} (#{kolcsonzesController.selected.peldany.konyvPeldany}. példány)" title="#{bundle.ViewKolcsonzesTitle_peldany}" style="width: 200px"/>
                     </p:panelGrid>
                     <p:commandButton value="#{bundle.Close}" onclick="KolcsonzesViewDialog.hide()"/>
                 </h:panelGroup>

@@ -55,7 +55,6 @@ public class KonyvController implements Serializable {
     private List<Konyv> filteredItems = null;
     private Konyv selected;
     private List<Szerzo> szerzok;
-//    private List<Boolean> list;
     private List<Oszlop> konyvOszlopok;
 
     public List<Oszlop> getKonyvOszlopok() {
@@ -67,7 +66,6 @@ public class KonyvController implements Serializable {
     
     @PostConstruct
     public void init() {
-//        list = new ArrayList<>();
         konyvOszlopok = new ArrayList<>();
         List<Oszlop> oszlopok = oszlopController.getItems();
         for (Oszlop oszlop : oszlopok) {
@@ -75,12 +73,9 @@ public class KonyvController implements Serializable {
                 konyvOszlopok.add(oszlop);
             }
         }
-//         list = Arrays.asList(true, true, true, true, true, true, true, true, true, true, true, true, true, true, true);
     }    
     
     public void onToggle(ToggleEvent e) {
-        
-//        list.set((Integer) e.getData(), e.getVisibility() == Visibility.VISIBLE);
         Oszlop oszlop = konyvOszlopok.get((Integer) e.getData());
         oszlop.setLathatosag(e.getVisibility() == Visibility.VISIBLE);
         oszlopController.setSelected(oszlop);
