@@ -16,298 +16,308 @@
 
         <ui:define name="body">
             <h:form id="KolcsonzesListForm">
-                
-        <p:growl id="msgs" showDetail="true" />
-        
-         <p:dashboard id="board" model="#{kolcsonzesController.model}">
-            <p:ajax event="reorder" listener="#{kolcsonzesController.handleReorder}" update="msgs" />
- 
-            <p:panel id="a" header="Olvasó" styleClass="dashboard-panel">
-                    <p:dataTable id="szemely" value="#{kolcsonzesController.szemelyController.items}" var="item"
-                                 selectionMode="single" selection="#{kolcsonzesController.szemelyController.selected}"
-                                 paginator="true"
-                                 paginatorPosition="bottom"
-                                 rowKey="#{item.id}"
-                                 rows="15"
-                                 >
 
-                        <p:ajax event="rowSelect" listener="#{kolcsonzesController.szemelyPeldanyai}"  update="@widgetVar(valasztottP)"/>
-                        <p:ajax event="rowUnselect" />
+                <p:growl id="msgs" showDetail="true" />
 
-                        <p:column sortBy="#{item.nev}" filterBy="#{item.nev}" filterMatchMode="contains">
+                <p:dashboard id="board" model="#{kolcsonzesController.model}">
+                    <p:ajax event="reorder" listener="#{kolcsonzesController.handleReorder}" update="msgs" />
+
+                    <p:panel id="a" header="Olvasó" styleClass="dashboard-panel">
+                        <p:dataTable id="szemely" value="#{kolcsonzesController.szemelyController.items}" var="item"
+                                     selectionMode="single" selection="#{kolcsonzesController.szemelyController.selected}"
+                                     paginator="true"
+                                     paginatorPosition="bottom"
+                                     rowKey="#{item.id}"
+                                     rows="15"
+                                     >
+
+                            <p:ajax event="rowSelect" listener="#{kolcsonzesController.szemelyPeldanyai}"  update="@widgetVar(valasztottP)"/>
+                            <p:ajax event="rowUnselect" />
+
+                            <p:column sortBy="#{item.nev}" filterBy="#{item.nev}" filterMatchMode="contains">
+                                <f:facet name="header">
+                                    <h:outputText value="#{bundle.ListSzemelyTitle_nev}"/>
+                                </f:facet>
+                                <h:outputText value="#{item.nev}"/>
+                            </p:column>
+                            <p:column sortBy="#{item.leanykoriNev}" filterBy="#{item.leanykoriNev}" filterMatchMode="contains">
+                                <f:facet name="header">
+                                    <h:outputText value="#{bundle.ListSzemelyTitle_leanykoriNev}"/>
+                                </f:facet>
+                                <h:outputText value="#{item.leanykoriNev}"/>
+                            </p:column>
+
+                        </p:dataTable>  
+                    </p:panel>
+
+                    <p:panel id="b" header="Könyvek" styleClass="dashboard-panel">
+                        <p:dataTable id="konyv" value="#{konyvController.items}" var="item"
+                                     widgetVar="konyvek"
+                                     selectionMode="single" selection="#{konyvController.selected}"
+                                     paginator="true"
+                                     paginatorPosition="bottom"
+                                     rowKey="#{item.id}"
+                                     rows="13"
+                                     emptyMessage="Nincs találat az adott feltételekkel"
+                                     filteredValue="#{konyvController.filteredItems}"
+                                     resizableColumns="true"
+                                     >
+                            <p:ajax event="rowSelect"  listener="#{kolcsonzesController.konyvPeldanyai}"  update="@widgetVar(elerhetoP)" />
+                            <p:ajax event="rowUnselect" />
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListSzemelyTitle_nev}"/>
+                                <p:outputPanel style="float: right">
+                                    <p:outputLabel value="Keresés minden mezőben:" for="globalFilter"/>
+                                    <p:inputText id="globalFilter" onkeyup="PF('konyvek').filter()" style="width:150px" placeholder="Kulcsszó"/>
+                                    <p:commandButton id="toggler" type="button" value="Oszlopok" style="float:right" icon="ui-icon-calculator" />
+                                    <p:columnToggler datasource="konyv" trigger="toggler" />                                
+                                </p:outputPanel>
                             </f:facet>
-                            <h:outputText value="#{item.nev}"/>
-                        </p:column>
-                        <p:column sortBy="#{item.leanykoriNev}" filterBy="#{item.leanykoriNev}" filterMatchMode="contains">
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListSzemelyTitle_leanykoriNev}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.leanykoriNev}"/>
-                        </p:column>
+                            <p:column sortBy="#{item.szerzoNev}" filterBy="#{item.szerzoNev}" filterMatchMode="contains">
+                                <f:facet name="header">
+                                    <h:outputText value="#{bundle.ListSzerzoTitle_nev}"/>
+                                </f:facet>
+                                <h:outputText value="#{item.szerzoNev}"/>
+                            </p:column>
+                            <p:column sortBy="#{item.cim}" filterBy="#{item.cim}" filterMatchMode="contains">
+                                <f:facet name="header">
+                                    <h:outputText value="#{bundle.ListKonyvTitle_cim}"/>
+                                </f:facet>
+                                <h:outputText value="#{item.cim}"/>
+                            </p:column>
+                            <p:column sortBy="#{item.alcim}" filterBy="#{item.alcim}" filterMatchMode="contains">
+                                <f:facet name="header">
+                                    <h:outputText value="#{bundle.ListKonyvTitle_alcim}"/>
+                                </f:facet>
+                                <h:outputText value="#{item.alcim}"/>
+                            </p:column>
+                            <p:column sortBy="#{item.sorozat}" filterBy="#{item.sorozat}" filterMatchMode="contains">
+                                <f:facet name="header">
+                                    <h:outputText value="#{bundle.ListKonyvTitle_sorozat}"/>
+                                </f:facet>
+                                <h:outputText value="#{item.sorozat.nev}"/>
+                            </p:column>
+                            <p:column sortBy="#{item.kiado.nev}" filterBy="#{item.kiado.nev}" filterMatchMode="contains">
+                                <f:facet name="header">
+                                    <h:outputText value="#{bundle.ListKonyvTitle_kiado}"/>
+                                </f:facet>
+                                <h:outputText value="#{item.kiado.nev}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Előjegyzi"/>
+                                </f:facet>
+                                <p:commandLink id="elojegyez" value="Előjegyzi" action="#{kolcsonzesController.elojegyzi(item)}" update="@widgetVar(konyvek) @widgetVar(elojegyzesek)"/>
+                            </p:column>                        
+                        </p:dataTable>  
+                    </p:panel>
 
-                    </p:dataTable>  
-            </p:panel>
- 
-            <p:panel id="b" header="Könyvek" styleClass="dashboard-panel">
-                    <p:dataTable id="konyv" value="#{konyvController.items}" var="item"
-                                 widgetVar="konyvek"
-                                 selectionMode="single" selection="#{konyvController.selected}"
-                                 paginator="true"
-                                 paginatorPosition="bottom"
-                                 rowKey="#{item.id}"
-                                 rows="13"
-                                 emptyMessage="Nincs találat az adott feltételekkel"
-                                 filteredValue="#{konyvController.filteredItems}"
-                                 resizableColumns="true"
-                                 >
-                        <p:ajax event="rowSelect"  listener="#{kolcsonzesController.konyvPeldanyai}"  update="@widgetVar(elerhetoP)" />
-                        <p:ajax event="rowUnselect" />
-                        <f:facet name="header">
-                            <p:outputPanel style="float: right">
-                                <p:outputLabel value="Keresés minden mezőben:" for="globalFilter"/>
-                                <p:inputText id="globalFilter" onkeyup="PF('konyvek').filter()" style="width:150px" placeholder="Kulcsszó"/>
+                    <p:panel id="c" header="Kölcsönözhető példányok" styleClass="dashboard-panel">
+                        <p:dataTable id="elerhetoPeldany" widgetVar="elerhetoP" value="#{peldanyController.konyvPeldanyaiItems}" var="item"
+                                     selectionMode="single" selection="#{peldanyController.selected}"
+                                     paginator="true"
+                                     rowKey="#{item.id}"
+                                     rows="10"
+                                     rowsPerPageTemplate="10,20,30,40,50"
+                                     >
+
+                            <p:ajax event="rowSelect"   />
+                            <p:ajax event="rowUnselect" />
+
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="#{bundle.ListPeldanyTitle_konyv}"/>
+                                </f:facet>
+                                <h:outputText value="#{item.konyv.cim}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="#{bundle.ListPeldanyTitle_konyvPeldany}"/>
+                                </f:facet>
+                                <h:outputText value="#{item.konyvPeldany}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="#{bundle.ListPeldanyTitle_polc}"/>
+                                </f:facet>
+                                <h:outputText value="#{item.polc.szekreny} #{item.polc.polc}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Kölcsönzés"/>
+                                </f:facet>
+                                <p:commandButton id="kolcsonoz" icon="ui-icon-plus" value="Kölcsönzi" action="#{kolcsonzesController.kolcsonoz(item)}" update="@widgetVar(elerhetoP) @widgetVar(valasztottP)"/>
+                            </p:column>
+                        </p:dataTable>  
+                    </p:panel>
+
+                    <p:panel id="d" header="Kikölcsönzött példányok" styleClass="dashboard-panel">
+                        <p:dataTable id="valasztottPeldany" widgetVar="valasztottP" value="#{peldanyController.szemelyPeldanyaiItems}" var="item"
+                                     selectionMode="single" selection="#{peldanyController.selected}"
+                                     paginator="true"
+                                     rowKey="#{item.id}"
+                                     rows="10"
+                                     rowsPerPageTemplate="10,20,30,40,50"
+                                     >
+
+                            <p:ajax event="rowSelect"   />
+                            <p:ajax event="rowUnselect" />
+
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="#{bundle.ListPeldanyTitle_konyv}"/>
+                                </f:facet>
+                                <h:outputText value="#{item.konyv.cim}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="#{bundle.ListPeldanyTitle_konyvPeldany}"/>
+                                </f:facet>
+                                <h:outputText value="#{item.konyvPeldany}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="#{bundle.ListPeldanyTitle_polc}"/>
+                                </f:facet>
+                                <h:outputText value="#{item.polc.szekreny} #{item.polc.polc}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Visszahozta"/>
+                                </f:facet>
+                                <p:commandButton id="visszahozta" icon="ui-icon-minus" value="Visszahozta" action="#{kolcsonzesController.visszahoz(item)}" update="@widgetVar(elerhetoP) @widgetVar(valasztottP)"/>
+                            </p:column>
+                            <f:facet name="footer">
+                                <p:commandButton value="Kölcsönzött könyvek nyomtatása" type="button" icon="ui-icon-print" style="display:block;margin-bottom: 20px">
+                                    <p:printer target="valasztottPeldany" />
+                                </p:commandButton>
+                            </f:facet>
+                        </p:dataTable>       
+                    </p:panel>
+
+                    <p:panel id="e" header="Kölcsönzések" styleClass="dashboard-panel">
+                        <p:dataTable id="kolcsonzes" value="#{kolcsonzesController.items}" var="item"
+                                     widgetVar="kolcsonzesek"
+                                     selectionMode="single" selection="#{kolcsonzesController.selected}"
+                                     paginator="true"
+                                     paginatorPosition="top"
+                                     rowKey="#{item.id}"
+                                     rows="10"
+                                     rowsPerPageTemplate="10,20,30,40,50"
+                                     draggableColumns="true"
+                                     rowStyleClass="#{item.kesesben}"
+                                     >
+                            <p:ajax event="rowSelect"   />
+                            <p:ajax event="rowUnselect" />
+                            <p:column sortBy="#{item.datum}" filterBy="#{item.datum}" filterMatchMode="contains" visible="#{kolcsonzesController.kolcsonzesOszlopok[0].lathatosag}">
+                                <f:facet name="header">
+                                    <h:outputText value="#{bundle.ListKolcsonzesTitle_datum}"/>
+                                </f:facet>
+                                <h:outputText value="#{item.datum}">
+                                    <f:convertDateTime pattern="yyyy-MM-dd" />
+                                </h:outputText>
+                            </p:column>
+                            <p:column sortBy="#{item.szemely.nev}" filterBy="#{item.szemely.nev}" filterMatchMode="contains" visible="#{kolcsonzesController.kolcsonzesOszlopok[1].lathatosag}" >
+                                <f:facet name="header">
+                                    <h:outputText value="#{bundle.ListKolcsonzesTitle_szemely}"/>
+                                </f:facet>
+                                <h:outputText value="#{item.szemely.nev}"/>
+                            </p:column>   
+                            <p:column sortBy="#{item.peldany.konyv.cim}"  filterBy="#{item.peldany.konyv.cim}" filterMatchMode="contains" visible="#{kolcsonzesController.kolcsonzesOszlopok[2].lathatosag}">
+                                <f:facet name="header">
+                                    <h:outputText value="#{bundle.ListKolcsonzesTitle_peldany}"/>
+                                </f:facet>
+                                <h:outputText value="#{item.peldany.konyv.cim} #{item.peldany.konyvPeldany}"/>
+                            </p:column>   
+                            <p:column sortBy="#{item.maxKolcs}"  filterBy="#{item.maxKolcs}" filterMatchMode="contains" visible="#{kolcsonzesController.kolcsonzesOszlopok[3].lathatosag}">
+                                <f:facet name="header">
+                                    <h:outputText value="#{bundle.ListKolcsonzesTitle_maxKolcs}"/>
+                                </f:facet>
+                                <h:outputText value="#{item.maxKolcs}"/>
+                            </p:column>                        
+                            <p:column sortBy="#{item.hatarido}"  filterBy="#{item.hatarido}" filterMatchMode="contains" visible="#{kolcsonzesController.kolcsonzesOszlopok[4].lathatosag}">
+                                <f:facet name="header">
+                                    <h:outputText value="Határidő"/>
+                                </f:facet>
+                                <h:outputText value="#{item.hatarido}">
+                                    <f:convertDateTime pattern="yyyy-MM-dd" />
+                                </h:outputText>
+                            </p:column> 
+                            <p:column sortBy="#{item.visszahozDatum}"  filterBy="#{item.visszahozDatum}" filterMatchMode="contains" visible="#{kolcsonzesController.kolcsonzesOszlopok[5].lathatosag}">
+                                <f:facet name="header">
+                                    <h:outputText value="#{bundle.ListKolcsonzesTitle_visszahozDatum}"/>
+                                </f:facet>
+                                <h:outputText value="#{item.visszahozDatum}">
+                                    <f:convertDateTime pattern="yyyy-MM-dd" />
+                                </h:outputText>
+                            </p:column>
+                            <p:column sortBy="#{item.kesett}"  filterBy="#{item.kesett}" filterMatchMode="contains" visible="#{kolcsonzesController.kolcsonzesOszlopok[6].lathatosag}">
+                                <f:facet name="header">
+                                    <h:outputText value="Késett"/>
+                                </f:facet>
+                                <h:outputText value="#{item.kesett}" />
+                            </p:column>
+                            <p:column sortBy="#{item.fizetendo}"  filterBy="#{item.fizetendo}" filterMatchMode="contains" visible="#{kolcsonzesController.kolcsonzesOszlopok[7].lathatosag}">
+                                <f:facet name="header">
+                                    <h:outputText value="Fizetnie kell"/>
+                                </f:facet>
+                                <h:outputText value="#{item.fizetendo}"/>
+                            </p:column>
+                            <p:column sortBy="#{item.felszolit}"  filterBy="#{item.felszolit}" filterMatchMode="contains" visible="#{kolcsonzesController.kolcsonzesOszlopok[8].lathatosag}">
+                                <f:facet name="header">
+                                    <h:outputText value="#{bundle.ListKolcsonzesTitle_felszolit}"/>
+                                </f:facet>
+                                <h:outputText value="#{item.felszolit}"/>
+                            </p:column>
+                            <f:facet name="footer">
                                 <p:commandButton id="toggler" type="button" value="Oszlopok" style="float:right" icon="ui-icon-calculator" />
-                                <p:columnToggler datasource="konyv" trigger="toggler" />                                
-                            </p:outputPanel>
-                        </f:facet>
-                        <p:column sortBy="#{item.szerzoNev}" filterBy="#{item.szerzoNev}" filterMatchMode="contains">
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListSzerzoTitle_nev}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.szerzoNev}"/>
-                        </p:column>
-                        <p:column sortBy="#{item.cim}" filterBy="#{item.cim}" filterMatchMode="contains">
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListKonyvTitle_cim}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.cim}"/>
-                        </p:column>
-                        <p:column sortBy="#{item.alcim}" filterBy="#{item.alcim}" filterMatchMode="contains">
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListKonyvTitle_alcim}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.alcim}"/>
-                        </p:column>
-                        <p:column sortBy="#{item.sorozat}" filterBy="#{item.sorozat}" filterMatchMode="contains">
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListKonyvTitle_sorozat}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.sorozat.nev}"/>
-                        </p:column>
-                        <p:column sortBy="#{item.kiado.nev}" filterBy="#{item.kiado.nev}" filterMatchMode="contains">
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListKonyvTitle_kiado}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.kiado.nev}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="Előjegyzi"/>
-                            </f:facet>
-                            <p:commandLink id="elojegyez" value="Előjegyzi" action="#{kolcsonzesController.elojegyzi(item)}" update="@widgetVar(konyvek) @widgetVar(elojegyzesek)"/>
-                         </p:column>                        
-                    </p:dataTable>  
-            </p:panel>
- 
-            <p:panel id="c" header="Kölcsönözhető példányok" styleClass="dashboard-panel">
-                    <p:dataTable id="elerhetoPeldany" widgetVar="elerhetoP" value="#{peldanyController.konyvPeldanyaiItems}" var="item"
-                                 selectionMode="single" selection="#{peldanyController.selected}"
-                                 paginator="true"
-                                 rowKey="#{item.id}"
-                                 rows="10"
-                                 rowsPerPageTemplate="10,20,30,40,50"
-                                 >
-
-                        <p:ajax event="rowSelect"   />
-                        <p:ajax event="rowUnselect" />
-
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListPeldanyTitle_konyv}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.konyv.cim}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListPeldanyTitle_konyvPeldany}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.konyvPeldany}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListPeldanyTitle_polc}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.polc.szekreny} #{item.polc.polc}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="Kölcsönzés"/>
-                            </f:facet>
-                            <p:commandButton id="kolcsonoz" icon="ui-icon-plus" value="Kölcsönzi" action="#{kolcsonzesController.kolcsonoz(item)}" update="@widgetVar(elerhetoP) @widgetVar(valasztottP)"/>
-                         </p:column>
-                    </p:dataTable>  
-            </p:panel>
-
-            <p:panel id="d" header="Kikölcsönzött példányok" styleClass="dashboard-panel">
-                    <p:dataTable id="valasztottPeldany" widgetVar="valasztottP" value="#{peldanyController.szemelyPeldanyaiItems}" var="item"
-                                 selectionMode="single" selection="#{peldanyController.selected}"
-                                 paginator="true"
-                                 rowKey="#{item.id}"
-                                 rows="10"
-                                 rowsPerPageTemplate="10,20,30,40,50"
-                                 >
-
-                        <p:ajax event="rowSelect"   />
-                        <p:ajax event="rowUnselect" />
-
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListPeldanyTitle_konyv}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.konyv.cim}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListPeldanyTitle_konyvPeldany}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.konyvPeldany}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListPeldanyTitle_polc}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.polc.szekreny} #{item.polc.polc}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="Visszahozta"/>
-                            </f:facet>
-                            <p:commandButton id="visszahozta" icon="ui-icon-minus" value="Visszahozta" action="#{kolcsonzesController.visszahoz(item)}" update="@widgetVar(elerhetoP) @widgetVar(valasztottP)"/>
-                        </p:column>
-                    </p:dataTable>       
-            </p:panel>
-  
-            <p:panel id="e" header="Kölcsönzések" styleClass="dashboard-panel">
-                    <p:dataTable id="kolcsonzes" value="#{kolcsonzesController.items}" var="item"
-                                 widgetVar="kolcsonzesek"
-                                 selectionMode="single" selection="#{kolcsonzesController.selected}"
-                                 paginator="true"
-                                 paginatorPosition="top"
-                                 rowKey="#{item.id}"
-                                 rows="10"
-                                 rowsPerPageTemplate="10,20,30,40,50"
-                                 draggableColumns="true"
-                                 rowStyleClass="#{item.kesesben}"
-                                 >
-                        <p:ajax event="rowSelect"   />
-                        <p:ajax event="rowUnselect" />
-                        <p:column sortBy="#{item.datum}" filterBy="#{item.datum}" filterMatchMode="contains" visible="#{kolcsonzesController.kolcsonzesOszlopok[0].lathatosag}">
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListKolcsonzesTitle_datum}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.datum}">
-                                <f:convertDateTime pattern="yyyy-MM-dd" />
-                            </h:outputText>
-                        </p:column>
-                        <p:column sortBy="#{item.szemely.nev}" filterBy="#{item.szemely.nev}" filterMatchMode="contains" visible="#{kolcsonzesController.kolcsonzesOszlopok[1].lathatosag}" >
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListKolcsonzesTitle_szemely}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.szemely.nev}"/>
-                        </p:column>   
-                        <p:column sortBy="#{item.peldany.konyv.cim}"  filterBy="#{item.peldany.konyv.cim}" filterMatchMode="contains" visible="#{kolcsonzesController.kolcsonzesOszlopok[2].lathatosag}">
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListKolcsonzesTitle_peldany}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.peldany.konyv.cim} #{item.peldany.konyvPeldany}"/>
-                        </p:column>   
-                        <p:column sortBy="#{item.maxKolcs}"  filterBy="#{item.maxKolcs}" filterMatchMode="contains" visible="#{kolcsonzesController.kolcsonzesOszlopok[3].lathatosag}">
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListKolcsonzesTitle_maxKolcs}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.maxKolcs}"/>
-                        </p:column>                        
-                        <p:column sortBy="#{item.hatarido}"  filterBy="#{item.hatarido}" filterMatchMode="contains" visible="#{kolcsonzesController.kolcsonzesOszlopok[4].lathatosag}">
-                            <f:facet name="header">
-                                <h:outputText value="Határidő"/>
-                            </f:facet>
-                            <h:outputText value="#{item.hatarido}">
-                                <f:convertDateTime pattern="yyyy-MM-dd" />
-                            </h:outputText>
-                        </p:column> 
-                        <p:column sortBy="#{item.visszahozDatum}"  filterBy="#{item.visszahozDatum}" filterMatchMode="contains" visible="#{kolcsonzesController.kolcsonzesOszlopok[5].lathatosag}">
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListKolcsonzesTitle_visszahozDatum}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.visszahozDatum}">
-                                <f:convertDateTime pattern="yyyy-MM-dd" />
-                            </h:outputText>
-                        </p:column>
-                        <p:column sortBy="#{item.kesett}"  filterBy="#{item.kesett}" filterMatchMode="contains" visible="#{kolcsonzesController.kolcsonzesOszlopok[6].lathatosag}">
-                            <f:facet name="header">
-                                <h:outputText value="Késett"/>
-                            </f:facet>
-                            <h:outputText value="#{item.kesett}" />
-                        </p:column>
-                        <p:column sortBy="#{item.fizetendo}"  filterBy="#{item.fizetendo}" filterMatchMode="contains" visible="#{kolcsonzesController.kolcsonzesOszlopok[7].lathatosag}">
-                            <f:facet name="header">
-                                <h:outputText value="Fizetnie kell"/>
-                            </f:facet>
-                            <h:outputText value="#{item.fizetendo}"/>
-                        </p:column>
-                        <p:column sortBy="#{item.felszolit}"  filterBy="#{item.felszolit}" filterMatchMode="contains" visible="#{kolcsonzesController.kolcsonzesOszlopok[8].lathatosag}">
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListKolcsonzesTitle_felszolit}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.felszolit}"/>
-                        </p:column>
+                                <p:columnToggler datasource="kolcsonzes" trigger="toggler" >
+                                    <p:ajax event="toggle" listener="#{kolcsonzesController.onToggle}" update="@widgetVar(kolcsonzesek)" />
+                                </p:columnToggler>                            
+                            </f:facet>                        
+                        </p:dataTable>
+                    </p:panel>
+                    <p:panel id="f" header="Előjegyzések" styleClass="dashboard-panel">
+                        <p:dataTable id="elojegyzes" value="#{elojegyzesController.items}" var="item"
+                                     widgetVar="elojegyzesek"
+                                     selectionMode="single" selection="#{elojegyzesController.selected}"
+                                     paginator="true"
+                                     paginatorPosition="top"
+                                     rowKey="#{item.id}"
+                                     rows="10"
+                                     rowsPerPageTemplate="10,20,30,40,50"
+                                     >
+                            <p:ajax event="rowSelect"   />
+                            <p:ajax event="rowUnselect" />
+                            <p:column sortBy="#{item.datum}" filterBy="#{item.datum}" filterMatchMode="contains">
+                                <f:facet name="header">
+                                    <h:outputText value="#{bundle.ListElojegyzesTitle_datum}" />
+                                </f:facet>
+                                <h:outputText value="#{item.datum}">
+                                    <f:convertDateTime pattern="yyyy-MM-dd" />
+                                </h:outputText>
+                            </p:column>
+                            <p:column sortBy="#{item.szemely.nev}" filterBy="#{item.szemely.nev}" filterMatchMode="contains">
+                                <f:facet name="header">
+                                    <h:outputText value="#{bundle.ListElojegyzesTitle_szemely}"/>
+                                </f:facet>
+                                <h:outputText value="#{item.szemely.nev}"/>
+                            </p:column>                        
+                            <p:column sortBy="#{item.konyv.cim}" filterBy="#{item.konyv.cim}" filterMatchMode="contains">
+                                <f:facet name="header">
+                                    <h:outputText value="#{bundle.ListElojegyzesTitle_konyv}"/>
+                                </f:facet>
+                                <h:outputText value="#{item.konyv.cim}"/>
+                            </p:column>
                         <f:facet name="footer">
-                            <p:commandButton id="toggler" type="button" value="Oszlopok" style="float:right" icon="ui-icon-calculator" />
-                            <p:columnToggler datasource="kolcsonzes" trigger="toggler" >
-                                <p:ajax event="toggle" listener="#{kolcsonzesController.onToggle}" update="@widgetVar(kolcsonzesek)" />
-                            </p:columnToggler>                            
-                        </f:facet>                        
-                    </p:dataTable>
-            </p:panel>
-            <p:panel id="f" header="Előjegyzések" styleClass="dashboard-panel">
-                    <p:dataTable id="elojegyzes" value="#{elojegyzesController.items}" var="item"
-                                 widgetVar="elojegyzesek"
-                                 selectionMode="single" selection="#{elojegyzesController.selected}"
-                                 paginator="true"
-                                 paginatorPosition="top"
-                                 rowKey="#{item.id}"
-                                 rows="10"
-                                 rowsPerPageTemplate="10,20,30,40,50"
-                                 >
-                        <p:ajax event="rowSelect"   />
-                        <p:ajax event="rowUnselect" />
-                        <p:column sortBy="#{item.datum}" filterBy="#{item.datum}" filterMatchMode="contains">
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListElojegyzesTitle_datum}" />
-                            </f:facet>
-                            <h:outputText value="#{item.datum}">
-                                <f:convertDateTime pattern="yyyy-MM-dd" />
-                            </h:outputText>
-                        </p:column>
-                        <p:column sortBy="#{item.szemely.nev}" filterBy="#{item.szemely.nev}" filterMatchMode="contains">
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListElojegyzesTitle_szemely}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.szemely.nev}"/>
-                        </p:column>                        
-                        <p:column sortBy="#{item.konyv.cim}" filterBy="#{item.konyv.cim}" filterMatchMode="contains">
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListElojegyzesTitle_konyv}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.konyv.cim}"/>
-                        </p:column>
-                    </p:dataTable> 
-            </p:panel>
-        </p:dashboard>                
-    
-         <div style="clear:both" />       
+                            <p:commandButton value="Előjegyzések nyomtatása" type="button" icon="ui-icon-print" >
+                                <p:printer target="elojegyzes" />
+                            </p:commandButton>                                         
+                        </f:facet>                            
+                        </p:dataTable> 
+                    </p:panel>
+                </p:dashboard>                
+
+                <div style="clear:both" />       
 
             </h:form>
         </ui:define>

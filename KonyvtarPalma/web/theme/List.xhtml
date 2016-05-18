@@ -56,6 +56,9 @@
                             <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundleTheme.View}" update=":ThemeViewForm" oncomplete="PF('ThemeViewDialog').show()" disabled="#{empty themeController.selected}"/>
                             <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundleTheme.Edit}" update=":ThemeEditForm" oncomplete="PF('ThemeEditDialog').show()" disabled="#{empty themeController.selected}"/>
                             <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundleTheme.Delete}" actionListener="#{themeController.destroy}" update=":growl,datalist" disabled="true"/>
+                            <p:commandButton value="Témák nyomtatása" type="button" icon="ui-icon-print">
+                                <p:printer target="datalist" />
+                            </p:commandButton>                                      
                         </f:facet>
                     </p:dataTable>
 

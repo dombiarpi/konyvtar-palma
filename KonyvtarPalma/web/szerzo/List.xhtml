@@ -38,12 +38,15 @@
                             <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":SzerzoViewForm" oncomplete="PF('SzerzoViewDialog').show()" disabled="#{empty szerzoController.selected}"/>
                             <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":SzerzoEditForm" oncomplete="PF('SzerzoEditDialog').show()" disabled="#{empty szerzoController.selected}"/>
                             <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}"  actionListener="#{szerzoController.destroy}" update=":growl,datalist" disabled="#{empty szerzoController.selected}">
-                            <p:confirm header="Megerősítés" message="#{bundle.ConfirmDeleteMessage}" icon="ui-icon-alert" />
+                                <p:confirm header="Megerősítés" message="#{bundle.ConfirmDeleteMessage}" icon="ui-icon-alert" />
                             </p:commandButton>
                             <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
                                 <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
                                 <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
                             </p:confirmDialog>
+                            <p:commandButton value="Szerzők nyomtatása" type="button" icon="ui-icon-print">
+                                <p:printer target="datalist" />
+                            </p:commandButton>                                      
                         </f:facet>
                     </p:dataTable>
                 </p:panel>
