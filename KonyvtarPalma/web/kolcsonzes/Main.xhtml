@@ -191,6 +191,7 @@
   
             <p:panel id="e" header="Kölcsönzések" styleClass="dashboard-panel">
                     <p:dataTable id="kolcsonzes" value="#{kolcsonzesController.items}" var="item"
+                                 widgetVar="kolcsonzesek"
                                  selectionMode="single" selection="#{kolcsonzesController.selected}"
                                  paginator="true"
                                  paginatorPosition="top"
@@ -202,7 +203,7 @@
                                  >
                         <p:ajax event="rowSelect"   />
                         <p:ajax event="rowUnselect" />
-                        <p:column sortBy="#{item.datum}" filterBy="#{item.datum}" filterMatchMode="contains">
+                        <p:column sortBy="#{item.datum}" filterBy="#{item.datum}" filterMatchMode="contains" visible="#{kolcsonzesController.kolcsonzesOszlopok[0].lathatosag}">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListKolcsonzesTitle_datum}"/>
                             </f:facet>
@@ -210,44 +211,64 @@
                                 <f:convertDateTime pattern="yyyy-MM-dd" />
                             </h:outputText>
                         </p:column>
-                        <p:column sortBy="#{item.peldany.konyv.cim}"  filterBy="#{item.peldany.konyv.cim}" filterMatchMode="contains">
+                        <p:column sortBy="#{item.szemely.nev}" filterBy="#{item.szemely.nev}" filterMatchMode="contains" visible="#{kolcsonzesController.kolcsonzesOszlopok[1].lathatosag}" >
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListKolcsonzesTitle_szemely}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.szemely.nev}"/>
+                        </p:column>   
+                        <p:column sortBy="#{item.peldany.konyv.cim}"  filterBy="#{item.peldany.konyv.cim}" filterMatchMode="contains" visible="#{kolcsonzesController.kolcsonzesOszlopok[2].lathatosag}">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListKolcsonzesTitle_peldany}"/>
                             </f:facet>
-                            <h:outputText value="#{item.peldany.konyv.cim} (#{item.peldany.konyvPeldany}. példány)"/>
+                            <h:outputText value="#{item.peldany.konyv.cim} #{item.peldany.konyvPeldany}"/>
                         </p:column>   
-                        <p:column sortBy="#{item.maxKolcs}"  filterBy="#{item.maxKolcs}" filterMatchMode="contains">
+                        <p:column sortBy="#{item.maxKolcs}"  filterBy="#{item.maxKolcs}" filterMatchMode="contains" visible="#{kolcsonzesController.kolcsonzesOszlopok[3].lathatosag}">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListKolcsonzesTitle_maxKolcs}"/>
                             </f:facet>
                             <h:outputText value="#{item.maxKolcs}"/>
                         </p:column>                        
-                        <p:column sortBy="#{item.hatarido}"  filterBy="#{item.hatarido}" filterMatchMode="contains">
+                        <p:column sortBy="#{item.hatarido}"  filterBy="#{item.hatarido}" filterMatchMode="contains" visible="#{kolcsonzesController.kolcsonzesOszlopok[4].lathatosag}">
                             <f:facet name="header">
                                 <h:outputText value="Határidő"/>
                             </f:facet>
                             <h:outputText value="#{item.hatarido}">
                                 <f:convertDateTime pattern="yyyy-MM-dd" />
                             </h:outputText>
-                        </p:column>                        
-                        <p:column sortBy="#{item.kesett}"  filterBy="#{item.kesett}" filterMatchMode="contains">
+                        </p:column> 
+                        <p:column sortBy="#{item.visszahozDatum}"  filterBy="#{item.visszahozDatum}" filterMatchMode="contains" visible="#{kolcsonzesController.kolcsonzesOszlopok[5].lathatosag}">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListKolcsonzesTitle_visszahozDatum}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.visszahozDatum}">
+                                <f:convertDateTime pattern="yyyy-MM-dd" />
+                            </h:outputText>
+                        </p:column>
+                        <p:column sortBy="#{item.kesett}"  filterBy="#{item.kesett}" filterMatchMode="contains" visible="#{kolcsonzesController.kolcsonzesOszlopok[6].lathatosag}">
                             <f:facet name="header">
                                 <h:outputText value="Késett"/>
                             </f:facet>
                             <h:outputText value="#{item.kesett}" />
                         </p:column>
-                        <p:column sortBy="#{item.fizetendo}"  filterBy="#{item.fizetendo}" filterMatchMode="contains">
+                        <p:column sortBy="#{item.fizetendo}"  filterBy="#{item.fizetendo}" filterMatchMode="contains" visible="#{kolcsonzesController.kolcsonzesOszlopok[7].lathatosag}">
                             <f:facet name="header">
                                 <h:outputText value="Fizetnie kell"/>
                             </f:facet>
                             <h:outputText value="#{item.fizetendo}"/>
                         </p:column>
-                        <p:column sortBy="#{item.felszolit}"  filterBy="#{item.felszolit}" filterMatchMode="contains">
+                        <p:column sortBy="#{item.felszolit}"  filterBy="#{item.felszolit}" filterMatchMode="contains" visible="#{kolcsonzesController.kolcsonzesOszlopok[8].lathatosag}">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListKolcsonzesTitle_felszolit}"/>
                             </f:facet>
                             <h:outputText value="#{item.felszolit}"/>
-                        </p:column>                        
+                        </p:column>
+                        <f:facet name="footer">
+                            <p:commandButton id="toggler" type="button" value="Oszlopok" style="float:right" icon="ui-icon-calculator" />
+                            <p:columnToggler datasource="kolcsonzes" trigger="toggler" >
+                                <p:ajax event="toggle" listener="#{kolcsonzesController.onToggle}" update="@widgetVar(kolcsonzesek)" />
+                            </p:columnToggler>                            
+                        </f:facet>                        
                     </p:dataTable>
             </p:panel>
             <p:panel id="f" header="Előjegyzések" styleClass="dashboard-panel">

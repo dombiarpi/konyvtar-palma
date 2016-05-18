@@ -19,13 +19,12 @@
                     <p:dataTable id="datalist" value="#{konyvController.items}" var="item"
                                  widgetVar="konyvek"
                                  selectionMode="single" selection="#{konyvController.selected}"
-                                 paginator="true"
+                                 paginator="true" resizableColumns="true"
                                  rowKey="#{item.id}"
                                  rows="20"
                                  rowsPerPageTemplate="10,20,30,40,50"
                                  emptyMessage="Nincs találat az adott feltételekkel"
                                  filteredValue="#{konyvController.filteredItems}"
-                                 resizableColumns="true"
                                  >
 
                         <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>

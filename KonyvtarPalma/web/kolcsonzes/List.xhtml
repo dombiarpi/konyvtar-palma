@@ -19,7 +19,7 @@
                     <p:dataTable id="datalist" value="#{kolcsonzesController.items}" var="item"
                                  widgetVar="kolcsonzesek"
                                  selectionMode="single" selection="#{kolcsonzesController.selected}"
-                                 paginator="true"
+                                 paginator="true" resizableColumns="true"
                                  rowKey="#{item.id}"
                                  rows="20"
                                  rowsPerPageTemplate="10,20,30,40,50"
