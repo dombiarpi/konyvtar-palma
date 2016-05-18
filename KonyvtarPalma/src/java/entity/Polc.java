@@ -9,6 +9,8 @@ import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -42,9 +44,8 @@ public class Polc implements Serializable {
     private Integer id;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 21)
-    @Column(name = "szekreny", nullable = false, length = 21)
-    private String szekreny;
+    @Enumerated(EnumType.STRING)
+    private Szekreny szekreny;
     @Basic(optional = false)
     @NotNull
     @Column(name = "polc", nullable = false)
@@ -66,7 +67,6 @@ public class Polc implements Serializable {
 
     public Polc(Integer id, String szekreny, int polc) {
         this.id = id;
-        this.szekreny = szekreny;
         this.polc = polc;
     }
 
@@ -78,11 +78,11 @@ public class Polc implements Serializable {
         this.id = id;
     }
 
-    public String getSzekreny() {
+    public Szekreny getSzekreny() {
         return szekreny;
     }
 
-    public void setSzekreny(String szekreny) {
+    public void setSzekreny(Szekreny szekreny) {
         this.szekreny = szekreny;
     }
 

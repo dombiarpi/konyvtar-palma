@@ -13,12 +13,11 @@
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{polcController.selected != null}">
                         <p:outputLabel value="#{bundle.EditPolcLabel_szekreny}" for="szekreny" />
-                        <p:selectOneMenu id="szekreny" value="#{polcController.selected.szekreny}" required="true" requiredMessage="#{bundle.EditPolcRequiredMessage_szekreny}">
-                            <f:selectItems value="#{polcController.selected.szekrenyek}"
-                                           var="szekrenyItem"
-                                           itemValue="#{szekrenyItem}" itemLabel="#{szekrenyItem.name}" />/>
-                        </p:selectOneMenu>                                                     
-                        <p:outputLabel value="#{bundle.EditPolcLabel_polc}" for="polc" />
+                         <p:autoComplete id="szekreny" value="#{polcController.selected.szekreny}" completeMethod="#{polcController.completeSzekreny}"
+                                        var="szekrenyItem" converter="genericEnumConverter"
+                                        itemValue="#{szekrenyItem}" itemLabel="#{szekrenyItem.name}"
+                                        required="true" requiredMessage="#{bundle.EditPolcRequiredMessage_szekreny}"/>                        
+                         <p:outputLabel value="#{bundle.EditPolcLabel_polc}" for="polc" />
                         <p:inputText id="polc" value="#{polcController.selected.polc}" title="#{bundle.EditPolcTitle_polc}" required="true" requiredMessage="#{bundle.EditPolcRequiredMessage_polc}"/>
                     </p:panelGrid>
                     <p:commandButton actionListener="#{polcController.update}" value="#{bundle.Save}" update="display,:PolcListForm:datalist,:growl" oncomplete="handleSubmit(args, 'PolcEditDialog');"/>

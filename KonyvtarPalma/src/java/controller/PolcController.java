@@ -3,9 +3,12 @@ package controller;
 import entity.Polc;
 import controller.util.JsfUtil;
 import controller.util.JsfUtil.PersistAction;
+import entity.Szekreny;
 import facade.PolcFacade;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -80,6 +83,19 @@ public class PolcController implements Serializable {
         }
         return items;
     }
+    
+    public List<Szekreny> completeSzekreny(String query) {
+        List<Szekreny> allSzekreny = Arrays.asList(Szekreny.values());
+        List<Szekreny> filteredSzekreny = new ArrayList<>();
+         
+        for (int i = 0; i < allSzekreny.size(); i++) {
+            Szekreny szekreny = allSzekreny.get(i);
+            if(szekreny.getName().startsWith(query)) {
+                filteredSzekreny.add(szekreny);
+            }
+        }
+        return filteredSzekreny;
+    }    
 
     private void persist(PersistAction persistAction, String successMessage) {
         if (selected != null) {

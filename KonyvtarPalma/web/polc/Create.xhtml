@@ -12,12 +12,11 @@
             <h:form id="PolcCreateForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{polcController.selected != null}">
-                        <p:outputLabel value="#{bundle.CreatePolcLabel_szekreny}" for="szekreny" />
-                        <p:selectOneMenu id="szekreny" value="#{polcController.selected.szekreny}" required="true" requiredMessage="#{bundle.CreatePolcRequiredMessage_szekreny}">
-                            <f:selectItems value="#{polcController.selected.szekrenyek}"
-                                           var="szekrenyItem"
-                                           itemValue="#{szekrenyItem}" itemLabel="#{szekrenyItem.name}" />/>
-                        </p:selectOneMenu>                                                      
+                        <p:outputLabel value="#{bundle.CreatePolcLabel_szekreny}" for="dd" />
+                        <p:autoComplete id="dd" value="#{polcController.selected.szekreny}" completeMethod="#{polcController.completeSzekreny}"
+                                        var="szekrenyItem" converter="genericEnumConverter"
+                                        itemValue="#{szekrenyItem}" itemLabel="#{szekrenyItem.name}"
+                                        required="true" requiredMessage="#{bundle.CreatePolcRequiredMessage_szekreny}"/>
                         <p:outputLabel value="#{bundle.CreatePolcLabel_polc}" for="polc" />
                         <p:inputText id="polc" value="#{polcController.selected.polc}" title="#{bundle.CreatePolcTitle_polc}" required="true" requiredMessage="#{bundle.CreatePolcRequiredMessage_polc}"/>
                     </p:panelGrid>
