@@ -35,7 +35,7 @@
                         <p:outputLabel value="#{bundle.CreateSzemelyLabel_cim}" for="cim" />
                         <p:inputText id="cim" value="#{szemelyController.selected.cim}" title="#{bundle.CreateSzemelyTitle_cim}" />
                         <p:outputLabel value="#{bundle.CreateSzemelyLabel_megjegyzes}" for="megjegyzes" />
-                        <p:inputText id="megjegyzes" value="#{szemelyController.selected.megjegyzes}" title="#{bundle.CreateSzemelyTitle_megjegyzes}" />
+                        <p:inputTextarea id="megjegyzes" rows="1" cols="22"  value="#{szemelyController.selected.megjegyzes}" title="#{bundle.CreateSzemelyTitle_megjegyzes}" />                        
                     </p:panelGrid>
                     <p:commandButton actionListener="#{szemelyController.create}" value="#{bundle.Save}" update="display,:SzemelyListForm:datalist,:growl" oncomplete="handleSubmit(args,'SzemelyCreateDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" immediate="true"  onclick="SzemelyCreateDialog.hide()"/>

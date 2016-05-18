@@ -67,7 +67,6 @@ public class Szemely implements Serializable {
     @Temporal(TemporalType.DATE)
     private Date beiratkozas;
     @Basic(optional = true)
-    @NotNull
     @Column(name = "elofiz_datum", nullable = true)
     @Temporal(TemporalType.DATE)
     private Date elofizDatum;
@@ -89,8 +88,8 @@ public class Szemely implements Serializable {
     @Size(max = 50)
     @Column(name = "cim", length = 50)
     private String cim;
-    @Size(max = 50)
-    @Column(name = "megjegyzes", length = 50)
+    @Size(max = 100)
+    @Column(name = "megjegyzes", length = 100)
     private String megjegyzes;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "szemely")
     private Collection<Elojegyzes> elojegyzesCollection;

@@ -46,7 +46,7 @@
                         <p:outputLabel value="#{bundle.EditKonyvLabel_szorzo}" for="szorzo" />
                         <p:inputText id="szorzo" value="#{konyvController.selected.szorzo}" title="#{bundle.EditKonyvTitle_szorzo}" required="true" requiredMessage="#{bundle.EditKonyvRequiredMessage_szorzo}"/>
                         <p:outputLabel value="#{bundle.EditKonyvLabel_megjegyzes}" for="megjegyzes" />
-                        <p:inputText id="megjegyzes" value="#{konyvController.selected.megjegyzes}" title="#{bundle.EditKonyvTitle_megjegyzes}" />
+                        <p:inputTextarea id="megjegyzes" rows="1" cols="22"  value="#{konyvController.selected.megjegyzes}" title="#{bundle.EditKonyvTitle_megjegyzes}" />                        
                         <p:outputLabel value="#{bundle.EditKonyvLabel_media}" for="media" />
                         <p:inputText id="media" value="#{konyvController.selected.media}" title="#{bundle.EditKonyvTitle_media}" required="true" requiredMessage="#{bundle.EditKonyvRequiredMessage_media}"/>
                         <p:outputLabel value="#{bundle.EditKonyvLabel_nyelv}" for="nyelv" />

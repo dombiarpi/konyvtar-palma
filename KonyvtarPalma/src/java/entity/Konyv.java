@@ -101,8 +101,8 @@ public class Konyv implements Serializable {
     @NotNull
     @Column(name = "szorzo", nullable = false)
     private double szorzo;
-    @Size(max = 50)
-    @Column(name = "megjegyzes", length = 50)
+    @Size(max = 100)
+    @Column(name = "megjegyzes", length = 100)
     private String megjegyzes;
     @Enumerated(EnumType.STRING)
     @Column(name = "media", nullable = false)

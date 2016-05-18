@@ -52,7 +52,7 @@
                         <p:outputLabel value="#{bundle.CreateKonyvLabel_szorzo}" for="szorzo" />
                         <p:inputText id="szorzo" value="#{konyvController.selected.szorzo}" title="#{bundle.CreateKonyvTitle_szorzo}" required="true" requiredMessage="#{bundle.CreateKonyvRequiredMessage_szorzo}"/>
                         <p:outputLabel value="#{bundle.CreateKonyvLabel_megjegyzes}" for="megjegyzes" />
-                        <p:inputText id="megjegyzes" value="#{konyvController.selected.megjegyzes}" title="#{bundle.CreateKonyvTitle_megjegyzes}" />
+                        <p:inputTextarea id="megjegyzes" rows="1" cols="22"  value="#{konyvController.selected.megjegyzes}" title="#{bundle.CreateKonyvTitle_megjegyzes}" />
                         <p:outputLabel value="#{bundle.CreateKonyvLabel_media}" for="media" />
                         <p:selectOneMenu id="media" value="#{konyvController.selected.media}" required="true" requiredMessage="#{bundle.CreateKonyvRequiredMessage_media}">
                             <f:selectItems value="#{konyvController.selected.mediak}"
