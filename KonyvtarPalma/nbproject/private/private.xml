@@ -3,9 +3,21 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/E:/Software/NetbeansProjects/KonyvtarPalma/web/kolcsonzes/Main.xhtml</file>
-            <file>file:/E:/Software/NetbeansProjects/KonyvtarPalma/web/kolcsonzes/List.xhtml</file>
-            <file>file:/E:/Software/NetbeansProjects/KonyvtarPalma/web/konyv/List.xhtml</file>
+            <file>file:/E:/Software/NetbeansProjects/KonyvtarPalma/web/resources/css/jsfcrud.css</file>
+            <file>file:/E:/Software/NetbeansProjects/KonyvtarPalma/web/szemely/Edit.xhtml</file>
+            <file>file:/E:/Software/NetbeansProjects/KonyvtarPalma/web/template.xhtml</file>
+            <file>file:/E:/Software/NetbeansProjects/KonyvtarPalma/web/index.xhtml</file>
+            <file>file:/E:/Software/NetbeansProjects/KonyvtarPalma/src/java/controller/util/GenericEnumConverter.java</file>
+            <file>file:/E:/Software/NetbeansProjects/KonyvtarPalma/web/szemely/Create.xhtml</file>
+            <file>file:/E:/Software/NetbeansProjects/KonyvtarPalma/src/java/entity/Polc.java</file>
+            <file>file:/E:/Software/NetbeansProjects/KonyvtarPalma/src/java/controller/PolcController.java</file>
+            <file>file:/E:/Software/NetbeansProjects/KonyvtarPalma/src/java/entity/Szemely.java</file>
+            <file>file:/E:/Software/NetbeansProjects/KonyvtarPalma/web/konyv/Create.xhtml</file>
+            <file>file:/E:/Software/NetbeansProjects/KonyvtarPalma/web/polc/Edit.xhtml</file>
+            <file>file:/E:/Software/NetbeansProjects/KonyvtarPalma/src/java/entity/Szekreny.java</file>
+            <file>file:/E:/Software/NetbeansProjects/KonyvtarPalma/web/polc/Create.xhtml</file>
+            <file>file:/E:/Software/NetbeansProjects/KonyvtarPalma/src/java/entity/Konyv.java</file>
+            <file>file:/E:/Software/NetbeansProjects/KonyvtarPalma/web/konyv/Edit.xhtml</file>
         </group>
     </open-files>
 </project-private>
