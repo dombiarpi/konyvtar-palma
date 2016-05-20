@@ -117,6 +117,7 @@
                                      paginator="true"
                                      rowKey="#{item.id}"
                                      rows="10"
+                                     rowStyleClass="#{item.aktKolcs != true ? 'nemkolcsonozheto' : null}"
                                      rowsPerPageTemplate="10,20,30,40,50"
                                      >
 
@@ -145,7 +146,8 @@
                                 <f:facet name="header">
                                     <h:outputText value="Kölcsönzés"/>
                                 </f:facet>
-                                <p:commandButton id="kolcsonoz" icon="ui-icon-plus" value="Kölcsönzi" action="#{kolcsonzesController.kolcsonoz(item)}" update="@widgetVar(elerhetoP) @widgetVar(valasztottP)"/>
+                                <p:commandButton id="kolcsonoz" rendered="#{item.aktKolcs}" icon="ui-icon-plus" value="Kölcsönzi" action="#{kolcsonzesController.kolcsonoz(item)}" update="@widgetVar(elerhetoP) @widgetVar(valasztottP)"/>
+                                <p:commandButton id="kinelvan"  rendered="#{item.kikolcs}" icon="ui-icon-plus" value="Kinél van?" action="#{kolcsonzesController.kinelVan(item)}" update="@widgetVar(kolcsonzesek)"/>
                             </p:column>
                         </p:dataTable>  
                     </p:panel>
@@ -308,11 +310,11 @@
                                 </f:facet>
                                 <h:outputText value="#{item.konyv.cim}"/>
                             </p:column>
-                        <f:facet name="footer">
-                            <p:commandButton value="Előjegyzések nyomtatása" type="button" icon="ui-icon-print" >
-                                <p:printer target="elojegyzes" />
-                            </p:commandButton>                                         
-                        </f:facet>                            
+                            <f:facet name="footer">
+                                <p:commandButton value="Előjegyzések nyomtatása" type="button" icon="ui-icon-print" >
+                                    <p:printer target="elojegyzes" />
+                                </p:commandButton>                                         
+                            </f:facet>                            
                         </p:dataTable> 
                     </p:panel>
                 </p:dashboard>                

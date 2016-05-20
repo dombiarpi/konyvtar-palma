@@ -17,7 +17,13 @@
 }
 
 .kesesben {
-    background-color: #d4bd7a !important;
+    color: #990000 !important;
+}
+
+.nemkolcsonozheto {
+    font-style: italic;
+    color: lightsteelblue;
+    background-color: #ff6666 !important;
 }
 
 /* for dashboard */

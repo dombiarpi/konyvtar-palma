@@ -20,6 +20,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -62,6 +63,8 @@ public class Peldany implements Serializable {
     private Polc polc;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "peldany")
     private Collection<Kolcsonzes> kolcsonzesCollection;
+    @Transient
+    private String kiadva;
 
     public Peldany() {
     }
@@ -76,6 +79,11 @@ public class Peldany implements Serializable {
         this.kikolcs = kikolcs;
         this.aktKolcs = aktKolcs;
     }
+    
+    public String getKiadva() {
+        kiadva = getAktKolcs() == null || !getAktKolcs() ? "nemkolcsonozheto" : "";
+        return kiadva;
+    }    
 
     public Integer getId() {
         return id;

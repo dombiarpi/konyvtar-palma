@@ -39,7 +39,7 @@ import javax.validation.constraints.NotNull;
     @NamedQuery(name = "Kolcsonzes.findById", query = "SELECT k FROM Kolcsonzes k WHERE k.id = :id"),
     @NamedQuery(name = "Kolcsonzes.findAllPeldanyBySzemely", query = "SELECT DISTINCT p FROM Kolcsonzes k, Szemely s, Peldany p where k.szemely = s and k.peldany = p and k.szemely = :szemely and p.aktKolcs = :aktKolcs and p.kikolcs = :kikolcs"),    
     @NamedQuery(name = "Kolcsonzes.findAllBySzemelyAndPeldany", query = "SELECT DISTINCT k FROM Kolcsonzes k, Szemely s, Peldany p where k.szemely = s and k.peldany = p and k.szemely = :szemely and k.peldany = :peldany"),    
-    @NamedQuery(name = "Kolcsonzes.findAllPeldanyByKonyv", query = "SELECT p FROM Peldany p join p.konyv k where k = :konyv and p.aktKolcs = :aktKolcs and p.kikolcs = :kikolcs"),    
+    @NamedQuery(name = "Kolcsonzes.findAllPeldanyByKonyv", query = "SELECT p FROM Peldany p join p.konyv k where k = :konyv"),// and p.aktKolcs = :aktKolcs and p.kikolcs = :kikolcs"),    
     @NamedQuery(name = "Kolcsonzes.findByDatum", query = "SELECT k FROM Kolcsonzes k WHERE k.datum = :datum"),
     @NamedQuery(name = "Kolcsonzes.findByVisszahozDatum", query = "SELECT k FROM Kolcsonzes k WHERE k.visszahozDatum = :visszahozDatum"),
     @NamedQuery(name = "Kolcsonzes.findByFelszolit", query = "SELECT k FROM Kolcsonzes k WHERE k.felszolit = :felszolit"),

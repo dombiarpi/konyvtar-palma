@@ -185,7 +185,7 @@ public class KolcsonzesController implements Serializable {
     
     public void konyvPeldanyai() {
         Konyv valasztottKonyv = konyvController.getSelected();
-        List<Peldany> friss = ejbFacade.findPeldanyByKonyv(valasztottKonyv);
+//        List<Peldany> friss = ejbFacade.findPeldanyByKonyv(valasztottKonyv);
         peldanyController.setKonyvPeldanyaiItems(ejbFacade.findPeldanyByKonyv(valasztottKonyv));
     }
     
@@ -210,6 +210,10 @@ public class KolcsonzesController implements Serializable {
         peldanyController.getSzemelyPeldanyaiItems().add(peldany);
         szemelyPeldanyai();
         konyvPeldanyai();        
+        return null;
+    }
+    
+    public String kinelVan(Peldany peldany) {
         return null;
     }
 
