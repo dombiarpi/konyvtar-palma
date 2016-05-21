@@ -214,6 +214,7 @@ public class KolcsonzesController implements Serializable {
     }
     
     public String kinelVan(Peldany peldany) {
+        selected = ejbFacade.findAllByPeldany(peldany).get(0);
         return null;
     }
 

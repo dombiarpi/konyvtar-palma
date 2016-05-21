@@ -52,12 +52,24 @@ public class KolcsonzesFacade extends AbstractFacade<Kolcsonzes> {
         return q.getResultList();
     }
     
+    
+    
+    
     public List<Kolcsonzes> findAllBySzemelyAndPeldany(Szemely szemely, Peldany peldany) {
         if (szemely == null || peldany == null) {
             return null;
         }
         Query q = em.createNamedQuery("Kolcsonzes.findAllBySzemelyAndPeldany");
         q.setParameter("szemely", szemely);
+        q.setParameter("peldany", peldany);
+        return q.getResultList();
+    }
+    
+    public List<Kolcsonzes> findAllByPeldany(Peldany peldany) {
+        if (peldany == null) {
+            return null;
+        }
+        Query q = em.createNamedQuery("Kolcsonzes.findAllByPeldany");
         q.setParameter("peldany", peldany);
         return q.getResultList();
     }

@@ -12,10 +12,18 @@
             <h:form id="KolcsonzesViewForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{kolcsonzesController.selected != null}">
+                        <h:outputText value="#{bundle.ViewKolcsonzesLabel_szemely}"/>
+                        <h:outputText value="#{kolcsonzesController.selected.szemely.nev}" title="#{bundle.ViewKolcsonzesTitle_szemely}"/>
+                        <h:outputText value="#{bundle.ViewKolcsonzesLabel_peldany}"/>
+                        <h:outputText value="#{kolcsonzesController.selected.peldany.konyv.cim} (#{kolcsonzesController.selected.peldany.konyvPeldany}. példány)" title="#{bundle.ViewKolcsonzesTitle_peldany}" style="width: 200px"/>
                         <h:outputText value="#{bundle.ViewKolcsonzesLabel_datum}"/>
                         <h:outputText value="#{kolcsonzesController.selected.datum}" title="#{bundle.ViewKolcsonzesTitle_datum}">
                             <f:convertDateTime pattern="yyyy-MM-dd" />
                         </h:outputText>
+                        <h:outputText value="Határidő"/>
+                        <h:outputText value="#{kolcsonzesController.selected.hatarido}">
+                            <f:convertDateTime pattern="yyyy-MM-dd" />
+                        </h:outputText>                        
                         <h:outputText value="#{bundle.ViewKolcsonzesLabel_visszahozDatum}"/>
                         <h:outputText value="#{kolcsonzesController.selected.visszahozDatum}" title="#{bundle.ViewKolcsonzesTitle_visszahozDatum}">
                             <f:convertDateTime pattern="yyyy-MM-dd" />
@@ -24,10 +32,7 @@
                         <h:outputText value="#{kolcsonzesController.selected.felszolit}" title="#{bundle.ViewKolcsonzesTitle_felszolit}"/>
                         <h:outputText value="#{bundle.ViewKolcsonzesLabel_maxKolcs}"/>
                         <h:outputText value="#{kolcsonzesController.selected.maxKolcs}" title="#{bundle.ViewKolcsonzesTitle_maxKolcs}"/>
-                        <h:outputText value="#{bundle.ViewKolcsonzesLabel_szemely}"/>
-                        <h:outputText value="#{kolcsonzesController.selected.szemely.nev}" title="#{bundle.ViewKolcsonzesTitle_szemely}"/>
-                        <h:outputText value="#{bundle.ViewKolcsonzesLabel_peldany}"/>
-                        <h:outputText value="#{kolcsonzesController.selected.peldany.konyv.cim} (#{kolcsonzesController.selected.peldany.konyvPeldany}. példány)" title="#{bundle.ViewKolcsonzesTitle_peldany}" style="width: 200px"/>
+
                     </p:panelGrid>
                     <p:commandButton value="#{bundle.Close}" onclick="KolcsonzesViewDialog.hide()"/>
                 </h:panelGroup>
