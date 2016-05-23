@@ -3,13 +3,16 @@ package controller;
 import entity.Szemely;
 import controller.util.JsfUtil;
 import controller.util.JsfUtil.PersistAction;
+import entity.Oszlop;
 import facade.SzemelyFacade;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.ejb.EJBException;
 import javax.inject.Named;
@@ -18,6 +21,9 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import javax.inject.Inject;
+import org.primefaces.event.ToggleEvent;
+import org.primefaces.model.Visibility;
 
 @Named("szemelyController")
 @SessionScoped
@@ -27,9 +33,34 @@ public class SzemelyController implements Serializable {
     private facade.SzemelyFacade ejbFacade;
     private List<Szemely> items = null;
     private Szemely selected;
+    @Inject
+    private OszlopController oszlopController;    
+    private List<Oszlop> szemelyOszlopok;
+
+    public List<Oszlop> getSzemelyOszlopok() {
+        return szemelyOszlopok;
+    }    
 
     public SzemelyController() {
     }
+    
+    @PostConstruct
+    public void init() {
+        szemelyOszlopok = new ArrayList<>();
+        List<Oszlop> oszlopok = oszlopController.getItems();
+        for (Oszlop oszlop : oszlopok) {
+            if (oszlop != null && oszlop.getNev().startsWith("olvaso")) {
+                szemelyOszlopok.add(oszlop);
+            }
+        }
+    }    
+    
+    public void onToggle(ToggleEvent e) {
+        Oszlop oszlop = szemelyOszlopok.get((Integer) e.getData());
+        oszlop.setLathatosag(e.getVisibility() == Visibility.VISIBLE);
+        oszlopController.setSelected(oszlop);
+        oszlopController.update();
+    }    
 
     public Szemely getSelected() {
         return selected;

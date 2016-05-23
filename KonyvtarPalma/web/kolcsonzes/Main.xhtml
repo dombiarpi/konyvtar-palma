@@ -24,29 +24,87 @@
 
                     <p:panel id="a" header="Olvasó" styleClass="dashboard-panel">
                         <p:dataTable id="szemely" value="#{kolcsonzesController.szemelyController.items}" var="item"
+                                     widgetVar="szemelyek"
                                      selectionMode="single" selection="#{kolcsonzesController.szemelyController.selected}"
                                      paginator="true"
                                      paginatorPosition="bottom"
                                      rowKey="#{item.id}"
-                                     rows="10"
+                                     rows="9"
                                      >
 
                             <p:ajax event="rowSelect" listener="#{kolcsonzesController.szemelyPeldanyai}"  update="@widgetVar(valasztottP)"/>
                             <p:ajax event="rowUnselect" />
 
-                            <p:column sortBy="#{item.nev}" filterBy="#{item.nev}" filterMatchMode="contains">
-                                <f:facet name="header">
-                                    <h:outputText value="#{bundle.ListSzemelyTitle_nev}"/>
-                                </f:facet>
-                                <h:outputText value="#{item.nev}"/>
-                            </p:column>
-                            <p:column sortBy="#{item.leanykoriNev}" filterBy="#{item.leanykoriNev}" filterMatchMode="contains">
-                                <f:facet name="header">
-                                    <h:outputText value="#{bundle.ListSzemelyTitle_leanykoriNev}"/>
-                                </f:facet>
-                                <h:outputText value="#{item.leanykoriNev}"/>
-                            </p:column>
-
+                        <p:column sortBy="#{item.nev}" filterBy="#{item.nev}" filterMatchMode="contains" visible="#{szemelyController.szemelyOszlopok[0].lathatosag}">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListSzemelyTitle_nev}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.nev}"/>
+                        </p:column>
+                        <p:column sortBy="#{item.leanykoriNev}" filterBy="#{item.leanykoriNev}" filterMatchMode="contains" visible="#{szemelyController.szemelyOszlopok[1].lathatosag}">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListSzemelyTitle_leanykoriNev}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.leanykoriNev}"/>
+                        </p:column>
+                        <p:column sortBy="#{item.beiratkozas}" filterBy="#{item.beiratkozas}" filterMatchMode="contains" visible="#{szemelyController.szemelyOszlopok[2].lathatosag}">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListSzemelyTitle_beiratkozas}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.beiratkozas}">
+                                <f:convertDateTime pattern="yyyy-MM-dd" />
+                            </h:outputText>
+                        </p:column>
+                        <p:column sortBy="#{item.elofizDatum}" filterBy="#{item.elofizDatum}" filterMatchMode="contains" visible="#{szemelyController.szemelyOszlopok[3].lathatosag}">
+                            <f:facet name="header">
+                                <h:outputText value="Előfizetett"/>
+                            </f:facet>
+                            <h:outputText value="#{item.elofizDatum}">
+                                <f:convertDateTime pattern="yyyy-MM-dd" />
+                            </h:outputText>
+                        </p:column>
+                        <p:column sortBy="#{item.elofizTipus}" filterBy="#{item.elofizTipus}" filterMatchMode="contains" visible="#{szemelyController.szemelyOszlopok[4].lathatosag}">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListSzemelyTitle_elofizTipus}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.elofizTipus}"/>
+                        </p:column>
+                        <p:column sortBy="#{item.tagdij}" filterBy="#{item.tagdij}" filterMatchMode="contains" visible="#{szemelyController.szemelyOszlopok[5].lathatosag}">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListSzemelyTitle_tagdij}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.tagdij}"/>
+                        </p:column>
+                        <p:column sortBy="#{item.email}" filterBy="#{item.email}" filterMatchMode="contains" visible="#{szemelyController.szemelyOszlopok[6].lathatosag}">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListSzemelyTitle_email}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.email}"/>
+                        </p:column>
+                        <p:column sortBy="#{item.mobil}" filterBy="#{item.mobil}" filterMatchMode="contains" visible="#{szemelyController.szemelyOszlopok[7].lathatosag}">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListSzemelyTitle_mobil}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.mobil}"/>
+                        </p:column>
+                        <p:column sortBy="#{item.cim}" filterBy="#{item.cim}" filterMatchMode="contains" visible="#{szemelyController.szemelyOszlopok[8].lathatosag}">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListSzemelyTitle_cim}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.cim}"/>
+                        </p:column>
+                        <p:column sortBy="#{item.megjegyzes}" filterBy="#{item.megjegyzes}" filterMatchMode="contains" visible="#{szemelyController.szemelyOszlopok[9].lathatosag}">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListSzemelyTitle_megjegyzes}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.megjegyzes}"/>
+                        </p:column>
+                        <f:facet name="footer">
+                            <p:commandButton id="sztoggler" type="button" value="Oszlopok" icon="ui-icon-calculator" update="@all"/>
+                            <p:columnToggler datasource="szemely" trigger="sztoggler" >
+                                <p:ajax event="toggle" listener="#{szemelyController.onToggle}" update="@widgetVar(szemelyek)" />
+                            </p:columnToggler>                             
+                        </f:facet>
                         </p:dataTable>  
                     </p:panel>
 
@@ -64,16 +122,7 @@
                                      >
                             <p:ajax event="rowSelect"  listener="#{kolcsonzesController.konyvPeldanyai}"  update="@widgetVar(elerhetoP)" />
                             <p:ajax event="rowUnselect" />
-                            <f:facet name="header">
-                                <p:outputPanel style="float: right">
-                                    <p:outputLabel value="Keresés minden mezőben:" for="globalFilter"/>
-                                    <p:inputText id="globalFilter" onkeyup="PF('konyvek').filter()" style="width:150px" placeholder="Kulcsszó"/>
-                                    <p:commandButton id="toggler" type="button" value="Oszlopok" style="float:right" icon="ui-icon-calculator" />
-                                    <p:columnToggler datasource="konyv" trigger="toggler" >
-                                        <p:ajax event="toggle" listener="#{konyvController.onToggle}" update="@widgetVar(konyv)" />
-                                    </p:columnToggler>                                     
-                                </p:outputPanel>
-                            </f:facet>
+
                             <p:column sortBy="#{item.katal}" filterBy="#{item.katal}" filterMatchMode="contains" visible="#{konyvController.konyvOszlopok[0].lathatosag}">
                                 <f:facet name="header">
                                     <h:outputText value="#{bundle.ListKonyvTitle_katal}"/>
@@ -169,7 +218,13 @@
                                     <h:outputText value="Előjegyzi"/>
                                 </f:facet>
                                 <p:commandLink id="elojegyez" value="Előjegyzi" action="#{kolcsonzesController.elojegyzi(item)}" update="@widgetVar(konyvek) @widgetVar(elojegyzesek)"/>
-                            </p:column>                        
+                            </p:column>   
+                            <f:facet name="footer">
+                                    <p:commandButton id="toggler" type="button" value="Oszlopok" icon="ui-icon-calculator" />
+                                    <p:columnToggler datasource="konyv" trigger="toggler" >
+                                        <p:ajax event="toggle" listener="#{konyvController.onToggle}" update="@widgetVar(konyv)" />
+                                    </p:columnToggler>                                     
+                            </f:facet>                            
                         </p:dataTable>  
                     </p:panel>
 
@@ -177,6 +232,7 @@
                         <p:dataTable id="elerhetoPeldany" widgetVar="elerhetoP" value="#{peldanyController.konyvPeldanyaiItems}" var="item"
                                      selectionMode="single" selection="#{peldanyController.selected}"
                                      paginator="true"
+                                     paginatorPosition="bottom"
                                      rowKey="#{item.id}"
                                      rows="6"
                                      rowStyleClass="#{item.aktKolcs != true ? 'nemkolcsonozheto' : null}"
@@ -222,6 +278,7 @@
                         <p:dataTable id="valasztottPeldany" widgetVar="valasztottP" value="#{peldanyController.szemelyPeldanyaiItems}" var="item"
                                      selectionMode="single" selection="#{peldanyController.selected}"
                                      paginator="true"
+                                     paginatorPosition="bottom"
                                      rowKey="#{item.id}"
                                      rows="6"
                                      rowsPerPageTemplate="10,20,30,40,50"
@@ -267,7 +324,7 @@
                                      widgetVar="kolcsonzesek"
                                      selectionMode="single" selection="#{kolcsonzesController.selected}"
                                      paginator="true"
-                                     paginatorPosition="top"
+                                     paginatorPosition="bottom"
                                      rowKey="#{item.id}"
                                      rows="10"
                                      rowsPerPageTemplate="10,20,30,40,50"
@@ -349,7 +406,7 @@
                                      widgetVar="elojegyzesek"
                                      selectionMode="single" selection="#{elojegyzesController.selected}"
                                      paginator="true"
-                                     paginatorPosition="top"
+                                     paginatorPosition="bottom"
                                      rowKey="#{item.id}"
                                      rows="10"
                                      rowsPerPageTemplate="10,20,30,40,50"

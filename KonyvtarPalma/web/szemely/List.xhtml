@@ -17,6 +17,7 @@
             <h:form id="SzemelyListForm">
                 <p:panel header="#{bundle.ListSzemelyTitle}">
                     <p:dataTable id="datalist" value="#{szemelyController.items}" var="item"
+                                 widgetVar="szemelyek"
                                  selectionMode="single" selection="#{szemelyController.selected}"
                                  paginator="true" resizableColumns="true"
                                  rowKey="#{item.id}"
@@ -27,19 +28,19 @@
                         <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
                         <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
 
-                        <p:column sortBy="#{item.nev}" filterBy="#{item.nev}" filterMatchMode="contains">
+                        <p:column sortBy="#{item.nev}" filterBy="#{item.nev}" filterMatchMode="contains" visible="#{szemelyController.szemelyOszlopok[0].lathatosag}">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListSzemelyTitle_nev}"/>
                             </f:facet>
                             <h:outputText value="#{item.nev}"/>
                         </p:column>
-                        <p:column sortBy="#{item.leanykoriNev}" filterBy="#{item.leanykoriNev}" filterMatchMode="contains">
+                        <p:column sortBy="#{item.leanykoriNev}" filterBy="#{item.leanykoriNev}" filterMatchMode="contains" visible="#{szemelyController.szemelyOszlopok[1].lathatosag}">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListSzemelyTitle_leanykoriNev}"/>
                             </f:facet>
                             <h:outputText value="#{item.leanykoriNev}"/>
                         </p:column>
-                        <p:column sortBy="#{item.beiratkozas}" filterBy="#{item.beiratkozas}" filterMatchMode="contains">
+                        <p:column sortBy="#{item.beiratkozas}" filterBy="#{item.beiratkozas}" filterMatchMode="contains" visible="#{szemelyController.szemelyOszlopok[2].lathatosag}">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListSzemelyTitle_beiratkozas}"/>
                             </f:facet>
@@ -47,7 +48,7 @@
                                 <f:convertDateTime pattern="yyyy-MM-dd" />
                             </h:outputText>
                         </p:column>
-                        <p:column sortBy="#{item.elofizDatum}" filterBy="#{item.elofizDatum}" filterMatchMode="contains">
+                        <p:column sortBy="#{item.elofizDatum}" filterBy="#{item.elofizDatum}" filterMatchMode="contains" visible="#{szemelyController.szemelyOszlopok[3].lathatosag}">
                             <f:facet name="header">
                                 <h:outputText value="Előfizetett"/>
                             </f:facet>
@@ -55,37 +56,37 @@
                                 <f:convertDateTime pattern="yyyy-MM-dd" />
                             </h:outputText>
                         </p:column>
-                        <p:column sortBy="#{item.elofizTipus}" filterBy="#{item.elofizTipus}" filterMatchMode="contains">
+                        <p:column sortBy="#{item.elofizTipus}" filterBy="#{item.elofizTipus}" filterMatchMode="contains" visible="#{szemelyController.szemelyOszlopok[4].lathatosag}">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListSzemelyTitle_elofizTipus}"/>
                             </f:facet>
                             <h:outputText value="#{item.elofizTipus}"/>
                         </p:column>
-                        <p:column sortBy="#{item.tagdij}" filterBy="#{item.tagdij}" filterMatchMode="contains">
+                        <p:column sortBy="#{item.tagdij}" filterBy="#{item.tagdij}" filterMatchMode="contains" visible="#{szemelyController.szemelyOszlopok[5].lathatosag}">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListSzemelyTitle_tagdij}"/>
                             </f:facet>
                             <h:outputText value="#{item.tagdij}"/>
                         </p:column>
-                        <p:column sortBy="#{item.email}" filterBy="#{item.email}" filterMatchMode="contains">
+                        <p:column sortBy="#{item.email}" filterBy="#{item.email}" filterMatchMode="contains" visible="#{szemelyController.szemelyOszlopok[6].lathatosag}">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListSzemelyTitle_email}"/>
                             </f:facet>
                             <h:outputText value="#{item.email}"/>
                         </p:column>
-                        <p:column sortBy="#{item.mobil}" filterBy="#{item.mobil}" filterMatchMode="contains">
+                        <p:column sortBy="#{item.mobil}" filterBy="#{item.mobil}" filterMatchMode="contains" visible="#{szemelyController.szemelyOszlopok[7].lathatosag}">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListSzemelyTitle_mobil}"/>
                             </f:facet>
                             <h:outputText value="#{item.mobil}"/>
                         </p:column>
-                        <p:column sortBy="#{item.cim}" filterBy="#{item.cim}" filterMatchMode="contains">
+                        <p:column sortBy="#{item.cim}" filterBy="#{item.cim}" filterMatchMode="contains" visible="#{szemelyController.szemelyOszlopok[8].lathatosag}">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListSzemelyTitle_cim}"/>
                             </f:facet>
                             <h:outputText value="#{item.cim}"/>
                         </p:column>
-                        <p:column sortBy="#{item.megjegyzes}" filterBy="#{item.megjegyzes}" filterMatchMode="contains">
+                        <p:column sortBy="#{item.megjegyzes}" filterBy="#{item.megjegyzes}" filterMatchMode="contains" visible="#{szemelyController.szemelyOszlopok[9].lathatosag}">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListSzemelyTitle_megjegyzes}"/>
                             </f:facet>
@@ -104,7 +105,11 @@
                             </p:confirmDialog>
                             <p:commandButton value="Olvasók nyomtatása" type="button" icon="ui-icon-print">
                                 <p:printer target="datalist" />
-                            </p:commandButton>                                         
+                            </p:commandButton> 
+                            <p:commandButton id="toggler" type="button" value="Oszlopok" icon="ui-icon-calculator" update="@all"/>
+                            <p:columnToggler datasource="datalist" trigger="toggler" >
+                                <p:ajax event="toggle" listener="#{szemelyController.onToggle}" update="@widgetVar(szemelyek)" />
+                            </p:columnToggler>                             
                         </f:facet>
                     </p:dataTable>
                 </p:panel>
