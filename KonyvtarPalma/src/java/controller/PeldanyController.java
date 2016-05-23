@@ -6,6 +6,7 @@ import controller.util.JsfUtil.PersistAction;
 import facade.PeldanyFacade;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -44,6 +45,19 @@ public class PeldanyController implements Serializable {
 
     protected void setEmbeddableKeys() {
     }
+    
+    public List<Peldany> completePeldany(String query) {
+        List<Peldany> filteredPeldany = new ArrayList<>();
+         
+        for (int i = 0; i < getItems().size(); i++) {
+            Peldany peldany = items.get(i);
+            if(peldany.toString().startsWith(query)) {
+                filteredPeldany.add(peldany);
+            }
+        }
+         
+        return filteredPeldany;
+    }             
 
     protected void initializeEmbeddableKey() {
     }
@@ -146,7 +160,7 @@ public class PeldanyController implements Serializable {
         this.konyvPeldanyaiItems = konyvPeldanyaiItems;
     }
 
-    @FacesConverter(forClass = Peldany.class)
+    @FacesConverter(value="peldanyControllerConverter", forClass = Peldany.class)
     public static class PeldanyControllerConverter implements Converter {
 
         @Override

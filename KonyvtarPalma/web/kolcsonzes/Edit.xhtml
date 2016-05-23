@@ -21,14 +21,14 @@
                         <p:outputLabel value="#{bundle.EditKolcsonzesLabel_maxKolcs}" for="maxKolcs" />
                         <p:inputText id="maxKolcs" value="#{kolcsonzesController.selected.maxKolcs}" title="#{bundle.EditKolcsonzesTitle_maxKolcs}" required="true" requiredMessage="#{bundle.EditKolcsonzesRequiredMessage_maxKolcs}"/>
                         <p:outputLabel value="#{bundle.EditKolcsonzesLabel_szemely}" for="szemely" />
-                        <p:selectOneMenu id="szemely" value="#{kolcsonzesController.selected.szemely}" required="true" requiredMessage="#{bundle.EditKolcsonzesRequiredMessage_szemely}">
+                        <p:selectOneMenu id="szemely" value="#{kolcsonzesController.selected.szemely}" required="true" requiredMessage="#{bundle.EditKolcsonzesRequiredMessage_szemely}" disabled="true">
                             <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
                             <f:selectItems value="#{szemelyController.itemsAvailableSelectOne}"
                                            var="szemelyItem"
                                            itemValue="#{szemelyItem}"/>
                         </p:selectOneMenu>
                         <p:outputLabel value="#{bundle.EditKolcsonzesLabel_peldany}" for="peldany" />
-                        <p:selectOneMenu id="peldany" value="#{kolcsonzesController.selected.peldany}" required="true" requiredMessage="#{bundle.EditKolcsonzesRequiredMessage_peldany}">
+                        <p:selectOneMenu id="peldany" value="#{kolcsonzesController.selected.peldany}" required="true" requiredMessage="#{bundle.EditKolcsonzesRequiredMessage_peldany}" disabled="true">
                             <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
                             <f:selectItems value="#{peldanyController.itemsAvailableSelectOne}"
                                            var="peldanyItem"

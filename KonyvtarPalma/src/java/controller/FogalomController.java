@@ -6,6 +6,7 @@ import controller.util.JsfUtil.PersistAction;
 import facade.FogalomFacade;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -44,6 +45,19 @@ public class FogalomController implements Serializable {
 
     protected void initializeEmbeddableKey() {
     }
+    
+    public List<Fogalom> completeFogalom(String query) {
+        List<Fogalom> filteredFogalom = new ArrayList<>();
+         
+        for (int i = 0; i < getItems().size(); i++) {
+            Fogalom fogalom = items.get(i);
+            if(fogalom.getNev().startsWith(query)) {
+                filteredFogalom.add(fogalom);
+            }
+        }
+         
+        return filteredFogalom;
+    }     
 
     private FogalomFacade getFacade() {
         return ejbFacade;
@@ -121,7 +135,7 @@ public class FogalomController implements Serializable {
         return getFacade().findAll();
     }
 
-    @FacesConverter(forClass = Fogalom.class)
+    @FacesConverter(value="fogalomControllerConverter", forClass = Fogalom.class)    
     public static class FogalomControllerConverter implements Converter {
 
         @Override

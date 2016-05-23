@@ -15,14 +15,14 @@
                         <p:outputLabel value="#{bundle.EditElojegyzesLabel_datum}" for="datum" />
                         <p:calendar id="datum" pattern="yyyy-MM-dd" value="#{elojegyzesController.selected.datum}" title="#{bundle.EditElojegyzesTitle_datum}" required="true" requiredMessage="#{bundle.EditElojegyzesRequiredMessage_datum}" showOn="button"/>
                         <p:outputLabel value="#{bundle.EditElojegyzesLabel_szemely}" for="szemely" />
-                        <p:selectOneMenu id="szemely" value="#{elojegyzesController.selected.szemely}" required="true" requiredMessage="#{bundle.EditElojegyzesRequiredMessage_szemely}">
+                        <p:selectOneMenu id="szemely" value="#{elojegyzesController.selected.szemely}" required="true" requiredMessage="#{bundle.EditElojegyzesRequiredMessage_szemely}" disabled="true">
                             <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
                             <f:selectItems value="#{szemelyController.itemsAvailableSelectOne}"
                                            var="szemelyItem"
                                            itemValue="#{szemelyItem}"/>
                         </p:selectOneMenu>
                         <p:outputLabel value="#{bundle.EditElojegyzesLabel_konyv}" for="konyv" />
-                        <p:selectOneMenu id="konyv" value="#{elojegyzesController.selected.konyv}" required="true" requiredMessage="#{bundle.EditElojegyzesRequiredMessage_konyv}">
+                        <p:selectOneMenu id="konyv" value="#{elojegyzesController.selected.konyv}" required="true" requiredMessage="#{bundle.EditElojegyzesRequiredMessage_konyv}" disabled="true">
                             <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
                             <f:selectItems value="#{konyvController.itemsAvailableSelectOne}"
                                            var="konyvItem"

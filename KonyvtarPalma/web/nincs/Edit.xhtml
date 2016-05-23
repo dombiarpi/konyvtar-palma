@@ -13,11 +13,13 @@
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{nincsController.selected != null}">
                         <p:outputLabel value="#{bundle.EditNincsLabel_peldany}" for="peldany" />
-                        <p:selectOneMenu id="peldany" value="#{nincsController.selected.peldany}" required="true" requiredMessage="#{bundle.CreateNincsRequiredMessage_peldany}">
-                            <f:selectItems value="#{peldanyController.itemsAvailableSelectOne}"
-                                           var="peldanyItem"
-                                           itemValue="#{peldanyItem}"/>
-                        </p:selectOneMenu>    
+                        <p:autoComplete id="peldany" value="#{nincsController.selected.peldany}"
+                                        required="true" requiredMessage="#{bundle.CreateNincsRequiredMessage_peldany}"
+                                        completeMethod="#{peldanyController.completePeldany}"
+                                        forceSelection="true"
+                                        disabled="true"
+                                        converter="peldanyControllerConverter"
+                                        var="peldanyItem" itemValue="#{peldanyItem}" itemLabel="#{peldanyItem}"/>                                   
                         <p:outputLabel value="#{bundle.EditNincsLabel_kelt}" for="kelt" />
                         <p:calendar id="kelt" pattern="yyyy-MM-dd" value="#{nincsController.selected.kelt}" title="#{bundle.EditNincsTitle_kelt}" required="true" requiredMessage="#{bundle.EditNincsRequiredMessage_kelt}" showOn="button"/>
                         <p:outputLabel value="#{bundle.EditNincsLabel_selejtLopott}" for="selejtLopott" />

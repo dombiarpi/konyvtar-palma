@@ -13,12 +13,12 @@
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{peldanyController.selected != null}">
                         <p:outputLabel value="#{bundle.CreatePeldanyLabel_konyv}" for="konyv" />
-                        <p:selectOneMenu id="konyv" value="#{peldanyController.selected.konyv}" required="true" requiredMessage="#{bundle.CreatePeldanyRequiredMessage_konyv}">
-                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
-                            <f:selectItems value="#{konyvController.itemsAvailableSelectOne}"
-                                           var="konyvItem"
-                                           itemValue="#{konyvItem}"/>
-                        </p:selectOneMenu>                           
+                        <p:autoComplete id="konyv" value="#{peldanyController.selected.konyv}"
+                                        required="true" requiredMessage="#{bundle.CreatePeldanyRequiredMessage_konyv}"
+                                        completeMethod="#{konyvController.completeKonyv}"
+                                        forceSelection="true"
+                                        converter="konyvControllerConverter"
+                                        var="konyvItem" itemValue="#{konyvItem}" itemLabel="#{konyvItem}"/>                                  
                         <p:outputLabel value="#{bundle.CreatePeldanyLabel_konyvPeldany}" for="konyvPeldany" />
                         <p:inputText id="konyvPeldany" value="#{peldanyController.selected.konyvPeldany}" title="#{bundle.CreatePeldanyTitle_konyvPeldany}" required="true" requiredMessage="#{bundle.CreatePeldanyRequiredMessage_konyvPeldany}"/>
                         <p:outputLabel value="#{bundle.CreatePeldanyLabel_kikolcs}" for="kikolcs" />
@@ -26,12 +26,12 @@
                         <p:outputLabel value="#{bundle.CreatePeldanyLabel_aktKolcs}" for="aktKolcs" />
                         <p:selectBooleanCheckbox id="aktKolcs" value="#{peldanyController.selected.aktKolcs}" />
                         <p:outputLabel value="#{bundle.CreatePeldanyLabel_polc}" for="polc" />
-                        <p:selectOneMenu id="polc" value="#{peldanyController.selected.polc}" required="true" requiredMessage="#{bundle.CreatePeldanyRequiredMessage_polc}">
-                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
-                            <f:selectItems value="#{polcController.itemsAvailableSelectOne}"
-                                           var="polcItem"
-                                           itemValue="#{polcItem}"/>
-                        </p:selectOneMenu>                              
+                        <p:autoComplete id="polc" value="#{peldanyController.selected.polc}"
+                                        required="true" requiredMessage="#{bundle.CreatePeldanyRequiredMessage_polc}"
+                                        completeMethod="#{polcController.completePolc}"
+                                        forceSelection="true"
+                                        converter="polcControllerConverter"
+                                        var="polcItem" itemValue="#{polcItem}" itemLabel="#{polcItem}"/>                                          
                     </p:panelGrid>
                     <p:commandButton actionListener="#{peldanyController.create}" value="#{bundle.Save}" update="display,:PeldanyListForm:datalist,:growl" oncomplete="handleSubmit(args,'PeldanyCreateDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" immediate="true"  onclick="PeldanyCreateDialog.hide()"/>

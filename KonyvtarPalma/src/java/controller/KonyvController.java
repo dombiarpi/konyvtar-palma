@@ -94,6 +94,19 @@ public class KonyvController implements Serializable {
         }
          
         return filteredSzerzo;
+    } 
+    
+    public List<Konyv> completeKonyv(String query) {
+        List<Konyv> filteredKonyv = new ArrayList<>();
+         
+        for (int i = 0; i < getItems().size(); i++) {
+            Konyv konyv = items.get(i);
+            if(konyv.getCim().startsWith(query)) {
+                filteredKonyv.add(konyv);
+            }
+        }
+         
+        return filteredKonyv;
     }    
     
 
@@ -240,11 +253,7 @@ public class KonyvController implements Serializable {
         this.filteredItems = filteredItems;
     }
 
-//    public List<Boolean> getList() {
-//        return list;
-//    }
-
-    @FacesConverter(forClass = Konyv.class)
+    @FacesConverter(value="konyvControllerConverter", forClass = Konyv.class)
     public static class KonyvControllerConverter implements Converter {
 
         @Override

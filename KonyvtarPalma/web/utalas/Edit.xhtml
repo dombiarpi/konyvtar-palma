@@ -13,19 +13,19 @@
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{utalasController.selected != null}">
                         <p:outputLabel value="#{bundle.EditUtalasLabel_konyv}" for="konyv" />
-                        <p:selectOneMenu id="konyv" value="#{utalasController.selected.konyv}" required="true" requiredMessage="#{bundle.EditUtalasRequiredMessage_konyv}">
-                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
-                            <f:selectItems value="#{konyvController.itemsAvailableSelectOne}"
-                                           var="konyvItem"
-                                           itemValue="#{konyvItem}"/>
-                        </p:selectOneMenu>
+                        <p:autoComplete id="konyv" value="#{utalasController.selected.konyv}"
+                                        required="true" requiredMessage="#{bundle.EditUtalasRequiredMessage_konyv}"
+                                        completeMethod="#{konyvController.completeKonyv}"
+                                        forceSelection="true"
+                                        converter="konyvControllerConverter"
+                                        var="konyvItem" itemValue="#{konyvItem}" itemLabel="#{konyvItem}"/>                        
                         <p:outputLabel value="#{bundle.EditUtalasLabel_fogalom}" for="fogalom" />
-                        <p:selectOneMenu id="fogalom" value="#{utalasController.selected.fogalom}" required="true" requiredMessage="#{bundle.EditUtalasRequiredMessage_fogalom}">
-                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
-                            <f:selectItems value="#{fogalomController.itemsAvailableSelectOne}"
-                                           var="fogalomItem"
-                                           itemValue="#{fogalomItem}"/>
-                        </p:selectOneMenu>
+                        <p:autoComplete id="fogalom" value="#{utalasController.selected.fogalom}"
+                                        required="true" requiredMessage="#{bundle.EditUtalasRequiredMessage_fogalom}"
+                                        completeMethod="#{fogalomController.completeFogalom}"
+                                        forceSelection="true"
+                                        converter="fogalomControllerConverter"
+                                        var="fogalomItem" itemValue="#{fogalomItem}" itemLabel="#{fogalomItem}"/>                                  
                     </p:panelGrid>
                     <p:commandButton actionListener="#{utalasController.update}" value="#{bundle.Save}" update="display,:UtalasListForm:datalist,:growl" oncomplete="handleSubmit(args, 'UtalasEditDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" immediate="true"  onclick="UtalasEditDialog.hide()"/>

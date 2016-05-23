@@ -47,6 +47,19 @@ public class PolcController implements Serializable {
 
     protected void initializeEmbeddableKey() {
     }
+    
+    public List<Polc> completePolc(String query) {
+        List<Polc> filteredPolc = new ArrayList<>();
+         
+        for (int i = 0; i < getItems().size(); i++) {
+            Polc polc = items.get(i);
+            if(polc.toString().startsWith(query)) {
+                filteredPolc.add(polc);
+            }
+        }
+         
+        return filteredPolc;
+    }         
 
     private PolcFacade getFacade() {
         return ejbFacade;
@@ -137,7 +150,7 @@ public class PolcController implements Serializable {
         return getFacade().findAll();
     }
 
-    @FacesConverter(forClass = Polc.class)
+    @FacesConverter(value="polcControllerConverter", forClass = Polc.class)
     public static class PolcControllerConverter implements Converter {
 
         @Override
