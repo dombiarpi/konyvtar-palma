@@ -11,7 +11,7 @@
         <p:dialog id="SzemelyCreateDlg" widgetVar="SzemelyCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateSzemelyTitle}">
             <h:form id="SzemelyCreateForm">
                 <h:panelGroup id="display">
-                    <p:panelGrid columns="2" rendered="#{szemelyController.selected != null}">
+                    <p:panelGrid columns="2" rendered="#{szemelyController.selected != null}" class="ui-noborder">
                         <p:outputLabel value="#{bundle.CreateSzemelyLabel_nev}" for="nev" />
                         <p:inputText id="nev" value="#{szemelyController.selected.nev}" title="#{bundle.CreateSzemelyTitle_nev}" required="true" requiredMessage="#{bundle.CreateSzemelyRequiredMessage_nev}"/>
                         <p:outputLabel value="#{bundle.CreateSzemelyLabel_leanykoriNev}" for="leanykoriNev" />
@@ -19,7 +19,9 @@
                         <p:outputLabel value="#{bundle.CreateSzemelyLabel_beiratkozas}" for="beiratkozas" />
                         <p:calendar id="beiratkozas" pattern="yyyy-MM-dd" value="#{szemelyController.selected.beiratkozas}" title="#{bundle.EditSzemelyTitle_beiratkozas}" required="true" requiredMessage="#{bundle.EditSzemelyRequiredMessage_beiratkozas}" showOn="button"/>
                         <p:outputLabel value="Előfizetés dátuma" for="elofizDatum" />
-                        <p:calendar id="elofizDatum" pattern="yyyy-MM-dd" value="#{szemelyController.selected.elofizDatum}" title="Előfizetés dátuma" showOn="button"/>
+                        <p:calendar id="elofizDatum" pattern="yyyy-MM-dd" value="#{szemelyController.selected.elofizDatum}" title="Előfizetés dátuma" showOn="button">
+                            <f:event listener="#{szemelyController.validateElofizetesDatum}" type="postValidate" />
+                        </p:calendar>
                         <p:outputLabel value="#{bundle.CreateSzemelyLabel_elofizTipus}" for="elofizTipus" />
                         <p:selectOneMenu id="elofizTipus" value="#{szemelyController.selected.elofizTipus}" required="true" requiredMessage="#{bundle.CreateSzemelyRequiredMessage_elofizTipus}">
                             <f:selectItems value="#{szemelyController.selected.elofizTipusok}"

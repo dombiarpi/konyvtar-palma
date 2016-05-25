@@ -6,6 +6,7 @@
 package entity;
 
 import java.io.Serializable;
+import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
 import javax.persistence.Basic;
@@ -115,6 +116,21 @@ public class Szemely implements Serializable {
         this.beiratkozas = beiratkozas;
         this.elofizTipus = elofizTipus;
         this.tagdij = tagdij;
+    }
+    
+    public String getKesesben() {
+        if (ElofizTipus.SPECIALIS.toString().equalsIgnoreCase(elofizTipus)) {
+            return ""; // speciálisok nem fizetnek elő
+        }
+        Calendar cal = Calendar.getInstance();
+        cal.add(Calendar.YEAR, -1);
+        Calendar befizetve = Calendar.getInstance();
+        if (elofizDatum != null) {
+            befizetve.setTime(elofizDatum);
+        } else {
+            return "kesesben"; // aki beíratkozott már és még nem fizetett mind késében van
+        }
+        return befizetve.before(cal) ? "kesesben" : ""; // egy év után lejár ez előfizetés
     }
 
     public Integer getId() {

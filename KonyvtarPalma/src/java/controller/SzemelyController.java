@@ -8,6 +8,7 @@ import facade.SzemelyFacade;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -17,10 +18,14 @@ import javax.ejb.EJB;
 import javax.ejb.EJBException;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
+import javax.faces.component.UIInput;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import javax.faces.event.ComponentSystemEvent;
+import javax.faces.validator.ValidatorException;
 import javax.inject.Inject;
 import org.primefaces.event.ToggleEvent;
 import org.primefaces.model.Visibility;
@@ -60,8 +65,8 @@ public class SzemelyController implements Serializable {
         oszlop.setLathatosag(e.getVisibility() == Visibility.VISIBLE);
         oszlopController.setSelected(oszlop);
         oszlopController.update();
-    }    
-
+    }
+    
     public Szemely getSelected() {
         return selected;
     }
@@ -84,6 +89,30 @@ public class SzemelyController implements Serializable {
         selected = new Szemely();
         initializeEmbeddableKey();
         return selected;
+    }
+    
+    // Nincs használva de mintaként itt marad. Ezzel együtt működne:
+    // <f:event listener="#{szemelyController.validateElofizetesDatum}" type="postValidate" />
+    // csak nem marad nyitva a dialógus ablak
+    public void validateElofizetesDatum(ComponentSystemEvent event) {
+	  FacesContext fc = FacesContext.getCurrentInstance();
+	  UIComponent components = event.getComponent();
+	  UIInput uiInputElofizDatum = (UIInput) components.findComponent("elofizDatum");
+	  UIInput uiInputTagdij = (UIInput) components.findComponent("tagdij");
+          
+	  String elofizdatum = uiInputElofizDatum.getLocalValue() == null ? ""
+		: uiInputElofizDatum.getLocalValue().toString();
+	  String elofizdatumId = uiInputElofizDatum.getClientId();          
+	  String tagDij = uiInputTagdij.getSubmittedValue() == null ? ""
+		: uiInputTagdij.getSubmittedValue().toString();
+
+	  if (elofizdatum.equals("") && Integer.parseInt(tagDij) > 0) {
+
+		FacesMessage msg = new FacesMessage("Ha fizetnek tagdíjat, az előfizetés dátuma mező nem lehet üres!");
+		msg.setSeverity(FacesMessage.SEVERITY_ERROR);
+		fc.addMessage(elofizdatumId, msg);
+		fc.renderResponse();
+	  }
     }
 
     public void create() {

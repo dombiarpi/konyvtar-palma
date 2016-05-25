@@ -17,9 +17,14 @@
                         <p:outputLabel value="#{bundle.EditSzemelyLabel_leanykoriNev}" for="leanykoriNev" />
                         <p:inputText id="leanykoriNev" value="#{szemelyController.selected.leanykoriNev}" title="#{bundle.EditSzemelyTitle_leanykoriNev}" />
                         <p:outputLabel value="#{bundle.EditSzemelyLabel_beiratkozas}" for="beiratkozas" />
-                        <p:calendar id="beiratkozas" pattern="yyyy-MM-dd" value="#{szemelyController.selected.beiratkozas}" title="#{bundle.EditSzemelyTitle_beiratkozas}" required="true" requiredMessage="#{bundle.EditSzemelyRequiredMessage_beiratkozas}" showOn="button"/>
+                        <p:calendar id="beiratkozas" pattern="yyyy-MM-dd" value="#{szemelyController.selected.beiratkozas}"
+                                    title="#{bundle.EditSzemelyTitle_beiratkozas}" required="true" requiredMessage="#{bundle.EditSzemelyRequiredMessage_beiratkozas}" showOn="button"/>
                         <p:outputLabel value="Előfizetés dátuma" for="elofizDatum" />
-                        <p:calendar id="elofizDatum" pattern="yyyy-MM-dd" value="#{szemelyController.selected.elofizDatum}" title="Előfizetés dátuma" showOn="button"/>
+                        <p:calendar id="elofizDatum" pattern="yyyy-MM-dd" value="#{szemelyController.selected.elofizDatum}"
+                                    title="Előfizetés dátuma" showOn="button">
+                            <f:validator validatorId="elofizetesDatumValidator" />
+                            <f:attribute name="tagdij" value="#{tagdij}" />                        
+                        </p:calendar>
                         <p:outputLabel value="#{bundle.EditSzemelyLabel_elofizTipus}" for="elofizTipus" />
                         <p:selectOneMenu id="elofizTipus" value="#{szemelyController.selected.elofizTipus}" required="true" requiredMessage="#{bundle.EditSzemelyRequiredMessage_elofizTipus}">
                             <f:selectItems value="#{szemelyController.selected.elofizTipusok}"
@@ -27,13 +32,24 @@
                                            itemValue="#{elofizTipusItem}" itemLabel="#{elofizTipusItem.name}" />/>
                         </p:selectOneMenu>                                                 
                         <p:outputLabel value="#{bundle.EditSzemelyLabel_tagdij}" for="tagdij" />
-                        <p:inputText id="tagdij" value="#{szemelyController.selected.tagdij}" title="#{bundle.EditSzemelyTitle_tagdij}" required="true" requiredMessage="#{bundle.EditSzemelyRequiredMessage_tagdij}"/>
+                        <p:inputText id="tagdij" value="#{szemelyController.selected.tagdij}"
+                                     binding="#{tagdij}"
+                                     title="#{bundle.EditSzemelyTitle_tagdij}"
+                                     required="true" requiredMessage="#{bundle.EditSzemelyRequiredMessage_tagdij}"/>
                         <p:outputLabel value="#{bundle.EditSzemelyLabel_email}" for="email" />
-                        <p:inputText id="email" value="#{szemelyController.selected.email}" title="#{bundle.EditSzemelyTitle_email}" />
+                        <p:inputText id="email" value="#{szemelyController.selected.email}" title="#{bundle.EditSzemelyTitle_email}" >
+                            <f:validator validatorId="elerhetosegValidator" />
+                            <f:attribute name="mobil" value="#{mobil}" />
+                            <f:attribute name="cim" value="#{cim}" />
+                        </p:inputText>
                         <p:outputLabel value="#{bundle.EditSzemelyLabel_mobil}" for="mobil" />
-                        <p:inputText id="mobil" value="#{szemelyController.selected.mobil}" title="#{bundle.EditSzemelyTitle_mobil}" />
+                        <p:inputText id="mobil" value="#{szemelyController.selected.mobil}"
+                                     binding="#{mobil}"
+                                     title="#{bundle.EditSzemelyTitle_mobil}" />
                         <p:outputLabel value="#{bundle.EditSzemelyLabel_cim}" for="cim" />
-                        <p:inputText id="cim" value="#{szemelyController.selected.cim}" title="#{bundle.EditSzemelyTitle_cim}" />
+                        <p:inputText id="cim" value="#{szemelyController.selected.cim}"
+                                     binding="#{cim}"
+                                     title="#{bundle.EditSzemelyTitle_cim}" />
                         <p:outputLabel value="#{bundle.EditSzemelyLabel_megjegyzes}" for="megjegyzes" />
                         <p:inputTextarea id="megjegyzes" rows="1" cols="22" value="#{szemelyController.selected.megjegyzes}" title="#{bundle.EditSzemelyTitle_megjegyzes}" />                                                
                     </p:panelGrid>

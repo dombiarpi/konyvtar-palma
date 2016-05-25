@@ -30,6 +30,7 @@
                                      paginatorPosition="bottom"
                                      rowKey="#{item.id}"
                                      rows="9"
+                                     rowStyleClass="#{item.kesesben}"
                                      >
 
                             <p:ajax event="rowSelect" listener="#{kolcsonzesController.szemelyPeldanyai}"  update="@widgetVar(valasztottP)"/>
