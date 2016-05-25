@@ -6,6 +6,7 @@ import controller.util.JsfUtil.PersistAction;
 import facade.KiadoFacade;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -41,6 +42,19 @@ public class KiadoController implements Serializable {
 
     protected void setEmbeddableKeys() {
     }
+    
+    public List<Kiado> completeKiado(String query) {
+        List<Kiado> filteredKiado = new ArrayList<>();
+         
+        for (int i = 0; i < getItems().size(); i++) {
+            Kiado kiado = items.get(i);
+            if(kiado.getNev().startsWith(query)) {
+                filteredKiado.add(kiado);
+            }
+        }
+         
+        return filteredKiado;
+    }     
 
     protected void initializeEmbeddableKey() {
     }
@@ -121,7 +135,7 @@ public class KiadoController implements Serializable {
         return getFacade().findAll();
     }
 
-    @FacesConverter(forClass = Kiado.class)
+    @FacesConverter(value = "kiadoControllerConverter", forClass = Kiado.class)
     public static class KiadoControllerConverter implements Converter {
 
         @Override

@@ -13,9 +13,13 @@
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{oszlopController.selected != null}">
                         <p:outputLabel value="#{bundleOszlop.EditOszlopLabel_id}" for="id" />
-                        <p:inputText id="id" value="#{oszlopController.selected.id}" title="#{bundleOszlop.EditOszlopTitle_id}" required="true" requiredMessage="#{bundleOszlop.EditOszlopRequiredMessage_id}"/>
+                        <p:inputText id="id" value="#{oszlopController.selected.id}" title="#{bundleOszlop.EditOszlopTitle_id}"
+                                     disabled="true"
+                                     required="true" requiredMessage="#{bundleOszlop.EditOszlopRequiredMessage_id}"/>
                         <p:outputLabel value="#{bundleOszlop.EditOszlopLabel_nev}" for="nev" />
-                        <p:inputText id="nev" value="#{oszlopController.selected.nev}" title="#{bundleOszlop.EditOszlopTitle_nev}" required="true" requiredMessage="#{bundleOszlop.EditOszlopRequiredMessage_nev}"/>
+                        <p:inputText id="nev" value="#{oszlopController.selected.nev}" title="#{bundleOszlop.EditOszlopTitle_nev}"
+                                     disabled="true"
+                                     required="true" requiredMessage="#{bundleOszlop.EditOszlopRequiredMessage_nev}"/>
                         <p:outputLabel value="#{bundleOszlop.EditOszlopLabel_lathatosag}" for="lathatosag" />
                         <p:selectBooleanCheckbox id="lathatosag" value="#{oszlopController.selected.lathatosag}" required="true" requiredMessage="#{bundleOszlop.EditOszlopRequiredMessage_lathatosag}"/>
                     </p:panelGrid>

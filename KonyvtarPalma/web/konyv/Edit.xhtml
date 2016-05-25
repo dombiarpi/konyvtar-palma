@@ -60,12 +60,12 @@
                                            itemValue="#{sorozatItem}"/>
                         </p:selectOneMenu>
                         <p:outputLabel value="#{bundle.EditKonyvLabel_kiado}" for="kiado" />
-                        <p:selectOneMenu id="kiado" value="#{konyvController.selected.kiado}" required="true" requiredMessage="#{bundle.EditKonyvRequiredMessage_kiado}">
-                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
-                            <f:selectItems value="#{kiadoController.itemsAvailableSelectOne}"
-                                           var="kiadoItem"
-                                           itemValue="#{kiadoItem}"/>
-                        </p:selectOneMenu>
+                        <p:autoComplete id="kiado" value="#{konyvController.selected.kiado}"
+                                        required="true" requiredMessage="#{bundle.EditKonyvRequiredMessage_kiado}"
+                                        completeMethod="#{kiadoController.completeKiado}"
+                                        forceSelection="true"
+                                        converter="kiadoControllerConverter"
+                                        var="kiadoItem" itemValue="#{kiadoItem}" itemLabel="#{kiadoItem}"/>                            
                     </p:panelGrid>
                     <p:commandButton actionListener="#{konyvController.update}" value="#{bundle.Save}" update="display,:KonyvListForm:datalist,:growl" oncomplete="handleSubmit(args, 'KonyvEditDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" immediate="true"  onclick="KonyvEditDialog.hide()"/>

@@ -4,6 +4,7 @@ import entity.Konyv;
 import controller.util.JsfUtil;
 import controller.util.JsfUtil.PersistAction;
 import entity.Kimitirt;
+import entity.Nyelv;
 import entity.Oszlop;
 import entity.Szerzo;
 import facade.KimitirtFacade;
@@ -12,8 +13,11 @@ import facade.KonyvFacade;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
@@ -43,6 +47,30 @@ public class KonyvController implements Serializable {
     private OszlopController oszlopController;
     @Inject
     private KimitirtController kimitirtController;
+    @Inject
+    private NyelvController nyelvController;
+    private List<Konyv> konyvek;
+    private List<Integer> katalogNumbers;
+
+    public List<Konyv> getKonyvek() {
+        return konyvek;
+    }
+
+    public void setKonyvek(List<Konyv> konyvek) {
+        this.konyvek = konyvek;
+    }
+    
+    public String reinit() {
+        selected = new Konyv();
+        setDefaultsOfNewKonyv();
+        Collections.sort(katalogNumbers);
+        Integer katal = katalogNumbers.get(katalogNumbers.size()-1);
+        Integer newKatal = katal + 1;
+        katalogNumbers.add(newKatal);
+        selected.setKatal(newKatal);
+        initializeEmbeddableKey();
+        return null;
+    }
 
     public KimitirtFacade getKimitirtFacade() {
         return kimitirtFacade;
@@ -67,6 +95,8 @@ public class KonyvController implements Serializable {
     @PostConstruct
     public void init() {
         konyvOszlopok = new ArrayList<>();
+        konyvek = new ArrayList<>();
+        katalogNumbers = new ArrayList<>();
         List<Oszlop> oszlopok = oszlopController.getItems();
         for (Oszlop oszlop : oszlopok) {
             if (oszlop != null && oszlop.getNev().startsWith("konyv")) {
@@ -130,7 +160,9 @@ public class KonyvController implements Serializable {
 
     public Konyv prepareCreate() {
         selected = new Konyv();
+        konyvek = new ArrayList<>();
         setDefaultsOfNewKonyv();
+        reInitKatalogNumbers();
         initializeEmbeddableKey();
         return selected;
     }
@@ -143,11 +175,28 @@ public class KonyvController implements Serializable {
      }
 
     private void setDefaultsOfNewKonyv() {
-        Integer katalog = getFacade().findMaxKatalogNumber();
-        selected.setKatal(katalog + 1);
         selected.setSzorzo(1.5);
         selected.setEgysAr(1000);
+        for (Nyelv nyelv  :  nyelvController.getItemsAvailableSelectOne()) {
+           if (nyelv.getNev().equalsIgnoreCase("Magyar")) {
+               selected.setNyelv(nyelv);
+           }
+        }
      }
+
+    private void reInitKatalogNumbers() {
+        katalogNumbers = new ArrayList<>();
+        Integer katalog = getFacade().findMaxKatalogNumber();
+        katalogNumbers.add(katalog + 1);
+        selected.setKatal(katalog + 1);
+    }
+    
+    public void createAll() {
+        for (Konyv konyv : konyvek) {
+            selected = konyv;
+            create();
+        }
+    }
 
     public void create() {
         persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("KonyvCreated"));

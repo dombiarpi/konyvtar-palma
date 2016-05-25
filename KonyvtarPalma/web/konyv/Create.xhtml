@@ -11,7 +11,7 @@
         <p:dialog id="KonyvCreateDlg" widgetVar="KonyvCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateKonyvTitle}">
             <h:form id="KonyvCreateForm">
                 <h:panelGroup id="display">
-                    <p:panelGrid columns="4" rendered="#{konyvController.selected != null}">
+                    <p:panelGrid columns="4" rendered="#{konyvController.selected != null}"  class="ui-noborder">
                         <p:outputLabel value="#{bundle.CreateKonyvLabel_katal}" for="katal" />
                         <p:outputLabel id="katal" value="#{konyvController.selected.katal}" title="#{bundle.CreateKonyvTitle_katal}" />
                         <p:outputLabel value="#{bundle.CreateKonyvLabel_cim}" for="cim" />
@@ -63,15 +63,123 @@
                                            itemValue="#{sorozatItem}"/>
                         </p:selectOneMenu>
                         <p:outputLabel value="#{bundle.CreateKonyvLabel_kiado}" for="kiado" />
-                        <p:selectOneMenu id="kiado" value="#{konyvController.selected.kiado}" required="true" requiredMessage="#{bundle.EditKonyvRequiredMessage_kiado}">
-                            <f:selectItems value="#{kiadoController.itemsAvailableSelectOne}"
-                                           var="kiadoItem"
-                                           itemValue="#{kiadoItem}"/>
-                        </p:selectOneMenu>
+                        <p:autoComplete id="kiado" value="#{konyvController.selected.kiado}"
+                                        required="true" requiredMessage="#{bundle.EditKonyvRequiredMessage_kiado}"
+                                        completeMethod="#{kiadoController.completeKiado}"
+                                        forceSelection="true"
+                                        converter="kiadoControllerConverter"
+                                        var="kiadoItem" itemValue="#{kiadoItem}" itemLabel="#{kiadoItem}"/>                        
                     </p:panelGrid>
                     <p:commandButton actionListener="#{konyvController.create}" value="#{bundle.Save}" update="display,:KonyvListForm:datalist,:growl" oncomplete="handleSubmit(args,'KonyvCreateDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" immediate="true"  onclick="KonyvCreateDialog.hide()"/>
+                    <p:commandButton id="btn_add" value="Hozzáad" update="books @parent" action="#{konyvController.reinit}" >
+                        <p:collector value="#{konyvController.selected}" addTo="#{konyvController.konyvek}" unique="false"/>
+                    </p:commandButton>
                 </h:panelGroup>
+                <br />
+                <br />
+                
+                <p:outputPanel id="books">
+                    <p:dataTable value="#{konyvController.konyvek}" var="item" id="booksTable">
+                        <p:column >
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListKonyvTitle_katal}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.katal}"/>
+                        </p:column>
+                        <p:column >
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListSzerzoTitle_nev}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.szerzoNev}"/>
+                        </p:column>
+                        <p:column >
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListKonyvTitle_cim}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.cim}"/>
+                        </p:column>
+                        <p:column >
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListKonyvTitle_alcim}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.alcim}"/>
+                        </p:column>
+                        <p:column >
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListKonyvTitle_kiadszam}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.kiadszam}"/>
+                        </p:column>
+                        <p:column >
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListKonyvTitle_kiadev}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.kiadev}" />
+                        </p:column>
+                        <p:column >
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListKonyvTitle_mufaj}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.mufaj.nev}"/>
+                        </p:column>
+                        <p:column >
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListKonyvTitle_beszerzesiAr}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.beszerzesiAr}"/>
+                        </p:column>
+                        <p:column >
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListKonyvTitle_egysAr}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.egysAr}"/>
+                        </p:column>
+
+                        <p:column >
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListKonyvTitle_megjegyzes}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.megjegyzes}"/>
+                        </p:column>
+                        <p:column >
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListKonyvTitle_media}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.media.name}"/>
+                        </p:column>
+                        <p:column >
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListKonyvTitle_nyelv}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.nyelv.nev}"/>
+                        </p:column>
+                        <p:column >
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListKonyvTitle_sorozat}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.sorozat.nev}"/>
+                        </p:column>
+                        <p:column >
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListKonyvTitle_kiado}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.kiado.nev}"/>
+                        </p:column>
+
+                        <p:column headerText="Action">
+                            <p:commandLink value="Remove" update=":KonyvCreateForm:books" process=":KonyvCreateForm:books">
+                                <p:collector value="#{item}" removeFrom="#{konyvController.konyvek}" unique="false"/>
+                            </p:commandLink>
+                        </p:column>
+
+                    </p:dataTable>
+                    <p:commandButton actionListener="#{konyvController.createAll}" value="Összes mentése" 
+                                     update="display,:KonyvListForm:datalist,:growl"
+                                     oncomplete="handleSubmit(args,'KonyvCreateDialog');"
+                                     immediate="true"/>                    
+                </p:outputPanel>                
+                
             </h:form>
         </p:dialog>
 

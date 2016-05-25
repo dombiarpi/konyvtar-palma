@@ -46,10 +46,14 @@
                             <p:selectBooleanCheckbox value="#{item.lathatosag}" disabled="true"/>
                         </p:column>
                         <f:facet name="footer">
-                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundleOszlop.Create}" actionListener="#{oszlopController.prepareCreate}" update=":OszlopCreateForm" oncomplete="PF('OszlopCreateDialog').show()"/>
+                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundleOszlop.Create}" 
+                                             disabled="true"
+                                             actionListener="#{oszlopController.prepareCreate}" update=":OszlopCreateForm" oncomplete="PF('OszlopCreateDialog').show()"/>
                             <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundleOszlop.View}" update=":OszlopViewForm" oncomplete="PF('OszlopViewDialog').show()" disabled="#{empty oszlopController.selected}"/>
                             <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundleOszlop.Edit}" update=":OszlopEditForm" oncomplete="PF('OszlopEditDialog').show()" disabled="#{empty oszlopController.selected}"/>
-                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundleOszlop.Delete}" actionListener="#{oszlopController.destroy}" update=":growl,datalist" disabled="#{empty oszlopController.selected}"/>
+                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundleOszlop.Delete}" 
+                                             disabled="true"
+                                             actionListener="#{oszlopController.destroy}" update=":growl,datalist" />
                         </f:facet>
                     </p:dataTable>
                 </p:panel>
