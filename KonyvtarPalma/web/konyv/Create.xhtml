@@ -58,6 +58,7 @@
                         </p:selectOneMenu>                        
                         <p:outputLabel value="#{bundle.CreateKonyvLabel_sorozat}" for="sorozat" />
                         <p:selectOneMenu id="sorozat" value="#{konyvController.selected.sorozat}" >
+                            <f:selectItem itemLabel="" />
                             <f:selectItems value="#{sorozatController.itemsAvailableSelectOne}"
                                            var="sorozatItem"
                                            itemValue="#{sorozatItem}"/>
