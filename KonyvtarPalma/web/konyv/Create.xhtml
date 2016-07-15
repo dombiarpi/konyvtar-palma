@@ -19,7 +19,7 @@
                         <p:outputLabel value="#{bundle.CreateKonyvLabel_alcim}" for="alcim" />
                         <p:inputText id="alcim" value="#{konyvController.selected.alcim}" title="#{bundle.CreateKonyvTitle_alcim}" />
                         <p:outputLabel value="Szerző" for="szerzo" />
-                        <p:autoComplete id="szerzo" value="#{konyvController.szerzok}"
+                        <p:autoComplete id="szerzo" value="#{konyvController.selected.szerzok}"
                                         required="true" requiredMessage="#{bundle.EditKonyvRequiredMessage_kiado}"
                                         completeMethod="#{konyvController.completeSzerzo}"
                                         multiple="true"
@@ -68,8 +68,33 @@
                                         completeMethod="#{kiadoController.completeKiado}"
                                         forceSelection="true"
                                         converter="kiadoControllerConverter"
-                                        var="kiadoItem" itemValue="#{kiadoItem}" itemLabel="#{kiadoItem}"/>                        
+                                        var="kiadoItem" itemValue="#{kiadoItem}" itemLabel="#{kiadoItem}"/>    
+                        
+                        
+                        
+                        <p:outputLabel value="Első példányt felvisz" for="elsoPeldany" />
+                        
+                        <p:selectBooleanCheckbox id="elsoPeldany" value="#{konyvController.elsoPeldany}" > 
+                            <p:ajax event="change" listener="#{konyvController.elsoPeldanyChange}" update="@form" />
+                        </p:selectBooleanCheckbox>
+               
                     </p:panelGrid>
+                       <h:panelGroup id="peldany" rendered="#{konyvController.elsoPeldany}">
+                     <p:panelGrid columns="4" rendered="#{konyvController.selected != null}"  class="ui-noborder">
+                        <p:outputLabel value="#{bundle.CreatePeldanyLabel_konyvPeldany}" for="konyvPeldany" />
+                        <p:inputText id="konyvPeldany" value="1" title="#{bundle.CreatePeldanyTitle_konyvPeldany}" required="true" requiredMessage="#{bundle.CreatePeldanyRequiredMessage_konyvPeldany}" disabled="true"/>
+                        
+                        <p:outputLabel value="#{bundle.CreatePeldanyLabel_aktKolcs}" for="aktKolcs" />
+                        <p:selectBooleanCheckbox id="aktKolcs" value="#{konyvController.selected.elso.aktKolcs}" />
+                        <p:outputLabel value="#{bundle.CreatePeldanyLabel_polc}" for="polc" />
+                        <p:autoComplete id="polc" value="#{konyvController.selected.elso.polc}"
+                                        required="true" requiredMessage="#{bundle.CreatePeldanyRequiredMessage_polc}"
+                                        completeMethod="#{polcController.completePolc}"
+                                        forceSelection="true"
+                                        converter="polcControllerConverter"
+                                        var="polcItem" itemValue="#{polcItem}" itemLabel="#{polcItem}"/>                             
+                     </p:panelGrid>
+                       </h:panelGroup>                    
                     <p:commandButton actionListener="#{konyvController.create}" value="#{bundle.Save}" update="display,:KonyvListForm:datalist,:growl" oncomplete="handleSubmit(args,'KonyvCreateDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" immediate="true"  onclick="KonyvCreateDialog.hide()"/>
                     <p:commandButton id="btn_add" value="Hozzáad" update="books @parent" action="#{konyvController.reinit}" >

@@ -128,6 +128,27 @@ public class Konyv implements Serializable {
     private Media[] mediak;
     @Transient
     private static final AtomicInteger count = new AtomicInteger(0); 
+    @Transient
+    private Peldany elso;
+    @Transient
+    private List<Szerzo> szerzok;
+
+    public Peldany getElso() {
+        return elso;
+    }
+
+    public void setElso(Peldany elso) {
+        this.elso = elso;
+    }
+
+    public List<Szerzo> getSzerzok() {
+        return szerzok;
+    }
+
+    public void setSzerzok(List<Szerzo> szerzok) {
+        this.szerzok = szerzok;
+    }
+    
 
     public Konyv() {
     }

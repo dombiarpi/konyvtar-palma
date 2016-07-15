@@ -6,18 +6,16 @@ import controller.util.JsfUtil.PersistAction;
 import entity.Kimitirt;
 import entity.Nyelv;
 import entity.Oszlop;
+import entity.Peldany;
 import entity.Szerzo;
 import facade.KimitirtFacade;
 import facade.KonyvFacade;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
 import java.util.ResourceBundle;
-import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
@@ -49,6 +47,9 @@ public class KonyvController implements Serializable {
     private KimitirtController kimitirtController;
     @Inject
     private NyelvController nyelvController;
+    @Inject
+    private PeldanyController peldanyController;
+    
     private List<Konyv> konyvek;
     private List<Integer> katalogNumbers;
 
@@ -68,6 +69,7 @@ public class KonyvController implements Serializable {
         Integer newKatal = katal + 1;
         katalogNumbers.add(newKatal);
         selected.setKatal(newKatal);
+        initPeldany();
         initializeEmbeddableKey();
         return null;
     }
@@ -84,6 +86,11 @@ public class KonyvController implements Serializable {
     private Konyv selected;
     private List<Szerzo> szerzok;
     private List<Oszlop> konyvOszlopok;
+    private boolean elsoPeldany = true;
+    
+    public void elsoPeldanyChange() {
+        String s = "";
+    }
 
     public List<Oszlop> getKonyvOszlopok() {
         return konyvOszlopok;
@@ -164,7 +171,16 @@ public class KonyvController implements Serializable {
         setDefaultsOfNewKonyv();
         reInitKatalogNumbers();
         initializeEmbeddableKey();
+        initPeldany();
         return selected;
+    }
+
+    private void initPeldany() {
+        Peldany elso = new Peldany();
+        elso.setKikolcs(Boolean.FALSE);
+        elso.setAktKolcs(Boolean.TRUE); 
+        elso.setKonyvPeldany(1);
+        selected.setElso(elso);
     }
     
     public void prepareUpdate() {
@@ -228,7 +244,7 @@ public class KonyvController implements Serializable {
     }
     
     private void setupSzerzok(Konyv konyv) {
-        for (Szerzo item : szerzok) {
+        for (Szerzo item : konyv.getSzerzok()) {
             Szerzo szerzo = szerzoFacade.find(item.getId());
             List<Kimitirt> kimitirtak = kimitirtFacade.find(konyv, szerzo);
             if (kimitirtak == null || kimitirtak.isEmpty()) {
@@ -245,9 +261,10 @@ public class KonyvController implements Serializable {
             setEmbeddableKeys();
             try {
                 if (persistAction != PersistAction.DELETE) {
-                    // kimitirtFacade also persists the konyv
+                    // kimitirtFacade and peldanyController also persists the konyv
                     Konyv k = getFacade().editKonyv(selected);
                     setupSzerzok(k);
+                    setupPeldany(k);
                 } else {
                     getFacade().remove(selected);
                 }
@@ -300,6 +317,26 @@ public class KonyvController implements Serializable {
 
     public void setFilteredItems(List<Konyv> filteredItems) {
         this.filteredItems = filteredItems;
+    }
+
+    /**
+     * @return the elsoPeldany
+     */
+    public boolean isElsoPeldany() {
+        return elsoPeldany;
+    }
+
+    /**
+     * @param elsoPeldany the elsoPeldany to set
+     */
+    public void setElsoPeldany(boolean elsoPeldany) {
+        this.elsoPeldany = elsoPeldany;
+    }
+
+    private void setupPeldany(Konyv k) {
+        peldanyController.setSelected(k.getElso());
+        peldanyController.getSelected().setKonyv(k);
+        peldanyController.create();
     }
 
     @FacesConverter(value="konyvControllerConverter", forClass = Konyv.class)
