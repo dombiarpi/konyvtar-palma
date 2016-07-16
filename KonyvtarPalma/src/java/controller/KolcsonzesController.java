@@ -65,7 +65,8 @@ public class KolcsonzesController implements Serializable {
     private OszlopController oszlopController;
     
     private Peldany kolcsonzi;
- 
+    private Szemely selectedKolcsonzo;
+
     private Peldany visszahozta;
     private List<Oszlop> kolcsonzesOszlopok;
 
@@ -160,21 +161,30 @@ public class KolcsonzesController implements Serializable {
      }
     
     public void szemelyPeldanyai() {
-        Szemely valasztottSzemely = szemelyController.getSelected();
-        List<Peldany> friss = ejbFacade.findPeldanyBySzemely(valasztottSzemely);
-        peldanyController.setSzemelyPeldanyaiItems(ejbFacade.findPeldanyBySzemely(valasztottSzemely));
+        selectedKolcsonzo = szemelyController.getSelected();
+        peldanyController.setSzemelyPeldanyaiItems(ejbFacade.findPeldanyBySzemely(selectedKolcsonzo));
     }
     
+    public String peldanyKolcsonzese(Peldany peldany) {
+        selected = ejbFacade.findAllBySzemelyAndPeldany(selectedKolcsonzo, peldany).get(0);        
+        return null;
+    }
+    
+    public String peldanyKesett(Peldany peldany) {
+        return ejbFacade.findAllBySzemelyAndPeldany(selectedKolcsonzo, peldany).get(0).getKesesben();        
+    }
+    
+    
+    
     public String visszahoz(Peldany peldany) {
-        Szemely kolcsonzo = szemelyController.getSelected();
-        if (kolcsonzo == null) {
+        if (selectedKolcsonzo == null) {
             return null;
         }
         peldanyController.setSelected(peldany);
         peldany.setKikolcs(Boolean.FALSE);
         peldany.setAktKolcs(Boolean.TRUE);
         peldanyController.update();        
-        selected = ejbFacade.findAllBySzemelyAndPeldany(kolcsonzo, peldany).get(0);// can be only one
+        selected = ejbFacade.findAllBySzemelyAndPeldany(selectedKolcsonzo, peldany).get(0);// can be only one. Later: it is not true: todo: correct it
         selected.setVisszahozDatum(new Date());
         updateRefresh();
         peldanyController.getSzemelyPeldanyaiItems().remove(peldany);
@@ -276,7 +286,7 @@ public class KolcsonzesController implements Serializable {
         }
     }
     
-    private void updateRefresh() {
+    public void updateRefresh() {
         update();
         if (!JsfUtil.isValidationFailed()) {
             selected = null; // Remove selection
@@ -385,6 +395,14 @@ public class KolcsonzesController implements Serializable {
      */
     public void setVisszahozta(Peldany visszahozta) {
         this.visszahozta = visszahozta;
+    }
+
+    public Szemely getSelectedKolcsonzo() {
+        return selectedKolcsonzo;
+    }
+
+    public void setSelectedKolcsonzo(Szemely selectedKolcsonzo) {
+        this.selectedKolcsonzo = selectedKolcsonzo;
     }
     
     @FacesConverter(forClass = Kolcsonzes.class)

@@ -33,7 +33,7 @@
                                      rowStyleClass="#{item.kesesben}"
                                      >
 
-                            <p:ajax event="rowSelect" listener="#{kolcsonzesController.szemelyPeldanyai}"  update="@widgetVar(valasztottP)"/>
+                            <p:ajax event="rowSelect" listener="#{kolcsonzesController.szemelyPeldanyai}"  update="@widgetVar(valasztottP) @widgetVar(kolcsonzesek)"/>
                             <p:ajax event="rowUnselect" />
 
                         <p:column sortBy="#{item.nev}" filterBy="#{item.nev}" filterMatchMode="contains" visible="#{szemelyController.szemelyOszlopok[0].lathatosag}">
@@ -283,11 +283,20 @@
                                      rowKey="#{item.id}"
                                      rows="6"
                                      rowsPerPageTemplate="10,20,30,40,50"
+                                     rowStyleClass="#{kolcsonzesController.peldanyKesett(item)}"
                                      >
 
-                            <p:ajax event="rowSelect"   />
+                            <p:ajax event="rowSelect" listener="#{kolcsonzesController.peldanyKolcsonzese}"  update="@widgetVar(kolcsonzesek)"/>
                             <p:ajax event="rowUnselect" />
 
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Részletek"/>
+                                </f:facet>
+                                <p:commandButton id="viewKolcsonzesButton"   rendered="true"  icon="ui-icon-search" value="Hosszabbít" 
+                                                 action="#{kolcsonzesController.peldanyKolcsonzese(item)}" update=":KolcsonzesEditForm"
+                                                 oncomplete="PF('KolcsonzesEditDialog').show()" />                                        
+                            </p:column>                            
                             <p:column>
                                 <f:facet name="header">
                                     <h:outputText value="#{bundle.ListPeldanyTitle_konyv}"/>
@@ -447,7 +456,8 @@
                 <div style="clear:both" />       
 
             </h:form>
-            <ui:include src="View.xhtml"/>            
+            <ui:include src="View.xhtml"/>    
+            <ui:include src="EditKolcsonzes.xhtml"/>    
         </ui:define>
     </ui:composition>
 

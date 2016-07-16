@@ -8,7 +8,6 @@ import facade.SzemelyFacade;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -25,7 +24,6 @@ import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 import javax.faces.event.ComponentSystemEvent;
-import javax.faces.validator.ValidatorException;
 import javax.inject.Inject;
 import org.primefaces.event.ToggleEvent;
 import org.primefaces.model.Visibility;

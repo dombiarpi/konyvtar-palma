@@ -40,7 +40,7 @@ public class KolcsonzesFacade extends AbstractFacade<Kolcsonzes> {
         Query q = em.createNamedQuery("Kolcsonzes.findAllPeldanyBySzemely");
         q.setParameter("szemely", szemely);
         q.setParameter("aktKolcs", Boolean.FALSE);
-        q.setParameter("kikolcs", Boolean.TRUE);        
+        q.setParameter("kikolcs", Boolean.TRUE); 
         return q.getResultList();
     }
     

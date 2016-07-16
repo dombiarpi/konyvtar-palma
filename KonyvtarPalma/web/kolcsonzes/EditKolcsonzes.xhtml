@@ -13,9 +13,15 @@
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{kolcsonzesController.selected != null}">
                         <p:outputLabel value="#{bundle.EditKolcsonzesLabel_datum}" for="datum" />
-                        <p:calendar id="datum" pattern="yyyy-MM-dd" value="#{kolcsonzesController.selected.datum}" title="#{bundle.EditKolcsonzesTitle_datum}" required="true" requiredMessage="#{bundle.EditKolcsonzesRequiredMessage_datum}" showOn="button"/>
+                        <p:calendar id="datum" pattern="yyyy-MM-dd" value="#{kolcsonzesController.selected.datum}"
+                                    disabled="true" title="#{bundle.EditKolcsonzesTitle_datum}" required="true" requiredMessage="#{bundle.EditKolcsonzesRequiredMessage_datum}" showOn="button"/>
+                        <p:outputLabel value="Késett" for="kesett" />
+                        <h:outputText id="kesett" value="#{kolcsonzesController.selected.kesett}" />
+                        <p:outputLabel value="Fizetendő" for="fizetendo" />
+                        <h:outputText id="fizetendo" value="#{kolcsonzesController.selected.fizetendo}"/>
                         <p:outputLabel value="#{bundle.EditKolcsonzesLabel_visszahozDatum}" for="visszahozDatum" />
-                        <p:calendar id="visszahozDatum" pattern="yyyy-MM-dd" value="#{kolcsonzesController.selected.visszahozDatum}" title="#{bundle.EditKolcsonzesTitle_visszahozDatum}"  showOn="button"/>
+                        <p:calendar id="visszahozDatum" pattern="yyyy-MM-dd" 
+                                    disabled="true"  value="#{kolcsonzesController.selected.visszahozDatum}" title="#{bundle.EditKolcsonzesTitle_visszahozDatum}"  showOn="button"/>
                         <p:outputLabel value="#{bundle.EditKolcsonzesLabel_felszolit}" for="felszolit" />
                         <p:inputText id="felszolit" value="#{kolcsonzesController.selected.felszolit}" title="#{bundle.EditKolcsonzesTitle_felszolit}" />
                         <p:outputLabel value="#{bundle.EditKolcsonzesLabel_maxKolcs}" for="maxKolcs" />
@@ -35,7 +41,7 @@
                                            itemValue="#{peldanyItem}"/>
                         </p:selectOneMenu>
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{kolcsonzesController.updateRefresh}" value="#{bundle.Save}" update="display,:KolcsonzesListForm:datalist,:growl" oncomplete="handleSubmit(args, 'KolcsonzesEditDialog');"/>
+                    <p:commandButton actionListener="#{kolcsonzesController.updateRefresh}" value="#{bundle.Save}" update="display,:KolcsonzesListForm,:growl" oncomplete="handleSubmit(args, 'KolcsonzesEditDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" immediate="true"  onclick="KolcsonzesEditDialog.hide()"/>
                 </h:panelGroup>
             </h:form>
