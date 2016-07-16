@@ -266,7 +266,7 @@
                                     <h:outputText value="Kölcsönzés"/>
                                 </f:facet>
                                 <p:commandButton id="kolcsonoz" rendered="#{item.aktKolcs}" icon="ui-icon-plus" value="Kölcsönzi" 
-                                                 action="#{kolcsonzesController.kolcsonoz(item)}" update="@widgetVar(elerhetoP) @widgetVar(valasztottP)"/>
+                                                 action="#{kolcsonzesController.kolcsonoz(item)}" update="@widgetVar(elerhetoP) @widgetVar(valasztottP) @widgetVar(kolcsonzesek)"/>
                                 <p:commandButton id="viewButton"   rendered="#{item.kikolcs}"  icon="ui-icon-search" value="Kinél van?" 
                                                  action="#{kolcsonzesController.kinelVan(item)}" update=":KolcsonzesViewForm"
                                                  oncomplete="PF('KolcsonzesViewDialog').show()" />                                
@@ -310,7 +310,8 @@
                                 <f:facet name="header">
                                     <h:outputText value="Visszahozta"/>
                                 </f:facet>
-                                <p:commandButton id="visszahozta" icon="ui-icon-minus" value="Visszahozta" action="#{kolcsonzesController.visszahoz(item)}" update="@widgetVar(elerhetoP) @widgetVar(valasztottP)"/>
+                                <p:commandButton id="visszahozta" icon="ui-icon-minus" value="Visszahozta" action="#{kolcsonzesController.visszahoz(item)}"
+                                                 update="@widgetVar(elerhetoP) @widgetVar(valasztottP) @widgetVar(kolcsonzesek)"/>
                             </p:column>
                             <f:facet name="footer">
                                 <p:commandButton value="Kölcsönzött könyvek nyomtatása" type="button" icon="ui-icon-print" style="display:block;margin-bottom: 20px">

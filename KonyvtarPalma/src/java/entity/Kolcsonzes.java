@@ -78,7 +78,7 @@ public class Kolcsonzes implements Serializable {
     @Transient
     private String kesesben;
     @Transient
-    private final int NAPI_KESESI_DIJ = 10;
+    private final int NAPI_KESESI_DIJ = 5;
 
     public Kolcsonzes() {
     }
@@ -159,8 +159,9 @@ public class Kolcsonzes implements Serializable {
     public Integer getKesett() {
         Integer diffInDays = 0;
         if (visszahozDatum != null) {
-            diffInDays =  (int)( (visszahozDatum.getTime() - getHatarido().getTime()) 
-                 / (1000 * 60 * 60 * 24) );
+            // Nincs teendő, nem tartjuk nyilván a fizetés tényét vagy hiányát sem a múltbeli késéseket
+//            diffInDays =  (int)( (visszahozDatum.getTime() - getHatarido().getTime()) 
+//                 / (1000 * 60 * 60 * 24) );
         } else {
             diffInDays = (int)( ((new Date()).getTime() - getHatarido().getTime()) 
                  / (1000 * 60 * 60 * 24) );

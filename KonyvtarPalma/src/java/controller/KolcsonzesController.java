@@ -176,7 +176,7 @@ public class KolcsonzesController implements Serializable {
         peldanyController.update();        
         selected = ejbFacade.findAllBySzemelyAndPeldany(kolcsonzo, peldany).get(0);// can be only one
         selected.setVisszahozDatum(new Date());
-        update();
+        updateRefresh();
         peldanyController.getSzemelyPeldanyaiItems().remove(peldany);
         szemelyPeldanyai();
         konyvPeldanyai();
@@ -274,6 +274,14 @@ public class KolcsonzesController implements Serializable {
             items = null;    // Invalidate list of items to trigger re-query.
             peldanyController.setKonyvPeldanyaiItems(null);
         }
+    }
+    
+    private void updateRefresh() {
+        update();
+        if (!JsfUtil.isValidationFailed()) {
+            selected = null; // Remove selection
+            items = null;    // Invalidate list of items to trigger re-query.
+        }        
     }
 
     public void update() {
