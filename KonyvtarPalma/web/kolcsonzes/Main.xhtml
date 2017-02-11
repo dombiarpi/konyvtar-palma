@@ -320,7 +320,7 @@
                                     <h:outputText value="Visszahozta"/>
                                 </f:facet>
                                 <p:commandButton id="visszahozta" icon="ui-icon-minus" value="Visszahozta" action="#{kolcsonzesController.visszahoz(item)}"
-                                                 update="@widgetVar(elerhetoP) @widgetVar(valasztottP) @widgetVar(kolcsonzesek)"/>
+                                                 update="@widgetVar(elerhetoP) @widgetVar(valasztottP) @widgetVar(kolcsonzesek),:growl"/>
                             </p:column>
                             <f:facet name="footer">
                                 <p:commandButton value="Kölcsönzött könyvek nyomtatása" type="button" icon="ui-icon-print" style="display:block;margin-bottom: 20px">
