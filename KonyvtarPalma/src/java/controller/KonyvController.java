@@ -112,6 +112,7 @@ public class KonyvController implements Serializable {
         }
     }    
     
+    // sets the visibility
     public void onToggle(ToggleEvent e) {
         Oszlop oszlop = konyvOszlopok.get((Integer) e.getData());
         oszlop.setLathatosag(e.getVisibility() == Visibility.VISIBLE);
